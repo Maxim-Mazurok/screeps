@@ -5,7 +5,7 @@ var roleExtractor = require('extractor');
 var roleEnergizer = require('energizer');
 var roleUptownHarvester = require('uptown.harvester');
 var roleUptownClaimer = require('uptown.claimer');
-var tower = require('tower');
+//var tower = require('tower');
 module.exports.loop = function () {
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
@@ -119,8 +119,8 @@ module.exports.loop = function () {
             roleEnergizer.run(creep);
         }
     }
-    tower.tower('E47N16');
-    tower.tower('E47N17');
+    // tower.tower('E47N16');
+    // tower.tower('E47N17');
     var linkFrom = Game.rooms['E47N16'].lookForAt('structure', 9, 31)[0];
     var linkToBuild = Game.rooms['E47N16'].lookForAt('structure', 16, 23)[0];
     var linkToUpgrade = Game.rooms['E47N16'].lookForAt('structure', 43, 10)[0];
@@ -138,12 +138,11 @@ module.exports.loop = function () {
     // } else {
     linkFrom2.transferEnergy(linkToBuild2, linkFrom2.energy);
     //}
-    try {
-        var market = require('market');
-        market.market();
-    }
-    catch (e) {
-        console.log(e);
-    }
+    // try {
+    //     var market = require('market');
+    //     market.market();
+    // } catch (e) {
+    //     console.log(e);
+    // }
 };
 //# sourceMappingURL=main.js.map
