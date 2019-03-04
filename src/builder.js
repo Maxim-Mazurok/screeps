@@ -5,12 +5,12 @@ var roleBuilder = {
         //var isContainer = creep.room.lookAt(creep.pos.x, creep.pos.y).filter(x => x.type === 'structure' && x.structure.structureType === STRUCTURE_CONTAINER).length;
         if(creep.memory.building && creep.carry.energy == 0) {
             creep.memory.building = false;
-            creep.say('🔄 harvest');
+            creep.say('harvest');
         }
         //if(!creep.memory.building && creep.carry.energy > 0) { //== creep.carryCapacity) {
         if(!creep.memory.building && _.sum(creep.carry) == creep.carryCapacity) {
             creep.memory.building = true;
-            creep.say('🚧 build');
+            creep.say('build');
         }
         if(creep.memory.building) {
             if (creep.carry[RESOURCE_HYDROGEN] > 0) {
