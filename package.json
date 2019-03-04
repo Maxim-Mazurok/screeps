@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "check": "gts check",
     "clean": "gts clean",
-    "compile": "tsc -p . --allowJs",
+    "compile": "rm -rf build && tsc -p . --allowJs",
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
