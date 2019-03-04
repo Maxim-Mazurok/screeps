@@ -1,4 +1,3 @@
-"use strict";
 var roleBuilder = require('builder');
 var roleHarvester = {
     /** @param {Creep} creep **/

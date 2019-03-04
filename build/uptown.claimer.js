@@ -1,4 +1,3 @@
-"use strict";
 var roleUptownClaimer = {
     /** @param {Creep} creep **/
     run: function (creep) {

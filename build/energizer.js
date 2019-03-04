@@ -1,4 +1,3 @@
-"use strict";
 var roleEnergizer = {
     /** @param {Creep} creep **/
     run: function (creep) {

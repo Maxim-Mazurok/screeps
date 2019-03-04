@@ -1,4 +1,3 @@
-"use strict";
 var roleExtractor = {
     /** @param {Creep} creep **/
     run: function (creep) {

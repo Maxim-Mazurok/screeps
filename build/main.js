@@ -1,4 +1,3 @@
-"use strict";
 var roleHarvester = require('harvester');
 var roleUpgrader = require('upgrader');
 var roleBuilder = require('builder');

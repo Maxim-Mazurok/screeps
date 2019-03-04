@@ -7,7 +7,7 @@ var roleEnergizer = require('energizer');
 var roleUptownHarvester = require('uptown.harvester');
 var roleUptownClaimer = require('uptown.claimer');
 
-var tower = require('tower');
+//var tower = require('tower');
 
 module.exports.loop = function () {
 
