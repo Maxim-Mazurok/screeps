@@ -1,11 +1,11 @@
 "use strict";
-var roleHarvester = require('roles/harvester');
-var roleUpgrader = require('roles/upgrader');
-var roleBuilder = require('roles/builder');
-var roleExtractor = require('roles/extractor');
-var roleEnergizer = require('roles/energizer');
-var roleUptownHarvester = require('roles/uptown.harvester');
-var roleUptownClaimer = require('roles/uptown.claimer');
+var roleHarvester = require('harvester');
+var roleUpgrader = require('upgrader');
+var roleBuilder = require('builder');
+var roleExtractor = require('extractor');
+var roleEnergizer = require('energizer');
+var roleUptownHarvester = require('uptown.harvester');
+var roleUptownClaimer = require('uptown.claimer');
 var tower = require('tower');
 module.exports.loop = function () {
     for (var name in Memory.creeps) {
