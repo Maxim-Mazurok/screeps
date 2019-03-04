@@ -7,7 +7,19 @@ var roleEnergizer = require('energizer');
 var roleUptownHarvester = require('uptown.harvester');
 var roleUptownClaimer = require('uptown.claimer');
 
+import Rooms from './rooms';
+import * as _ from 'lodash';
 //var tower = require('tower');
+
+declare global {
+    // noinspection JSUnusedGlobalSymbols
+    interface CreepMemory {
+        [name: string]: any,
+
+        role: string,
+        roomN: string,
+    }
+}
 
 module.exports.loop = function () {
 
@@ -18,19 +30,19 @@ module.exports.loop = function () {
         }
     }
 
-    var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.memory.roomN == '1');
-    var harvestersE = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.memory.roomN == '1' && creep.memory.e == '1');
-    var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.roomN == '1');
-    var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.memory.roomN == '1');
-    var extractors = _.filter(Game.creeps, (creep) => creep.memory.role == 'extractor' && creep.memory.roomN == '1');
-    var energizers = _.filter(Game.creeps, (creep) => creep.memory.role == 'energizer' && creep.memory.roomN == '1');
+    var harvesters = _.filter(Game.creeps, (creep: Creep) => creep.memory.role == 'harvester' && creep.memory.roomN == '1');
+    var harvestersE = _.filter(Game.creeps, (creep: Creep) => creep.memory.role == 'harvester' && creep.memory.roomN == '1' && creep.memory.e == '1');
+    var builders = _.filter(Game.creeps, (creep: Creep) => creep.memory.role == 'builder' && creep.memory.roomN == '1');
+    var upgraders = _.filter(Game.creeps, (creep: Creep) => creep.memory.role == 'upgrader' && creep.memory.roomN == '1');
+    var extractors = _.filter(Game.creeps, (creep: Creep) => creep.memory.role == 'extractor' && creep.memory.roomN == '1');
+    var energizers = _.filter(Game.creeps, (creep: Creep) => creep.memory.role == 'energizer' && creep.memory.roomN == '1');
 
-    var harvesters2 = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.memory.roomN == '2');
-    var builders2 = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.memory.roomN == '2');
-    var upgraders2 = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.memory.roomN == '2');
+    var harvesters2 = _.filter(Game.creeps, (creep: Creep) => creep.memory.role == 'harvester' && creep.memory.roomN == '2');
+    var builders2 = _.filter(Game.creeps, (creep: Creep) => creep.memory.role == 'builder' && creep.memory.roomN == '2');
+    var upgraders2 = _.filter(Game.creeps, (creep: Creep) => creep.memory.role == 'upgrader' && creep.memory.roomN == '2');
 
-    var uptownHarvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'uptown-harvester');
-    var uptownClaimers = _.filter(Game.creeps, (creep) => creep.memory.role == 'uptown-claimer');
+    var uptownHarvesters = _.filter(Game.creeps, (creep: Creep) => creep.memory.role == 'uptown-harvester');
+    var uptownClaimers = _.filter(Game.creeps, (creep: Creep) => creep.memory.role == 'uptown-claimer');
 
     if (harvesters.length < 1 || harvestersE.length === 1 && harvesters.length < 2) {
         var newName = 'Harvester' + Game.time;
@@ -70,7 +82,9 @@ module.exports.loop = function () {
                 {memory: {role: 'extractor', roomN: '1'}});
         }
     } else if (energizers.length < 1) {
-        if (Game.rooms['E47N16'].lookForAt('structure', 20, 23)[0].store.energy < 10000 && Game.rooms['E47N16'].lookForAt('structure', 20, 23)[0].store['H'] > 1000) {
+        let terminal = Game.rooms['E47N16'].terminal;
+        let amountOfH = terminal!.store[RESOURCE_HYDROGEN] || 0;
+        if (terminal && terminal.store.energy < 10000 && amountOfH > 1000) {
             var newName = 'Energizer' + Game.time;
             Game.spawns['Spawn1'].spawnCreep([MOVE, MOVE, CARRY, CARRY], newName,
                 {memory: {role: 'energizer', roomN: '1'}});
@@ -136,21 +150,24 @@ module.exports.loop = function () {
     // tower.tower('E47N16');
     // tower.tower('E47N17');
 
-    var linkFrom = Game.rooms['E47N16'].lookForAt('structure', 9, 31)[0];
-    var linkToBuild = Game.rooms['E47N16'].lookForAt('structure', 16, 23)[0];
-    var linkToUpgrade = Game.rooms['E47N16'].lookForAt('structure', 43, 10)[0];
+    var linkFrom: StructureLink | any = Game.rooms['E47N16'].lookForAt('structure', 9, 31)[0];
+    var linkToBuild: StructureLink | any = Game.rooms['E47N16'].lookForAt('structure', 16, 23)[0];
+    var linkToUpgrade: StructureLink | any = Game.rooms['E47N16'].lookForAt('structure', 43, 10)[0];
     if (linkToUpgrade.energy < 150 + 600) {
+        // tslint:disable-next-line
         linkFrom.transferEnergy(linkToUpgrade);
     } else {
+        // tslint:disable-next-line
         linkFrom.transferEnergy(linkToBuild, Math.max(linkFrom.energy, 600));
     }
 
-    var linkFrom2 = Game.rooms['E47N17'].lookForAt('structure', 40, 12)[0];
-    var linkToBuild2 = Game.rooms['E47N17'].lookForAt('structure', 11, 36)[0];
+    var linkFrom2: StructureLink | any = Game.rooms['E47N17'].lookForAt('structure', 40, 12)[0];
+    var linkToBuild2: StructureLink | any = Game.rooms['E47N17'].lookForAt('structure', 11, 36)[0];
     //var linkToUpgrade2 = Game.rooms['E47N17'].lookForAt('structure', 43, 10)[0];
     // if (linkToUpgrade.energy < 150 + 600) {
     //     linkFrom.transferEnergy(linkToUpgrade);
     // } else {
+    // tslint:disable-next-line
     linkFrom2.transferEnergy(linkToBuild2, linkFrom2.energy);
     //}
 
@@ -160,5 +177,8 @@ module.exports.loop = function () {
     // } catch (e) {
     //     console.log(e);
     // }
+
+    const rooms = new Rooms(Game);
+    rooms.run();
 
 };

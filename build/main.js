@@ -1,3 +1,4 @@
+Object.defineProperty(exports, "__esModule", { value: true });
 var roleHarvester = require('harvester');
 var roleUpgrader = require('upgrader');
 var roleBuilder = require('builder');
@@ -5,7 +6,8 @@ var roleExtractor = require('extractor');
 var roleEnergizer = require('energizer');
 var roleUptownHarvester = require('uptown.harvester');
 var roleUptownClaimer = require('uptown.claimer');
-//var tower = require('tower');
+const rooms_1 = require("./rooms");
+const _ = require("lodash");
 module.exports.loop = function () {
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
@@ -61,7 +63,9 @@ module.exports.loop = function () {
         }
     }
     else if (energizers.length < 1) {
-        if (Game.rooms['E47N16'].lookForAt('structure', 20, 23)[0].store.energy < 10000 && Game.rooms['E47N16'].lookForAt('structure', 20, 23)[0].store['H'] > 1000) {
+        let terminal = Game.rooms['E47N16'].terminal;
+        let amountOfH = terminal.store[RESOURCE_HYDROGEN] || 0;
+        if (terminal && terminal.store.energy < 10000 && amountOfH > 1000) {
             var newName = 'Energizer' + Game.time;
             Game.spawns['Spawn1'].spawnCreep([MOVE, MOVE, CARRY, CARRY], newName, { memory: { role: 'energizer', roomN: '1' } });
         }
@@ -125,9 +129,11 @@ module.exports.loop = function () {
     var linkToBuild = Game.rooms['E47N16'].lookForAt('structure', 16, 23)[0];
     var linkToUpgrade = Game.rooms['E47N16'].lookForAt('structure', 43, 10)[0];
     if (linkToUpgrade.energy < 150 + 600) {
+        // tslint:disable-next-line
         linkFrom.transferEnergy(linkToUpgrade);
     }
     else {
+        // tslint:disable-next-line
         linkFrom.transferEnergy(linkToBuild, Math.max(linkFrom.energy, 600));
     }
     var linkFrom2 = Game.rooms['E47N17'].lookForAt('structure', 40, 12)[0];
@@ -136,6 +142,7 @@ module.exports.loop = function () {
     // if (linkToUpgrade.energy < 150 + 600) {
     //     linkFrom.transferEnergy(linkToUpgrade);
     // } else {
+    // tslint:disable-next-line
     linkFrom2.transferEnergy(linkToBuild2, linkFrom2.energy);
     //}
     // try {
@@ -144,5 +151,7 @@ module.exports.loop = function () {
     // } catch (e) {
     //     console.log(e);
     // }
+    const rooms = new rooms_1.default(Game);
+    rooms.run();
 };
 //# sourceMappingURL=main.js.map
