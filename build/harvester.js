@@ -1,5 +1,5 @@
 "use strict";
-var roleBuilder = require('role.builder');
+var roleBuilder = require('builder');
 var roleHarvester = {
     /** @param {Creep} creep **/
     run: function (creep) {

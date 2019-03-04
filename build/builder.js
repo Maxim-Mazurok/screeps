@@ -84,11 +84,11 @@ var roleBuilder = {
                             }
                         }
                         else {
-                            require('role.upgrader').run(creep);
+                            require('upgrader').run(creep);
                         }
                     }
                     else {
-                        require('role.upgrader').run(creep);
+                        require('upgrader').run(creep);
                     }
                 }
             }
