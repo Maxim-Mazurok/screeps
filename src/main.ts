@@ -292,7 +292,7 @@ module.exports.loop = () => {
   ) {
     const newName = 'Extractor' + Game.time;
     Game.spawns['Spawn1'].spawnCreep(
-      [MOVE, WORK, CARRY, WORK, CARRY, WORK, CARRY],
+      [MOVE, ...Array(3).fill(WORK), ...Array(3).fill(CARRY)],
       newName,
       { memory: { role: 'extractor', roomN: '1' } }
     );
@@ -305,7 +305,7 @@ module.exports.loop = () => {
       amountOfH > 1000
     ) {
       const newName = 'Energizer' + Game.time;
-      Game.spawns['Spawn1'].spawnCreep([MOVE, MOVE, CARRY, CARRY], newName, {
+      Game.spawns['Spawn1'].spawnCreep([...Array(5).fill(MOVE), ...Array(5).fill(CARRY)], newName, {
         memory: { role: 'energizer', roomN: '1' },
       });
     }

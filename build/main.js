@@ -207,7 +207,7 @@ module.exports.loop = () => {
     else if (extractors.length < 1 &&
         Game.rooms['E47N16'].lookForAt('mineral', 20, 21)[0].mineralAmount > 0) {
         const newName = 'Extractor' + Game.time;
-        Game.spawns['Spawn1'].spawnCreep([MOVE, WORK, CARRY, WORK, CARRY, WORK, CARRY], newName, { memory: { role: 'extractor', roomN: '1' } });
+        Game.spawns['Spawn1'].spawnCreep([MOVE, ...Array(3).fill(WORK), ...Array(3).fill(CARRY)], newName, { memory: { role: 'extractor', roomN: '1' } });
     }
     else if (energizers.length < 1) {
         const terminal = Game.rooms['E47N16'].terminal;
@@ -216,7 +216,7 @@ module.exports.loop = () => {
             terminal.store[RESOURCE_ENERGY] < 50000 &&
             amountOfH > 1000) {
             const newName = 'Energizer' + Game.time;
-            Game.spawns['Spawn1'].spawnCreep([MOVE, MOVE, CARRY, CARRY], newName, {
+            Game.spawns['Spawn1'].spawnCreep([...Array(5).fill(MOVE), ...Array(5).fill(CARRY)], newName, {
                 memory: { role: 'energizer', roomN: '1' },
             });
         }
