@@ -20,14 +20,14 @@ export class HelpersTerminal {
   static pickTheBestOrder(
     roomName: RoomName,
     orders: Order[],
-    amount: number,
+    availableAmount: number,
     energy: number
   ): Order | false {
     for (let i = 0; i < orders.length; i++) {
       const order = orders[i];
       const transactionCost =
         order.roomName !== undefined // in case if order for tokens, there's no room
-          ? Game.market.calcTransactionCost(amount, roomName, order.roomName)
+          ? Game.market.calcTransactionCost(Math.min(availableAmount, order.amount), roomName, order.roomName)
           : 0;
       if (transactionCost <= energy) {
         return order;
