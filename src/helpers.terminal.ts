@@ -4,7 +4,7 @@ export class HelpersTerminal {
   ): TerminalMarketResourcesAndAmounts {
     const resources: TerminalMarketResourcesAndAmounts = new Map();
     Object.entries(terminal.store).forEach(([resource, amount]) => {
-      if (amount > 0) {
+      if (amount > 0 && resource !== RESOURCE_ENERGY) {
         resources.set(resource as MarketResourceConstant, amount as number);
       }
     });

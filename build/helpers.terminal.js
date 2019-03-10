@@ -3,7 +3,7 @@ class HelpersTerminal {
     static getTerminalMarketResourcesAndAmounts(terminal) {
         const resources = new Map();
         Object.entries(terminal.store).forEach(([resource, amount]) => {
-            if (amount > 0) {
+            if (amount > 0 && resource !== RESOURCE_ENERGY) {
                 resources.set(resource, amount);
             }
         });
