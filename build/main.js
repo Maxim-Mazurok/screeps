@@ -213,7 +213,7 @@ module.exports.loop = () => {
         const terminal = Game.rooms['E47N16'].terminal;
         const amountOfH = terminal.store[RESOURCE_HYDROGEN] || 0;
         if (terminal &&
-            terminal.store[RESOURCE_ENERGY] < 10000 &&
+            terminal.store[RESOURCE_ENERGY] < 50000 &&
             amountOfH > 1000) {
             const newName = 'Energizer' + Game.time;
             Game.spawns['Spawn1'].spawnCreep([MOVE, MOVE, CARRY, CARRY], newName, {
