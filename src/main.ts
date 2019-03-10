@@ -286,21 +286,24 @@ module.exports.loop = () => {
       newName,
       { memory: { role: 'uptown-claimer', roomN: '1' } }
     );
-  } else if (extractors.length < 1) {
-    if (
-      Game.rooms['E47N16'].lookForAt('mineral', 20, 21)[0].mineralAmount > 0
-    ) {
-      const newName = 'Extractor' + Game.time;
-      Game.spawns['Spawn1'].spawnCreep(
-        [MOVE, WORK, CARRY, WORK, CARRY, WORK, CARRY],
-        newName,
-        { memory: { role: 'extractor', roomN: '1' } }
-      );
-    }
+  } else if (
+    extractors.length < 1 &&
+    Game.rooms['E47N16'].lookForAt('mineral', 20, 21)[0].mineralAmount > 0
+  ) {
+    const newName = 'Extractor' + Game.time;
+    Game.spawns['Spawn1'].spawnCreep(
+      [MOVE, WORK, CARRY, WORK, CARRY, WORK, CARRY],
+      newName,
+      { memory: { role: 'extractor', roomN: '1' } }
+    );
   } else if (energizers.length < 1) {
     const terminal = Game.rooms['E47N16'].terminal;
     const amountOfH = terminal!.store[RESOURCE_HYDROGEN] || 0;
-    if (terminal && terminal.store[RESOURCE_ENERGY] < 10000 && amountOfH > 1000) {
+    if (
+      terminal &&
+      terminal.store[RESOURCE_ENERGY] < 10000 &&
+      amountOfH > 1000
+    ) {
       const newName = 'Energizer' + Game.time;
       Game.spawns['Spawn1'].spawnCreep([MOVE, MOVE, CARRY, CARRY], newName, {
         memory: { role: 'energizer', roomN: '1' },
@@ -381,10 +384,12 @@ module.exports.loop = () => {
 
   for (const name of Object.keys(Game.creeps)) {
     const creep = Game.creeps[name];
-    if (harvesters.length < 1 && creep.memory.roomN === '1')
+    if (harvesters.length < 1 && creep.memory.roomN === '1') {
       roleHarvester.run(creep);
-    if (harvesters2.length < 1 && creep.memory.roomN === '2')
+    }
+    if (harvesters2.length < 1 && creep.memory.roomN === '2') {
       roleHarvester.run(creep);
+    }
     if (creep.memory.role === 'harvester') {
       roleHarvester.run(creep);
     }
