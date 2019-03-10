@@ -102,7 +102,7 @@ var roleHarvester = {
             }
         }
         else {
-            // console.log('harvest');
+            // //console.log('harvest');
             /*var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return ([STRUCTURE_STORAGE].indexOf(structure.structureType) !== -1) &&
