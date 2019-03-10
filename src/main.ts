@@ -300,7 +300,7 @@ module.exports.loop = () => {
   } else if (energizers.length < 1) {
     const terminal = Game.rooms['E47N16'].terminal;
     const amountOfH = terminal!.store[RESOURCE_HYDROGEN] || 0;
-    if (terminal && terminal.store.energy < 10000 && amountOfH > 1000) {
+    if (terminal && terminal.store[RESOURCE_ENERGY] < 10000 && amountOfH > 1000) {
       const newName = 'Energizer' + Game.time;
       Game.spawns['Spawn1'].spawnCreep([MOVE, MOVE, CARRY, CARRY], newName, {
         memory: { role: 'energizer', roomN: '1' },
