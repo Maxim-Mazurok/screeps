@@ -1,27 +1,24 @@
-import Towers from "./towers";
+import { Towers } from './towers';
+import { Market } from './market';
 
-export default class Rooms {
-    get rooms(): Array<Room> {
-        return this._rooms;
+export class Rooms {
+  constructor(game: Game = Game) {
+    for (const roomCoordinates of Object.keys(game.rooms)) {
+      const room = game.rooms[roomCoordinates];
+      this._rooms.push(room);
     }
+  }
 
-    private _rooms: Array<Room> = [];
+  private _rooms: Room[] = [];
 
-    constructor(game: Game = Game) {
-        for (const roomCoordinates in game.rooms) {
-            const room = game.rooms[roomCoordinates];
-            this._rooms.push(room);
-        }
-    }
+  get rooms(): Room[] {
+    return this._rooms;
+  }
 
-    public run() {
-        this.runTowers();
-    }
-
-    private runTowers() {
-        this.rooms.forEach((room: Room) => {
-            const towers = new Towers(room);
-            towers.run();
-        })
-    }
+  run() {
+    this.rooms.forEach((room: Room) => {
+      new Towers(room).run();
+      new Market(room).run();
+    });
+  }
 }

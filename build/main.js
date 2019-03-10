@@ -1,4 +1,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
+const rooms_1 = require("./rooms");
+const _ = require("lodash");
 var roleHarvester = require('harvester');
 var roleUpgrader = require('upgrader');
 var roleBuilder = require('builder');
@@ -6,8 +8,6 @@ var roleExtractor = require('extractor');
 var roleEnergizer = require('energizer');
 var roleUptownHarvester = require('uptown.harvester');
 var roleUptownClaimer = require('uptown.claimer');
-const rooms_1 = require("./rooms");
-const _ = require("lodash");
 module.exports.loop = function () {
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
@@ -151,7 +151,6 @@ module.exports.loop = function () {
     // } catch (e) {
     //     console.log(e);
     // }
-    const rooms = new rooms_1.default(Game);
-    rooms.run();
+    new rooms_1.default(Game).run();
 };
 //# sourceMappingURL=main.js.map

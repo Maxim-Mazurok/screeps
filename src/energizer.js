@@ -1,16 +1,16 @@
 var roleEnergizer = {
 
     /** @param {Creep} creep **/
-    run: function(creep) {
+    run: function (creep) {
         if (creep.carry[RESOURCE_HYDROGEN] > 0) {
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return ([STRUCTURE_TERMINAL].indexOf(structure.structureType) !== -1)
                 }
             });
-            if(targets.length > 0) {
+            if (targets.length > 0) {
                 const target = creep.pos.findClosestByPath(targets);
-                if(creep.transfer(target, RESOURCE_HYDROGEN) == ERR_NOT_IN_RANGE) {
+                if (creep.transfer(target, RESOURCE_HYDROGEN) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
@@ -20,13 +20,13 @@ var roleEnergizer = {
                     return ([STRUCTURE_TERMINAL].indexOf(structure.structureType) !== -1)
                 }
             });
-            if(targets.length > 0) {
+            if (targets.length > 0) {
                 const target = creep.pos.findClosestByPath(targets);
-                if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
-        } else if(creep.carry.energy < creep.carryCapacity) {
+        } else if (creep.carry.energy < creep.carryCapacity) {
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return ([STRUCTURE_LINK].indexOf(structure.structureType) !== -1) &&
@@ -85,13 +85,13 @@ var roleEnergizer = {
                                 return ([STRUCTURE_TERMINAL].indexOf(structure.structureType) !== -1)
                             }
                         });
-                        if(targets.length > 0) {
+                        if (targets.length > 0) {
                             const target = creep.pos.findClosestByPath(targets);
                             creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                         }
                     }
                 } else {
-                    if(Math.abs(creep.pos.x - source.pos.x) <= 1 && Math.abs(creep.pos.y - source.pos.y) <= 1) {
+                    if (Math.abs(creep.pos.x - source.pos.x) <= 1 && Math.abs(creep.pos.y - source.pos.y) <= 1) {
                         creep.withdraw(source, RESOURCE_ENERGY);
                     } else {
                         creep.moveTo(source, {visualizePathStyle: {stroke: '#ffffff'}});
@@ -103,7 +103,7 @@ var roleEnergizer = {
                 }
             }
         } else {
-            if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+            if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }

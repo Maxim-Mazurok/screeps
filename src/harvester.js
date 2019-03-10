@@ -3,16 +3,16 @@ var roleBuilder = require('builder');
 var roleHarvester = {
 
     /** @param {Creep} creep **/
-    run: function(creep) {
-        if(creep.memory.transferring && creep.carry.energy == 0) {
+    run: function (creep) {
+        if (creep.memory.transferring && creep.carry.energy == 0) {
             creep.memory.transferring = false;
             creep.say('harvest');
         }
-        if(!creep.memory.transferring && creep.carry.energy == creep.carryCapacity) {
+        if (!creep.memory.transferring && creep.carry.energy == creep.carryCapacity) {
             creep.memory.transferring = true;
             creep.say('transfer');
         }
-        if(creep.memory.transferring) {
+        if (creep.memory.transferring) {
             // creep.drop(RESOURCE_ENERGY);
             // return;
             var targets = creep.room.find(FIND_STRUCTURES, {
@@ -21,9 +21,9 @@ var roleHarvester = {
                         structure.energy < structure.energyCapacity;
                 }
             });
-            if(targets.length > 0) {
+            if (targets.length > 0) {
                 const target = creep.pos.findClosestByPath(targets);
-                if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             } else {
@@ -33,9 +33,9 @@ var roleHarvester = {
                             structure.energy < structure.energyCapacity;
                     }
                 });
-                if(targets.length > 0) {
+                if (targets.length > 0) {
                     const target = creep.pos.findClosestByPath(targets);
-                    if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                     }
                 } else {
@@ -45,9 +45,9 @@ var roleHarvester = {
                                 structure.energy < structure.energyCapacity - creep.carryCapacity;
                         }
                     });
-                    if(targets.length > 0) {
+                    if (targets.length > 0) {
                         const target = creep.pos.findClosestByPath(targets);
-                        if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                         }
                     } else {
@@ -56,10 +56,10 @@ var roleHarvester = {
                         } else if (creep.memory.roomN == '2') {
                             var targets = Game.rooms['E47N17'].lookForAt('structure', 40, 12)[0];
                         } else targets = false;
-                        if(targets && targets.energy < targets.energyCapacity - creep.carryCapacity) {
+                        if (targets && targets.energy < targets.energyCapacity - creep.carryCapacity) {
                             const target = targets;
                             if (target !== null) {
-                                if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                                if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                                     creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                                 }
                             }
@@ -72,7 +72,7 @@ var roleHarvester = {
                             // });
                             // const target = creep.pos.findClosestByPath(targets);
                             if (false && target !== null) {
-                                if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                                if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                                     creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                                 }
                             } else {
@@ -82,9 +82,9 @@ var roleHarvester = {
                                             structure.store[RESOURCE_ENERGY] < structure.storeCapacity;
                                     }
                                 });
-                                if(targets.length > 0) {
+                                if (targets.length > 0) {
                                     const target = creep.pos.findClosestByPath(targets);
-                                    if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                                    if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                                         creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                                     }
                                 }
@@ -94,8 +94,7 @@ var roleHarvester = {
                     }
                 }
             }
-        }
-        else {
+        } else {
             // console.log('harvest');
             /*var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
@@ -138,13 +137,13 @@ var roleHarvester = {
                         });
                         if (targets.length > 0) {
                             source = targets[0];
-                            if(Math.abs(creep.pos.x - source.pos.x) <= 1 && Math.abs(creep.pos.y - source.pos.y) <= 1) {
+                            if (Math.abs(creep.pos.x - source.pos.x) <= 1 && Math.abs(creep.pos.y - source.pos.y) <= 1) {
                                 creep.withdraw(source, RESOURCE_ENERGY);
                             } else {
                                 creep.moveTo(source, {visualizePathStyle: {stroke: '#ffffff'}});
                             }
                         }
-                    };
+                    }
                 }
             } else {
                 if ([ERR_NOT_IN_RANGE, ERR_INVALID_TARGET].indexOf(creep.pickup(source)) !== -1) {

@@ -2,12 +2,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class Towers {
     constructor(room) {
         this.towers = [];
-        let tmp = room.find(FIND_STRUCTURES, {
+        this.towers = room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return structure.structureType === STRUCTURE_TOWER;
             }
         });
-        this.towers = tmp;
     }
     run() {
         this.towers.forEach((tower) => {

@@ -12,10 +12,10 @@ var roleUptownHarvester = {
         }
         if (creep.memory.transferring) {
             const look = creep.room.lookAt(Game.flags['BuildMe']);
-            look.forEach(function(lookObject) {
-                if(lookObject.type == LOOK_CONSTRUCTION_SITES) {
+            look.forEach(function (lookObject) {
+                if (lookObject.type == LOOK_CONSTRUCTION_SITES) {
                     let target = lookObject.constructionSite;
-                    if(creep.build(target) == ERR_NOT_IN_RANGE) {
+                    if (creep.build(target) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                     }
                 }
@@ -38,7 +38,7 @@ var roleUptownHarvester = {
                         creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
                     }
                 } else {
-                    if(Math.abs(creep.pos.x - source.pos.x) <= 1 && Math.abs(creep.pos.y - source.pos.y) <= 1) {
+                    if (Math.abs(creep.pos.x - source.pos.x) <= 1 && Math.abs(creep.pos.y - source.pos.y) <= 1) {
                         creep.withdraw(source, RESOURCE_ENERGY);
                     } else {
                         creep.moveTo(source, {visualizePathStyle: {stroke: '#ffffff'}});

@@ -1,18 +1,18 @@
 var roleBuilder = {
 
     /** @param {Creep} creep **/
-    run: function(creep) {
+    run: function (creep) {
         //var isContainer = creep.room.lookAt(creep.pos.x, creep.pos.y).filter(x => x.type === 'structure' && x.structure.structureType === STRUCTURE_CONTAINER).length;
-        if(creep.memory.building && creep.carry.energy == 0) {
+        if (creep.memory.building && creep.carry.energy == 0) {
             creep.memory.building = false;
             creep.say('harvest');
         }
         //if(!creep.memory.building && creep.carry.energy > 0) { //== creep.carryCapacity) {
-        if(!creep.memory.building && _.sum(creep.carry) == creep.carryCapacity) {
+        if (!creep.memory.building && _.sum(creep.carry) == creep.carryCapacity) {
             creep.memory.building = true;
             creep.say('build');
         }
-        if(creep.memory.building) {
+        if (creep.memory.building) {
             if (creep.carry[RESOURCE_HYDROGEN] > 0) {
                 var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
@@ -21,9 +21,9 @@ var roleBuilder = {
                             && (structure.mineralType == RESOURCE_HYDROGEN || structure.mineralType == null);
                     }
                 });
-                if(targets.length > 0) {
+                if (targets.length > 0) {
                     const target = creep.pos.findClosestByPath(targets);
-                    if(creep.transfer(target, RESOURCE_HYDROGEN) == ERR_NOT_IN_RANGE) {
+                    if (creep.transfer(target, RESOURCE_HYDROGEN) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                     }
                 }
@@ -44,7 +44,7 @@ var roleBuilder = {
                 //     });
 
                 var source = creep.pos.findClosestByPath(FIND_SOURCES);
-                if(
+                if (
                     false// &&
                 //[ERR_NOT_IN_RANGE,ERR_INVALID_TARGET].indexOf(creep.harvest(source)) === -1
                 //isContainer
@@ -77,14 +77,14 @@ var roleBuilder = {
 
                     //targets = targets.filter(x => x.structureType !== 'lab' && x.structureType !== 'terminal');
 
-                    targets.sort((a,b) =>
+                    targets.sort((a, b) =>
                         (a.hasOwnProperty('progress') && a.progress !== undefined ? a.progress : a.hits) - (b.hasOwnProperty('progress') && b.progress !== undefined ? b.progress : b.hits)
                     );
 
-                    if(targets.length > 0) {
+                    if (targets.length > 0) {
                         const target = creep.pos.findClosestByPath(targets);
                         if (target !== null) {
-                            if((target.progress !== undefined ? creep.build(target) : creep.repair(target)) == ERR_NOT_IN_RANGE) {
+                            if ((target.progress !== undefined ? creep.build(target) : creep.repair(target)) == ERR_NOT_IN_RANGE) {
                                 creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                             }
                         } else {
@@ -95,8 +95,7 @@ var roleBuilder = {
                     }
                 }
             }
-        }
-        else {
+        } else {
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return ([STRUCTURE_LINK].indexOf(structure.structureType) !== -1) &&
@@ -144,7 +143,7 @@ var roleBuilder = {
                         }
                     }
                 } else {
-                    if(Math.abs(creep.pos.x - source.pos.x) <= 1 && Math.abs(creep.pos.y - source.pos.y) <= 1) {
+                    if (Math.abs(creep.pos.x - source.pos.x) <= 1 && Math.abs(creep.pos.y - source.pos.y) <= 1) {
                         creep.withdraw(source, RESOURCE_ENERGY);
                     } else {
                         creep.moveTo(source, {visualizePathStyle: {stroke: '#ffffff'}});

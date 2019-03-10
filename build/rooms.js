@@ -1,5 +1,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const towers_1 = require("./towers");
+const market_1 = require("./market");
 class Rooms {
     constructor(game = Game) {
         this._rooms = [];
@@ -12,12 +13,9 @@ class Rooms {
         return this._rooms;
     }
     run() {
-        this.runTowers();
-    }
-    runTowers() {
         this.rooms.forEach((room) => {
-            const towers = new towers_1.default(room);
-            towers.run();
+            new towers_1.default(room).run();
+            new market_1.default(room).run();
         });
     }
 }
