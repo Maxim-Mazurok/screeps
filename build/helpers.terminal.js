@@ -1,8 +1,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
-const AVERAGE_PRICES = {
-    RESOURCE_HYDROGEN: 0.2,
-    RESOURCE_ENERGY: 0.02,
-};
+let AVERAGE_PRICES = {}; // TODO: use MarketResourceConstant instead of string
+AVERAGE_PRICES[RESOURCE_HYDROGEN] = 0.2;
+AVERAGE_PRICES[RESOURCE_ENERGY] = 0.02;
 class HelpersTerminal {
     static getTerminalMarketResourcesAndAmounts(terminal) {
         const resources = new Map();
@@ -38,8 +37,8 @@ class HelpersTerminal {
                 : 0;
             let realPrice = Infinity;
             if (AVERAGE_PRICES.hasOwnProperty(order.resourceType)) {
-                realPrice = (amount * order.price - transactionCost * AVERAGE_PRICES[order.resourceType]) / amount;
-                console.log(amount, ' * ', order.price, ' - ', transactionCost, ' * ', AVERAGE_PRICES[order.resourceType]);
+                realPrice = (amount * order.price - transactionCost * AVERAGE_PRICES[RESOURCE_ENERGY]) / amount;
+                console.log(amount, ' * ', order.price, ' - ', transactionCost, ' * ', AVERAGE_PRICES[RESOURCE_ENERGY]);
                 console.log('realPrice', realPrice);
             }
             if (transactionCost <= energy) {
@@ -53,7 +52,9 @@ class HelpersTerminal {
             }
         }
         if (calcRealPrice === true) {
-            return orders.sort((order1, order2) => order2.price - order1.price)[0];
+            return orders
+                .filter(order => order.price > 0)
+                .sort((order1, order2) => order2.price - order1.price)[0] || false;
         }
         else {
             return false;
