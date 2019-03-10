@@ -1,4 +1,4 @@
-export class Find {
+export class HelpersFind {
   static findStructuresByType<T extends Structure>(
     room: Room,
     structureType: StructureConstant
@@ -10,7 +10,7 @@ export class Find {
   }
 
   static findMyActiveReadyToUseTerminals(room: Room): StructureTerminal[] {
-    return Find.findStructuresByType<StructureTerminal>(
+    return HelpersFind.findStructuresByType<StructureTerminal>(
       room,
       STRUCTURE_TERMINAL
     ).filter(

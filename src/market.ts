@@ -1,4 +1,4 @@
-import { Find, Terminal } from './helpers/index';
+import { HelpersFind, HelpersTerminal } from './helpers';
 
 export class Market {
   private terminals: StructureTerminal[] = [];
@@ -8,7 +8,7 @@ export class Market {
   constructor(room: Room, game: Game = Game) {
     this.roomName = room.name;
     this.game = game;
-    this.terminals = Find.findMyActiveReadyToUseTerminals(room);
+    this.terminals = HelpersFind.findMyActiveReadyToUseTerminals(room);
   }
 
   run() {
@@ -16,7 +16,7 @@ export class Market {
   }
 
   private terminalTrade(terminal: StructureTerminal) {
-    const resourcesAndAmounts = Terminal.getTerminalMarketResourcesAndAmounts(
+    const resourcesAndAmounts = HelpersTerminal.getTerminalMarketResourcesAndAmounts(
       terminal
     );
     const energy = terminal.store[RESOURCE_ENERGY];
@@ -26,15 +26,15 @@ export class Market {
         type: ORDER_SELL,
         resourceType,
       });
-      const sortedOrders = Terminal.sortOrders(sellOrders);
-      const theBestOrder = Terminal.pickTheBestOrder(
+      const sortedOrders = HelpersTerminal.sortOrders(sellOrders);
+      const theBestOrder = HelpersTerminal.pickTheBestOrder(
         this.roomName,
         sortedOrders,
         availableAmount,
         energy
       );
       if (theBestOrder !== false) {
-        Terminal.makeTrade(
+        HelpersTerminal.makeTrade(
           theBestOrder.id,
           availableAmount,
           theBestOrder.amount,

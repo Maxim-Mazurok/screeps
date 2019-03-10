@@ -1,5 +1,5 @@
 Object.defineProperty(exports, "__esModule", { value: true });
-class Terminal {
+class HelpersTerminal {
     static getTerminalMarketResourcesAndAmounts(terminal) {
         const resources = new Map();
         Object.entries(terminal.store).forEach(([resource, amount]) => {
@@ -30,5 +30,5 @@ class Terminal {
         Game.market.deal(orderId, Math.min(availableAmount, orderAmount), roomName);
     }
 }
-exports.Terminal = Terminal;
-//# sourceMappingURL=terminal.js.map
+exports.HelpersTerminal = HelpersTerminal;
+//# sourceMappingURL=helpers.terminal.js.map

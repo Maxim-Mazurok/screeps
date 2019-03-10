@@ -1,18 +1,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
-const index_1 = require("./helpers/index");
+const helpers_1 = require("./helpers");
 class Market {
     constructor(room, game = Game) {
         this.terminals = [];
         this.game = Game;
         this.roomName = room.name;
         this.game = game;
-        this.terminals = index_1.Find.findMyActiveReadyToUseTerminals(room);
+        this.terminals = helpers_1.HelpersFind.findMyActiveReadyToUseTerminals(room);
     }
     run() {
         this.terminals.forEach(terminal => this.terminalTrade(terminal));
     }
     terminalTrade(terminal) {
-        const resourcesAndAmounts = index_1.Terminal.getTerminalMarketResourcesAndAmounts(terminal);
+        const resourcesAndAmounts = helpers_1.HelpersTerminal.getTerminalMarketResourcesAndAmounts(terminal);
         const energy = terminal.store[RESOURCE_ENERGY];
         for (const resourceAndAmount of resourcesAndAmounts) {
             const [resourceType, availableAmount] = resourceAndAmount;
@@ -20,10 +20,10 @@ class Market {
                 type: ORDER_SELL,
                 resourceType,
             });
-            const sortedOrders = index_1.Terminal.sortOrders(sellOrders);
-            const theBestOrder = index_1.Terminal.pickTheBestOrder(this.roomName, sortedOrders, availableAmount, energy);
+            const sortedOrders = helpers_1.HelpersTerminal.sortOrders(sellOrders);
+            const theBestOrder = helpers_1.HelpersTerminal.pickTheBestOrder(this.roomName, sortedOrders, availableAmount, energy);
             if (theBestOrder !== false) {
-                index_1.Terminal.makeTrade(theBestOrder.id, availableAmount, theBestOrder.amount, this.roomName);
+                helpers_1.HelpersTerminal.makeTrade(theBestOrder.id, availableAmount, theBestOrder.amount, this.roomName);
             }
         }
     }

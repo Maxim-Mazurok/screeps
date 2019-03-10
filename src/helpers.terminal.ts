@@ -1,4 +1,4 @@
-export class Terminal {
+export class HelpersTerminal {
   static getTerminalMarketResourcesAndAmounts(
     terminal: StructureTerminal
   ): TerminalMarketResourcesAndAmounts {
