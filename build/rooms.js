@@ -4,7 +4,7 @@ const market_1 = require("./market");
 class Rooms {
     constructor(game = Game) {
         this._rooms = [];
-        for (const roomCoordinates in game.rooms) {
+        for (const roomCoordinates of Object.keys(game.rooms)) {
             const room = game.rooms[roomCoordinates];
             this._rooms.push(room);
         }
@@ -14,10 +14,10 @@ class Rooms {
     }
     run() {
         this.rooms.forEach((room) => {
-            new towers_1.default(room).run();
-            new market_1.default(room).run();
+            new towers_1.Towers(room).run();
+            new market_1.Market(room).run();
         });
     }
 }
-exports.default = Rooms;
+exports.Rooms = Rooms;
 //# sourceMappingURL=rooms.js.map

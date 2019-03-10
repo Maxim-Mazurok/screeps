@@ -28,5 +28,5 @@ class Market {
         }
     }
 }
-exports.default = Market;
+exports.Market = Market;
 //# sourceMappingURL=market.js.map

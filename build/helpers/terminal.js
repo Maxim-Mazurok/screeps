@@ -1,7 +1,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class Terminal {
     static getTerminalMarketResourcesAndAmounts(terminal) {
-        let resources = new Map();
+        const resources = new Map();
         Object.entries(terminal.store).forEach(([resource, amount]) => {
             if (amount > 0) {
                 resources.set(resource, amount);
@@ -17,8 +17,9 @@ class Terminal {
     static pickTheBestOrder(roomName, orders, amount, energy) {
         for (let i = 0; i < orders.length; i++) {
             const order = orders[i];
-            const transactionCost = order.roomName !== undefined ? // in case if order for tokens, there's no room
-                Game.market.calcTransactionCost(amount, roomName, order.roomName) : 0;
+            const transactionCost = order.roomName !== undefined // in case if order for tokens, there's no room
+                ? Game.market.calcTransactionCost(amount, roomName, order.roomName)
+                : 0;
             if (transactionCost <= energy) {
                 return order;
             }
@@ -29,5 +30,5 @@ class Terminal {
         Game.market.deal(orderId, Math.min(availableAmount, orderAmount), roomName);
     }
 }
-exports.default = Terminal;
+exports.Terminal = Terminal;
 //# sourceMappingURL=terminal.js.map

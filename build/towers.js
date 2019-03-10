@@ -5,7 +5,7 @@ class Towers {
         this.towers = room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return structure.structureType === STRUCTURE_TOWER;
-            }
+            },
         });
     }
     run() {
@@ -16,7 +16,7 @@ class Towers {
             }
             else {
                 const closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-                    filter: (structure) => structure.hits < structure.hitsMax && structure.hits < 25000
+                    filter: (structure) => structure.hits < structure.hitsMax && structure.hits < 25000,
                 });
                 if (closestDamagedStructure) {
                     tower.repair(closestDamagedStructure);
@@ -25,5 +25,5 @@ class Towers {
         });
     }
 }
-exports.default = Towers;
+exports.Towers = Towers;
 //# sourceMappingURL=towers.js.map

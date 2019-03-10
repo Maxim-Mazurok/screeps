@@ -153,7 +153,6 @@ var roleHarvester = {
                             }
                         }
                     }
-                    ;
                 }
             }
             else {
