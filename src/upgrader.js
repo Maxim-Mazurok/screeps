@@ -2,7 +2,7 @@ var roleUpgrader = {
 
     /** @param {Creep} creep **/
     run: function (creep) {
-        console.log(creep.upgradeController(creep.room.controller));
+        ////console.log(creep.upgradeController(creep.room.controller));
         if (creep.upgradeController(creep.room.controller) !== ERR_NOT_IN_RANGE && creep.carry.energy > 0) {
             //do the job
         } else if (creep.carry.energy < creep.carryCapacity) {
@@ -54,7 +54,7 @@ var roleUpgrader = {
                         //     let info = creep.room.lookAtArea(creep.pos.y - 1, creep.pos.x - 1, creep.pos.y + 1, creep.pos.x + 1);
                         //     for (y in info) {
                         //         for (x in info[y]) {
-                        //             //console.log(JSON.stringify(info[y][x]));
+                        //             ////console.log(JSON.stringify(info[y][x]));
                         //             if (info[y][x].filter(c => c.type === 'creep' || c.type === 'terrain' && c.terrain === 'wall').length === 0) {
                         //                 let filter = info[y][x].filter(c => c.type === 'terrain' && (c.terrain === 'plain' || c.terrain === 'swamp'));
                         //                 if (filter.length > 0) {

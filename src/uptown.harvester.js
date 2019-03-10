@@ -23,7 +23,7 @@ var roleUptownHarvester = {
             creep.moveTo(Game.flags['BuildMe']);
         } else {
             var source = creep.pos.findClosestByPath(creep.room.find(FIND_DROPPED_RESOURCES));
-            console.log(source);
+            //console.log(source);
             if (!source) {
                 var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {

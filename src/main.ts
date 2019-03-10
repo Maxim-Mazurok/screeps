@@ -26,7 +26,7 @@ module.exports.loop = () => {
   for (const name of Object.keys(Memory.creeps)) {
     if (!Game.creeps[name]) {
       delete Memory.creeps[name];
-      console.log('Clearing non-existing creep memory:', name);
+      //console.log('Clearing non-existing creep memory:', name);
     }
   }
 
@@ -396,7 +396,7 @@ module.exports.loop = () => {
       // try {
       //     roleUptownHarvester.run(creep);
       // } catch (e) {
-      //     console.log(e.message);
+      //     //console.log(e.message);
       // }
     }
     if (creep.memory.role === 'uptown-harvester') {
@@ -466,7 +466,7 @@ module.exports.loop = () => {
   //     const market = require('market');
   //     market.market();
   // } catch (e) {
-  //     console.log(e);
+  //     //console.log(e);
   // }
 
   new Rooms(Game).run();
