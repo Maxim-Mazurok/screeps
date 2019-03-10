@@ -1,3 +1,8 @@
+const AVERAGE_PRICES: { [key: string]: number } = { // TODO: use MarketResourceConstant instead of string
+  RESOURCE_HYDROGEN: 0.2,
+  RESOURCE_ENERGY: 0.02,
+};
+
 export class HelpersTerminal {
   static getTerminalMarketResourcesAndAmounts(
     terminal: StructureTerminal
@@ -14,6 +19,13 @@ export class HelpersTerminal {
   static sortOrders(orders: Order[]): Order[] {
     return orders
       .filter(order => order.amount > 0)
+      .filter(order => {
+        if (AVERAGE_PRICES.hasOwnProperty(order.resourceType)) {
+          return order.price >= AVERAGE_PRICES[order.resourceType];
+        } else {
+          return true;
+        }
+      })
       .sort((order1, order2) => order2.price - order1.price);
   }
 
@@ -23,17 +35,35 @@ export class HelpersTerminal {
     availableAmount: number,
     energy: number
   ): Order | false {
+    let calcRealPrice: boolean = false;
     for (let i = 0; i < orders.length; i++) {
       const order = orders[i];
+      const amount = Math.min(availableAmount, order.amount);
+      if (amount <= 0) return false;
       const transactionCost =
         order.roomName !== undefined // in case if order for tokens, there's no room
-          ? Game.market.calcTransactionCost(Math.min(availableAmount, order.amount), roomName, order.roomName)
+          ? Game.market.calcTransactionCost(amount, roomName, order.roomName)
           : 0;
+      let realPrice = Infinity;
+      if (AVERAGE_PRICES.hasOwnProperty(order.resourceType)) {
+        realPrice = (amount * order.price - transactionCost * AVERAGE_PRICES[order.resourceType]) / amount;
+        console.log(amount, ' * ', order.price, ' - ', transactionCost, ' * ', AVERAGE_PRICES[order.resourceType]);
+        console.log('realPrice', realPrice);
+      }
       if (transactionCost <= energy) {
-        return order;
+        if (realPrice !== Infinity) {
+          orders[i].price = realPrice;
+          calcRealPrice = true;
+        } else {
+          return order;
+        }
       }
     }
-    return false;
+    if (calcRealPrice === true) {
+      return orders.sort((order1, order2) => order2.price - order1.price)[0];
+    } else {
+      return false;
+    }
   }
 
   static makeTrade(
