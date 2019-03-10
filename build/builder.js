@@ -83,11 +83,11 @@ var roleBuilder = {
                             }
                         }
                         else {
-                            require('upgrader').run(creep);
+                            require('./upgrader').run(creep);
                         }
                     }
                     else {
-                        require('upgrader').run(creep);
+                        require('./upgrader').run(creep);
                     }
                 }
             }

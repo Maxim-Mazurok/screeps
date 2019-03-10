@@ -88,10 +88,10 @@ var roleBuilder = {
                                 creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                             }
                         } else {
-                            require('upgrader').run(creep);
+                            require('./upgrader').run(creep);
                         }
                     } else {
-                        require('upgrader').run(creep);
+                        require('./upgrader').run(creep);
                     }
                 }
             }

@@ -1,4 +1,4 @@
-var roleBuilder = require('builder');
+var roleBuilder = require('./builder');
 var roleHarvester = {
     /** @param {Creep} creep **/
     run: function (creep) {

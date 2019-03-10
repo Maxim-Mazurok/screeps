@@ -1,14 +1,14 @@
 import { Rooms } from './rooms';
 import * as _ from 'lodash';
 
-const roleHarvester = require('harvester');
-const roleUpgrader = require('upgrader');
-const roleBuilder = require('builder');
-const roleExtractor = require('extractor');
-const roleEnergizer = require('energizer');
+const roleHarvester = require('./harvester');
+const roleUpgrader = require('./upgrader');
+const roleBuilder = require('./builder');
+const roleExtractor = require('./extractor');
+const roleEnergizer = require('./energizer');
 
-const roleUptownHarvester = require('uptown.harvester');
-const roleUptownClaimer = require('uptown.claimer');
+const roleUptownHarvester = require('./uptown.harvester');
+const roleUptownClaimer = require('./uptown.claimer');
 
 //const tower = require('tower');
 
