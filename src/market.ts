@@ -34,7 +34,6 @@ export class Market {
         energy
       );
       if (theBestOrder !== false) {
-        console.log('theBestOrder', JSON.stringify(theBestOrder));
         HelpersTerminal.makeTrade(
           theBestOrder.id,
           availableAmount,

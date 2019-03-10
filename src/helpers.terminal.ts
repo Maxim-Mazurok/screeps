@@ -34,7 +34,7 @@ export class HelpersTerminal {
     availableAmount: number,
     energy: number
   ): Order | false {
-    let calcRealPrice: boolean = false;
+    let realPriceOrders: Order[] = [];
     for (let i = 0; i < orders.length; i++) {
       const order = orders[i];
       const amount = Math.min(availableAmount, order.amount);
@@ -46,20 +46,18 @@ export class HelpersTerminal {
       let realPrice = Infinity;
       if (AVERAGE_PRICES.hasOwnProperty(order.resourceType)) {
         realPrice = (amount * order.price - transactionCost * AVERAGE_PRICES[RESOURCE_ENERGY]) / amount;
-        console.log(amount, ' * ', order.price, ' - ', transactionCost, ' * ', AVERAGE_PRICES[RESOURCE_ENERGY]);
-        console.log('realPrice', realPrice);
       }
       if (transactionCost <= energy) {
         if (realPrice !== Infinity) {
-          orders[i].price = realPrice;
-          calcRealPrice = true;
+          order.price = realPrice;
+          realPriceOrders.push(order);
         } else {
           return order;
         }
       }
     }
-    if (calcRealPrice === true) {
-      return orders
+    if (realPriceOrders.length > 0) {
+      return realPriceOrders
         .filter(order => order.price > 0)
         .sort((order1, order2) => order2.price - order1.price)[0] || false;
     } else {
