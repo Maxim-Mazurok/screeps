@@ -23,6 +23,7 @@ class Market {
             const sortedOrders = helpers_1.HelpersTerminal.sortOrders(buyOrders);
             const theBestOrder = helpers_1.HelpersTerminal.pickTheBestOrder(this.roomName, sortedOrders, availableAmount, energy);
             if (theBestOrder !== false) {
+                console.log('theBestOrder', JSON.stringify(theBestOrder));
                 helpers_1.HelpersTerminal.makeTrade(theBestOrder.id, availableAmount, theBestOrder.amount, this.roomName);
             }
         }
