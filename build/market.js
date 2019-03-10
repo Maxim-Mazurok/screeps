@@ -16,11 +16,11 @@ class Market {
         const energy = terminal.store[RESOURCE_ENERGY];
         for (const resourceAndAmount of resourcesAndAmounts) {
             const [resourceType, availableAmount] = resourceAndAmount;
-            const sellOrders = this.game.market.getAllOrders({
-                type: ORDER_SELL,
+            const buyOrders = this.game.market.getAllOrders({
+                type: ORDER_BUY,
                 resourceType,
             });
-            const sortedOrders = helpers_1.HelpersTerminal.sortOrders(sellOrders);
+            const sortedOrders = helpers_1.HelpersTerminal.sortOrders(buyOrders);
             const theBestOrder = helpers_1.HelpersTerminal.pickTheBestOrder(this.roomName, sortedOrders, availableAmount, energy);
             if (theBestOrder !== false) {
                 helpers_1.HelpersTerminal.makeTrade(theBestOrder.id, availableAmount, theBestOrder.amount, this.roomName);

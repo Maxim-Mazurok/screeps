@@ -22,11 +22,11 @@ export class Market {
     const energy = terminal.store[RESOURCE_ENERGY];
     for (const resourceAndAmount of resourcesAndAmounts) {
       const [resourceType, availableAmount] = resourceAndAmount;
-      const sellOrders = this.game.market.getAllOrders({
-        type: ORDER_SELL,
+      const buyOrders = this.game.market.getAllOrders({
+        type: ORDER_BUY,
         resourceType,
       });
-      const sortedOrders = HelpersTerminal.sortOrders(sellOrders);
+      const sortedOrders = HelpersTerminal.sortOrders(buyOrders);
       const theBestOrder = HelpersTerminal.pickTheBestOrder(
         this.roomName,
         sortedOrders,
