@@ -1,5 +1,6 @@
 import { Towers } from './towers';
 import { Market } from './market';
+import { HelpersFind } from "./helpers.find";
 
 export class Rooms {
   constructor(game: Game = Game) {
@@ -19,6 +20,7 @@ export class Rooms {
     this.rooms.forEach((room: Room) => {
       new Towers(room).run();
       new Market(room).run();
+      HelpersFind.getRoomTotalEnergyForSpawning(room);
     });
   }
 }

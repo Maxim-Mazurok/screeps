@@ -33,32 +33,9 @@ module.exports.loop = () => {
         const newName = 'Harvester' + Game.time;
         if (harvestersE.length < 1) {
             if (Game.spawns['Spawn1'].spawnCreep([
-                MOVE,
-                MOVE,
-                MOVE,
-                MOVE,
-                MOVE,
-                MOVE,
-                MOVE,
-                MOVE,
-                MOVE,
-                WORK,
-                WORK,
-                WORK,
-                WORK,
-                WORK,
-                WORK,
-                WORK,
-                WORK,
-                WORK,
-                WORK,
-                CARRY,
-                CARRY,
-                CARRY,
-                CARRY,
-                CARRY,
-                CARRY,
-                CARRY,
+                ...Array(9).fill(MOVE),
+                ...Array(10).fill(WORK),
+                ...Array(7).fill(CARRY),
             ], newName, { memory: { role: 'harvester', roomN: '1' } }) === ERR_NOT_ENOUGH_ENERGY) {
                 Game.spawns['Spawn1'].spawnCreep([MOVE, CARRY, WORK], newName, {
                     memory: { role: 'harvester', roomN: '1', e: '1' },
@@ -67,32 +44,9 @@ module.exports.loop = () => {
         }
         else {
             Game.spawns['Spawn1'].spawnCreep([
-                MOVE,
-                MOVE,
-                MOVE,
-                MOVE,
-                MOVE,
-                MOVE,
-                MOVE,
-                MOVE,
-                MOVE,
-                WORK,
-                WORK,
-                WORK,
-                WORK,
-                WORK,
-                WORK,
-                WORK,
-                WORK,
-                WORK,
-                WORK,
-                CARRY,
-                CARRY,
-                CARRY,
-                CARRY,
-                CARRY,
-                CARRY,
-                CARRY,
+                ...Array(9).fill(MOVE),
+                ...Array(10).fill(WORK),
+                ...Array(7).fill(CARRY),
             ], newName, { memory: { role: 'harvester', roomN: '1' } });
         }
     }
@@ -100,110 +54,76 @@ module.exports.loop = () => {
         const newName = 'Builder' + Game.time;
         //Game.spawns['Spawn1'].spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], newName,
         Game.spawns['Spawn1'].spawnCreep([
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            WORK,
-            WORK,
-            WORK,
-            WORK,
-            WORK,
-            CARRY,
-            CARRY,
-            CARRY,
-            CARRY,
-            CARRY,
-            CARRY,
-            CARRY,
-            CARRY,
-            CARRY,
-            CARRY,
-            CARRY,
-            CARRY,
+            ...Array(14).fill(MOVE),
+            ...Array(5).fill(WORK),
+            ...Array(12).fill(CARRY),
         ], newName, { memory: { role: 'builder', roomN: '1' } });
     }
     else if (upgraders.length < 1) {
         const newName = 'Upgrader' + Game.time;
         //Game.spawns['Spawn1'].spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], newName,
         Game.spawns['Spawn1'].spawnCreep([
-            MOVE,
-            MOVE,
-            MOVE,
-            WORK,
-            WORK,
-            WORK,
-            CARRY,
-            WORK,
-            CARRY,
-            WORK,
-            CARRY,
-            WORK,
-            CARRY,
-            CARRY,
-            CARRY,
+            ...Array(3).fill(MOVE),
+            ...Array(6).fill(WORK),
+            ...Array(6).fill(CARRY),
         ], newName, { memory: { role: 'upgrader', roomN: '1' } });
-    }
-    else if (uptownHarvesters.length < 0) {
-        const newName = 'UptownHarvester' + Game.time;
-        Game.spawns['Spawn1'].spawnCreep([
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            WORK,
-            WORK,
-            WORK,
-            WORK,
-            WORK,
-            WORK,
-            CARRY,
-            CARRY,
-            CARRY,
-            CARRY,
-            CARRY,
-            CARRY,
-        ], newName, { memory: { role: 'uptown-harvester', roomN: '1' } });
-    }
-    else if (uptownClaimers.length < 0) {
-        const newName = 'UptownClaimer' + Game.time;
-        Game.spawns['Spawn1'].spawnCreep([
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            CLAIM,
-            CLAIM,
-        ], newName, { memory: { role: 'uptown-claimer', roomN: '1' } });
-    }
+    } /*else if (uptownHarvesters.length < 0) {
+      const newName = 'UptownHarvester' + Game.time;
+      Game.spawns['Spawn1'].spawnCreep(
+        [
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          WORK,
+          WORK,
+          WORK,
+          WORK,
+          WORK,
+          WORK,
+          CARRY,
+          CARRY,
+          CARRY,
+          CARRY,
+          CARRY,
+          CARRY,
+        ],
+        newName,
+        { memory: { role: 'uptown-harvester', roomN: '1' } }
+      );
+    } else if (uptownClaimers.length < 0) {
+      const newName = 'UptownClaimer' + Game.time;
+      Game.spawns['Spawn1'].spawnCreep(
+        [
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          MOVE,
+          CLAIM,
+          CLAIM,
+        ],
+        newName,
+        { memory: { role: 'uptown-claimer', roomN: '1' } }
+      );
+    }*/
     else if (extractors.length < 1 &&
         Game.rooms['E47N16'].lookForAt('mineral', 20, 21)[0].mineralAmount > 0) {
         const newName = 'Extractor' + Game.time;
@@ -224,35 +144,17 @@ module.exports.loop = () => {
     if (harvesters2.length < 1) {
         const newName = 'Harvester2' + Game.time;
         Game.spawns['Spawn2'].spawnCreep([
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            WORK,
-            WORK,
-            WORK,
-            WORK,
-            CARRY,
-            CARRY,
+            ...Array(6).fill(MOVE),
+            ...Array(4).fill(WORK),
+            ...Array(2).fill(CARRY),
         ], newName, { memory: { role: 'harvester', roomN: '2' } });
     }
-    else if (upgraders2.length < 2) {
+    else if (upgraders2.length < 1) {
         const newName = 'Upgrader2' + Game.time;
         Game.spawns['Spawn2'].spawnCreep([
-            MOVE,
-            MOVE,
-            MOVE,
-            MOVE,
-            WORK,
-            WORK,
-            WORK,
-            CARRY,
-            CARRY,
-            CARRY,
-            CARRY,
-            CARRY,
+            ...Array(4).fill(MOVE),
+            ...Array(3).fill(WORK),
+            ...Array(5).fill(CARRY),
         ], newName, { memory: { role: 'upgrader', roomN: '2' } });
     }
     else if (builders2.length < 1) {
