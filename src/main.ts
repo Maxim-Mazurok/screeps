@@ -79,14 +79,14 @@ module.exports.loop = () => {
       creep.memory.role === 'upgrader' && creep.memory.roomN === '2'
   );
 
-  const uptownHarvesters = _.filter(
+  /*const uptownHarvesters = _.filter(
     Game.creeps,
     (creep: Creep) => creep.memory.role === 'uptown-harvester'
   );
   const uptownClaimers = _.filter(
     Game.creeps,
     (creep: Creep) => creep.memory.role === 'uptown-claimer'
-  );
+  );*/
 
   if (
     harvesters.length < 1 ||
@@ -137,9 +137,9 @@ module.exports.loop = () => {
     //Game.spawns['Spawn1'].spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], newName,
     Game.spawns['Spawn1'].spawnCreep(
       [
-        ..._.fill(_.times(3), MOVE),
-        ..._.fill(_.times(6), WORK),
-        ..._.fill(_.times(6), CARRY),
+        ..._.fill(_.times(10), MOVE),
+        ..._.fill(_.times(10), WORK),
+        ..._.fill(_.times(10), CARRY),
       ],
       newName,
       { memory: { role: 'upgrader', roomN: '1' } }
@@ -233,9 +233,9 @@ module.exports.loop = () => {
     const newName = 'Harvester2' + Game.time;
     Game.spawns['Spawn2'].spawnCreep(
       [
-        ..._.fill(_.times(6), MOVE),
-        ..._.fill(_.times(4), WORK),
-        ..._.fill(_.times(2), CARRY),
+        ..._.fill(_.times(8), MOVE),
+        ..._.fill(_.times(8), WORK),
+        ..._.fill(_.times(8), CARRY),
       ],
       newName,
       { memory: { role: 'harvester', roomN: '2' } }
@@ -244,9 +244,9 @@ module.exports.loop = () => {
     const newName = 'Upgrader2' + Game.time;
     Game.spawns['Spawn2'].spawnCreep(
       [
-        ..._.fill(_.times(4), MOVE),
-        ..._.fill(_.times(3), WORK),
-        ..._.fill(_.times(5), CARRY),
+        ..._.fill(_.times(8), MOVE),
+        ..._.fill(_.times(8), WORK),
+        ..._.fill(_.times(8), CARRY),
       ],
       newName,
       { memory: { role: 'upgrader', roomN: '2' } }
@@ -255,18 +255,9 @@ module.exports.loop = () => {
     const newName = 'Builder2' + Game.time;
     Game.spawns['Spawn2'].spawnCreep(
       [
-        MOVE,
-        MOVE,
-        MOVE,
-        MOVE,
-        MOVE,
-        MOVE,
-        WORK,
-        WORK,
-        WORK,
-        CARRY,
-        CARRY,
-        CARRY,
+        ..._.fill(_.times(15), MOVE),
+        ..._.fill(_.times(6), WORK),
+        ..._.fill(_.times(9), CARRY),
       ],
       newName,
       { memory: { role: 'builder', roomN: '2' } }
