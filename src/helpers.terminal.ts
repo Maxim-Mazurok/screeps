@@ -1,4 +1,4 @@
-let AVERAGE_PRICES: { [key: string]: number } = {}; // TODO: use MarketResourceConstant instead of string
+const AVERAGE_PRICES: { [key: string]: number } = {}; // TODO: use MarketResourceConstant instead of string
 AVERAGE_PRICES[RESOURCE_HYDROGEN] = 0.2;
 AVERAGE_PRICES[RESOURCE_ENERGY] = 0.02;
 
@@ -34,7 +34,7 @@ export class HelpersTerminal {
     availableAmount: number,
     energy: number
   ): Order | false {
-    let realPriceOrders: Order[] = [];
+    const realPriceOrders: Order[] = [];
     for (let i = 0; i < orders.length; i++) {
       const order = orders[i];
       const amount = Math.min(availableAmount, order.amount);
@@ -45,7 +45,10 @@ export class HelpersTerminal {
           : 0;
       let realPrice = Infinity;
       if (AVERAGE_PRICES.hasOwnProperty(order.resourceType)) {
-        realPrice = (amount * order.price - transactionCost * AVERAGE_PRICES[RESOURCE_ENERGY]) / amount;
+        realPrice =
+          (amount * order.price -
+            transactionCost * AVERAGE_PRICES[RESOURCE_ENERGY]) /
+          amount;
       }
       if (transactionCost <= energy) {
         if (realPrice !== Infinity) {
@@ -57,9 +60,11 @@ export class HelpersTerminal {
       }
     }
     if (realPriceOrders.length > 0) {
-      return realPriceOrders
-        .filter(order => order.price > 0)
-        .sort((order1, order2) => order2.price - order1.price)[0] || false;
+      return (
+        realPriceOrders
+          .filter(order => order.price > 0)
+          .sort((order1, order2) => order2.price - order1.price)[0] || false
+      );
     } else {
       return false;
     }

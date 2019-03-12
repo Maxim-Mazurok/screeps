@@ -1,5 +1,5 @@
 Object.defineProperty(exports, "__esModule", { value: true });
-let AVERAGE_PRICES = {}; // TODO: use MarketResourceConstant instead of string
+const AVERAGE_PRICES = {}; // TODO: use MarketResourceConstant instead of string
 AVERAGE_PRICES[RESOURCE_HYDROGEN] = 0.2;
 AVERAGE_PRICES[RESOURCE_ENERGY] = 0.02;
 class HelpersTerminal {
@@ -26,7 +26,7 @@ class HelpersTerminal {
             .sort((order1, order2) => order2.price - order1.price);
     }
     static pickTheBestOrder(roomName, orders, availableAmount, energy) {
-        let realPriceOrders = [];
+        const realPriceOrders = [];
         for (let i = 0; i < orders.length; i++) {
             const order = orders[i];
             const amount = Math.min(availableAmount, order.amount);
@@ -37,7 +37,10 @@ class HelpersTerminal {
                 : 0;
             let realPrice = Infinity;
             if (AVERAGE_PRICES.hasOwnProperty(order.resourceType)) {
-                realPrice = (amount * order.price - transactionCost * AVERAGE_PRICES[RESOURCE_ENERGY]) / amount;
+                realPrice =
+                    (amount * order.price -
+                        transactionCost * AVERAGE_PRICES[RESOURCE_ENERGY]) /
+                        amount;
             }
             if (transactionCost <= energy) {
                 if (realPrice !== Infinity) {
@@ -50,9 +53,9 @@ class HelpersTerminal {
             }
         }
         if (realPriceOrders.length > 0) {
-            return realPriceOrders
+            return (realPriceOrders
                 .filter(order => order.price > 0)
-                .sort((order1, order2) => order2.price - order1.price)[0] || false;
+                .sort((order1, order2) => order2.price - order1.price)[0] || false);
         }
         else {
             return false;

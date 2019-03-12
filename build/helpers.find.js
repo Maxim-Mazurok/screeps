@@ -13,7 +13,8 @@ class HelpersFind {
     static getRoomTotalEnergyForSpawning(room, rcl = 0) {
         const extensions = HelpersFind.findStructuresByType(room, STRUCTURE_EXTENSION);
         const spawns = HelpersFind.findStructuresByType(room, STRUCTURE_SPAWN);
-        const totalEnergy = SPAWN_ENERGY_CAPACITY * spawns.length + EXTENSION_ENERGY_CAPACITY[rcl] * extensions.length;
+        const totalEnergy = SPAWN_ENERGY_CAPACITY * spawns.length +
+            EXTENSION_ENERGY_CAPACITY[rcl] * extensions.length;
         console.log(`Room ${room.name} has ${totalEnergy} energy for spawning in total`);
         return totalEnergy;
     }

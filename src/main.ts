@@ -97,9 +97,9 @@ module.exports.loop = () => {
       if (
         Game.spawns['Spawn1'].spawnCreep(
           [
-            ...Array(9).fill(MOVE),
-            ...Array(10).fill(WORK),
-            ...Array(7).fill(CARRY),
+            ..._.fill(_.times(9), MOVE),
+            ..._.fill(_.times(10), WORK),
+            ..._.fill(_.times(7), CARRY),
           ],
           newName,
           { memory: { role: 'harvester', roomN: '1' } }
@@ -112,9 +112,9 @@ module.exports.loop = () => {
     } else {
       Game.spawns['Spawn1'].spawnCreep(
         [
-          ...Array(9).fill(MOVE),
-          ...Array(10).fill(WORK),
-          ...Array(7).fill(CARRY),
+          ..._.fill(_.times(9), MOVE),
+          ..._.fill(_.times(10), WORK),
+          ..._.fill(_.times(7), CARRY),
         ],
         newName,
         { memory: { role: 'harvester', roomN: '1' } }
@@ -125,9 +125,9 @@ module.exports.loop = () => {
     //Game.spawns['Spawn1'].spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], newName,
     Game.spawns['Spawn1'].spawnCreep(
       [
-        ...Array(14).fill(MOVE),
-        ...Array(5).fill(WORK),
-        ...Array(12).fill(CARRY),
+        ..._.fill(_.times(14), MOVE),
+        ..._.fill(_.times(5), WORK),
+        ..._.fill(_.times(12), CARRY),
       ],
       newName,
       { memory: { role: 'builder', roomN: '1' } }
@@ -137,9 +137,9 @@ module.exports.loop = () => {
     //Game.spawns['Spawn1'].spawnCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], newName,
     Game.spawns['Spawn1'].spawnCreep(
       [
-        ...Array(3).fill(MOVE),
-        ...Array(6).fill(WORK),
-        ...Array(6).fill(CARRY),
+        ..._.fill(_.times(3), MOVE),
+        ..._.fill(_.times(6), WORK),
+        ..._.fill(_.times(6), CARRY),
       ],
       newName,
       { memory: { role: 'upgrader', roomN: '1' } }
@@ -206,7 +206,7 @@ module.exports.loop = () => {
   ) {
     const newName = 'Extractor' + Game.time;
     Game.spawns['Spawn1'].spawnCreep(
-      [MOVE, ...Array(3).fill(WORK), ...Array(3).fill(CARRY)],
+      [MOVE, ..._.fill(_.times(3), WORK), ..._.fill(_.times(3), CARRY)],
       newName,
       { memory: { role: 'extractor', roomN: '1' } }
     );
@@ -219,9 +219,13 @@ module.exports.loop = () => {
       amountOfH > 1000
     ) {
       const newName = 'Energizer' + Game.time;
-      Game.spawns['Spawn1'].spawnCreep([...Array(5).fill(MOVE), ...Array(5).fill(CARRY)], newName, {
-        memory: { role: 'energizer', roomN: '1' },
-      });
+      Game.spawns['Spawn1'].spawnCreep(
+        [..._.fill(_.times(5), MOVE), ..._.fill(_.times(5), CARRY)],
+        newName,
+        {
+          memory: { role: 'energizer', roomN: '1' },
+        }
+      );
     }
   }
 
@@ -229,9 +233,9 @@ module.exports.loop = () => {
     const newName = 'Harvester2' + Game.time;
     Game.spawns['Spawn2'].spawnCreep(
       [
-        ...Array(6).fill(MOVE),
-        ...Array(4).fill(WORK),
-        ...Array(2).fill(CARRY),
+        ..._.fill(_.times(6), MOVE),
+        ..._.fill(_.times(4), WORK),
+        ..._.fill(_.times(2), CARRY),
       ],
       newName,
       { memory: { role: 'harvester', roomN: '2' } }
@@ -240,9 +244,9 @@ module.exports.loop = () => {
     const newName = 'Upgrader2' + Game.time;
     Game.spawns['Spawn2'].spawnCreep(
       [
-        ...Array(4).fill(MOVE),
-        ...Array(3).fill(WORK),
-        ...Array(5).fill(CARRY),
+        ..._.fill(_.times(4), MOVE),
+        ..._.fill(_.times(3), WORK),
+        ..._.fill(_.times(5), CARRY),
       ],
       newName,
       { memory: { role: 'upgrader', roomN: '2' } }
