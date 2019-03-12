@@ -133,7 +133,11 @@ module.exports.loop = () => {
     else if (extractors.length < 1 &&
         Game.rooms['E47N16'].lookForAt('mineral', 20, 21)[0].mineralAmount > 0) {
         const newName = 'Extractor' + Game.time;
-        Game.spawns['Spawn1'].spawnCreep([MOVE, ..._.fill(_.times(3), WORK), ..._.fill(_.times(3), CARRY)], newName, { memory: { role: 'extractor', roomN: '1' } });
+        Game.spawns['Spawn1'].spawnCreep([
+            ..._.fill(_.times(1), MOVE),
+            ..._.fill(_.times(20), WORK),
+            ..._.fill(_.times(1), CARRY),
+        ], newName, { memory: { role: 'extractor', roomN: '1' } });
     }
     else if (energizers.length < 1) {
         const terminal = Game.rooms['E47N16'].terminal;

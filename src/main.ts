@@ -206,7 +206,11 @@ module.exports.loop = () => {
   ) {
     const newName = 'Extractor' + Game.time;
     Game.spawns['Spawn1'].spawnCreep(
-      [MOVE, ..._.fill(_.times(3), WORK), ..._.fill(_.times(3), CARRY)],
+      [
+        ..._.fill(_.times(1), MOVE),
+        ..._.fill(_.times(20), WORK),
+        ..._.fill(_.times(1), CARRY),
+      ],
       newName,
       { memory: { role: 'extractor', roomN: '1' } }
     );
