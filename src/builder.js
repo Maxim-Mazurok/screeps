@@ -66,7 +66,7 @@ var roleBuilder = {
                     let targets;
                     if (creep.memory.roomN === '2') {
                         targets = [...creep.room.find(FIND_STRUCTURES, {
-                            filter: object => (object.hits < object.hitsMax && object.hits < 2000000 && object.structureType == STRUCTURE_WALL)
+                            filter: object => (object.hits < object.hitsMax && object.hits < 1000000 && object.structureType === STRUCTURE_RAMPART)
                         }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
                     } else {
                         targets = [...creep.room.find(FIND_STRUCTURES, {

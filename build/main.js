@@ -162,17 +162,17 @@ module.exports.loop = () => {
     else if (upgraders2.length < 1) {
         const newName = 'Upgrader2' + Game.time;
         Game.spawns['Spawn2'].spawnCreep([
-            ..._.fill(_.times(8), MOVE),
-            ..._.fill(_.times(8), WORK),
-            ..._.fill(_.times(8), CARRY),
+            ..._.fill(_.times(6), MOVE),
+            ..._.fill(_.times(6), WORK),
+            ..._.fill(_.times(6), CARRY),
         ], newName, { memory: { role: 'upgrader', roomN: '2' } });
     }
     else if (builders2.length < 1) {
         const newName = 'Builder2' + Game.time;
         Game.spawns['Spawn2'].spawnCreep([
-            ..._.fill(_.times(15), MOVE),
-            ..._.fill(_.times(6), WORK),
-            ..._.fill(_.times(9), CARRY),
+            ..._.fill(_.times(4), MOVE),
+            ..._.fill(_.times(4), WORK),
+            ..._.fill(_.times(4), CARRY),
         ], newName, { memory: { role: 'builder', roomN: '2' } });
     }
     // if(Game.spawns['Spawn1'].spawning) {

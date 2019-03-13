@@ -49,7 +49,8 @@ class Extractor {
                 return;
             }
             const harvestResult = creep.harvest(mineral);
-            if (harvestResult === ERR_NOT_IN_RANGE || harvestResult === ERR_INVALID_TARGET) {
+            if (harvestResult === ERR_NOT_IN_RANGE ||
+                harvestResult === ERR_INVALID_TARGET) {
                 creep.moveTo(mineral, helpers_creep_1.HARVEST_PATH);
             }
             else if (harvestResult !== OK) {
