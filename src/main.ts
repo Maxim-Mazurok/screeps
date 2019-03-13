@@ -1,10 +1,10 @@
 import { Rooms } from './rooms';
 import * as _ from 'lodash';
+import { Extractor } from './extractor';
 
 const roleHarvester = require('./harvester');
 const roleUpgrader = require('./upgrader');
 const roleBuilder = require('./builder');
-const roleExtractor = require('./extractor');
 const roleEnergizer = require('./energizer');
 
 const roleUptownHarvester = require('./uptown.harvester');
@@ -17,8 +17,9 @@ declare global {
   interface CreepMemory {
     role: string;
     roomN: string;
+    transferring?: boolean;
 
-    [name: string]: string | number | boolean;
+    [name: string]: string | number | boolean | undefined;
   }
 }
 
@@ -306,7 +307,7 @@ module.exports.loop = () => {
       roleUptownClaimer.run(creep);
     }
     if (creep.memory.role === 'extractor') {
-      roleExtractor.run(creep);
+      new Extractor().run(creep);
     }
     if (creep.memory.role === 'energizer') {
       roleEnergizer.run(creep);

@@ -18,6 +18,12 @@ class HelpersFind {
         console.log(`Room ${room.name} has ${totalEnergy} energy for spawning in total`);
         return totalEnergy;
     }
+    static findByFindConstant(room, findConstant) {
+        return room.find(findConstant);
+    }
+    static findClosestPathToMineral(roomPosition, room, type) {
+        return roomPosition.findClosestByPath(HelpersFind.findByFindConstant(room, type));
+    }
 }
 exports.HelpersFind = HelpersFind;
 //# sourceMappingURL=helpers.find.js.map

@@ -39,4 +39,21 @@ export class HelpersFind {
     );
     return totalEnergy;
   }
+
+  static findByFindConstant<K extends FindConstant>(
+    room: Room,
+    findConstant: K
+  ): Array<FindTypes[K]> {
+    return room.find<K>(findConstant);
+  }
+
+  static findClosestPathToMineral<T extends FindConstant>(
+    roomPosition: RoomPosition,
+    room: Room,
+    type: T
+  ): FindTypes[T] | null {
+    return roomPosition.findClosestByPath(
+      HelpersFind.findByFindConstant<T>(room, type)
+    );
+  }
 }

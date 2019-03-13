@@ -1,15 +1,24 @@
-var roleExtractor = {
-    /** @param {Creep} creep **/
-    run: function (creep) {
-        if (creep.memory.transferring && _.sum(creep.carry) == 0) {
+Object.defineProperty(exports, "__esModule", { value: true });
+const helpers_creep_1 = require("./helpers.creep");
+const helpers_1 = require("./helpers");
+class Extractor {
+    run(creep) {
+        //// STATE MANAGEMENT
+        if (creep.memory.transferring && helpers_creep_1.HelpersCreep.totalCarry(creep) === 0) {
+            // If creep is transferring and he has no goods, then start extracting
             creep.memory.transferring = false;
-            creep.say('🔄 extract');
+            helpers_creep_1.HelpersCreep.logAction(creep, 'extract');
         }
-        if (!creep.memory.transferring && _.sum(creep.carry) == creep.carryCapacity) {
+        if (!creep.memory.transferring && helpers_creep_1.HelpersCreep.totalCarry(creep) > 0) {
+            // If creep is not transferring (i.e. extracting) and he has any goods, then transfer them
+            // It's good because we have terminal right after the extractor, so there's no travel time,
+            // while there's a cooldown for an extractor structure. So, we're not wasting time.
             creep.memory.transferring = true;
-            creep.say('🚧 transfer');
+            helpers_creep_1.HelpersCreep.logAction(creep, 'transfer');
         }
+        //// LOGIC BY STATE
         if (creep.memory.transferring) {
+            // currently, we are not using labs, so ignore this code.
             // var targets = creep.room.find(FIND_STRUCTURES, {
             //             filter: (structure) => {
             //                 return ([STRUCTURE_LAB].indexOf(structure.structureType) !== -1) &&
@@ -17,28 +26,37 @@ var roleExtractor = {
             //                     && (structure.mineralType == RESOURCE_HYDROGEN || structure.mineralType == null);
             //             }
             //     });
-            var targets = creep.room.find(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return ([STRUCTURE_TERMINAL].indexOf(structure.structureType) !== -1);
+            const terminals = helpers_1.HelpersFind.findStructuresByType(creep.room, STRUCTURE_TERMINAL);
+            if (terminals.length === 1) {
+                // only one terminal allowed per room
+                const terminal = terminals[0];
+                const transferResult = creep.transfer(terminal, RESOURCE_HYDROGEN);
+                if (transferResult === ERR_NOT_IN_RANGE) {
+                    creep.moveTo(terminal, helpers_creep_1.TRANSFER_PATH);
                 }
-            });
-            if (targets.length > 0) {
-                const target = creep.pos.findClosestByPath(targets);
-                if (creep.transfer(target, RESOURCE_HYDROGEN) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
+                else if (transferResult !== OK) {
+                    helpers_creep_1.HelpersCreep.logError(creep, `transfer to terminal failed with result: ${transferResult}`);
                 }
             }
             else {
-                // nothing to do
+                helpers_creep_1.HelpersCreep.logError(creep, 'no terminal in room found');
             }
         }
         else {
-            source = creep.pos.findClosestByPath(creep.room.find(FIND_MINERALS));
-            if ([ERR_NOT_IN_RANGE, ERR_INVALID_TARGET].indexOf(creep.harvest(source)) !== -1) {
-                creep.moveTo(source, { visualizePathStyle: { stroke: '#ffaa00' } });
+            const mineral = helpers_1.HelpersFind.findClosestPathToMineral(creep.pos, creep.room, FIND_MINERALS);
+            if (mineral === null) {
+                helpers_creep_1.HelpersCreep.logError(creep, 'no mineral in room found');
+                return;
+            }
+            const harvestResult = creep.harvest(mineral);
+            if (harvestResult === ERR_NOT_IN_RANGE || harvestResult === ERR_INVALID_TARGET) {
+                creep.moveTo(mineral, helpers_creep_1.HARVEST_PATH);
+            }
+            else if (harvestResult !== OK) {
+                helpers_creep_1.HelpersCreep.logError(creep, `mineral harvesting failed with result: ${harvestResult}`);
             }
         }
     }
-};
-module.exports = roleExtractor;
+}
+exports.Extractor = Extractor;
 //# sourceMappingURL=extractor.js.map

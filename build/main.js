@@ -1,10 +1,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const rooms_1 = require("./rooms");
 const _ = require("lodash");
+const extractor_1 = require("./extractor");
 const roleHarvester = require('./harvester');
 const roleUpgrader = require('./upgrader');
 const roleBuilder = require('./builder');
-const roleExtractor = require('./extractor');
 const roleEnergizer = require('./energizer');
 const roleUptownHarvester = require('./uptown.harvester');
 const roleUptownClaimer = require('./uptown.claimer');
@@ -212,7 +212,7 @@ module.exports.loop = () => {
             roleUptownClaimer.run(creep);
         }
         if (creep.memory.role === 'extractor') {
-            roleExtractor.run(creep);
+            new extractor_1.Extractor().run(creep);
         }
         if (creep.memory.role === 'energizer') {
             roleEnergizer.run(creep);
