@@ -64,13 +64,13 @@ var roleBuilder = {
                     let targets;
                     if (creep.memory.roomN === '2') {
                         targets = [...creep.room.find(FIND_STRUCTURES, {
-                                filter: object => (object.hits < object.hitsMax && object.hits < 1000000 && object.structureType === STRUCTURE_RAMPART)
+                                filter: object => (object.hits < object.hitsMax && object.hits < 2000000 && object.structureType === STRUCTURE_WALL)
                             }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
                     }
                     else {
                         targets = [...creep.room.find(FIND_STRUCTURES, {
                                 //filter: object => (object.hits < object.hitsMax && object.hits > 25000 && object.hits < 500000)
-                                filter: object => (object.hits < object.hitsMax && object.hits < 2000000 && object.structureType == STRUCTURE_WALL)
+                                filter: object => (object.hits < object.hitsMax && object.hits < 2000000 && object.structureType === STRUCTURE_WALL)
                             }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
                     }
                     //targets = targets.filter(x => x.structureType !== 'lab' && x.structureType !== 'terminal');
