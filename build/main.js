@@ -218,22 +218,11 @@ module.exports.loop = () => {
             roleEnergizer.run(creep);
         }
     }
-    // tower.tower('E47N16');
-    // tower.tower('E47N17');
     // tslint:disable-next-line
     const linkFrom = Game.rooms['E47N16'].lookForAt('structure', 9, 31)[0];
     // tslint:disable-next-line
-    const linkToBuild = Game.rooms['E47N16'].lookForAt('structure', 16, 23)[0];
-    // tslint:disable-next-line
     const linkToUpgrade = Game.rooms['E47N16'].lookForAt('structure', 43, 10)[0];
-    if (linkToUpgrade.energy < 150 + 600) {
-        // tslint:disable-next-line
-        linkFrom.transferEnergy(linkToUpgrade);
-    }
-    else {
-        // tslint:disable-next-line
-        linkFrom.transferEnergy(linkToBuild, Math.max(linkFrom.energy, 600));
-    }
+    linkFrom.transferEnergy(linkToUpgrade);
     // tslint:disable-next-line
     const linkFrom2 = Game.rooms['E47N17'].lookForAt('structure', 40, 12)[0];
     // tslint:disable-next-line

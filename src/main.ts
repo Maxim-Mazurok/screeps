@@ -314,9 +314,6 @@ module.exports.loop = () => {
     }
   }
 
-  // tower.tower('E47N16');
-  // tower.tower('E47N17');
-
   // tslint:disable-next-line
   const linkFrom: StructureLink | any = Game.rooms['E47N16'].lookForAt(
     'structure',
@@ -324,24 +321,12 @@ module.exports.loop = () => {
     31
   )[0];
   // tslint:disable-next-line
-  const linkToBuild: StructureLink | any = Game.rooms['E47N16'].lookForAt(
-    'structure',
-    16,
-    23
-  )[0];
-  // tslint:disable-next-line
   const linkToUpgrade: StructureLink | any = Game.rooms['E47N16'].lookForAt(
     'structure',
     43,
     10
   )[0];
-  if (linkToUpgrade.energy < 150 + 600) {
-    // tslint:disable-next-line
-    linkFrom.transferEnergy(linkToUpgrade);
-  } else {
-    // tslint:disable-next-line
-    linkFrom.transferEnergy(linkToBuild, Math.max(linkFrom.energy, 600));
-  }
+  linkFrom.transferEnergy(linkToUpgrade);
 
   // tslint:disable-next-line
   const linkFrom2: StructureLink | any = Game.rooms['E47N17'].lookForAt(
