@@ -19,7 +19,7 @@ export class Towers {
           FIND_STRUCTURES,
           {
             filter: (structure: Structure) =>
-              structure.hits < structure.hitsMax && structure.hits < 25000,
+              structure.hits < structure.hitsMax,
           }
         );
         if (closestDamagedStructure) {

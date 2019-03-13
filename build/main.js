@@ -154,20 +154,20 @@ module.exports.loop = () => {
     if (harvesters2.length < 1) {
         const newName = 'Harvester2' + Game.time;
         Game.spawns['Spawn2'].spawnCreep([
-            ..._.fill(_.times(8), MOVE),
-            ..._.fill(_.times(8), WORK),
-            ..._.fill(_.times(8), CARRY),
+            ..._.fill(_.times(9), MOVE),
+            ..._.fill(_.times(10), WORK),
+            ..._.fill(_.times(7), CARRY),
         ], newName, { memory: { role: 'harvester', roomN: '2' } });
     }
     else if (upgraders2.length < 1) {
         const newName = 'Upgrader2' + Game.time;
         Game.spawns['Spawn2'].spawnCreep([
-            ..._.fill(_.times(6), MOVE),
-            ..._.fill(_.times(6), WORK),
-            ..._.fill(_.times(6), CARRY),
+            ..._.fill(_.times(8), MOVE),
+            ..._.fill(_.times(8), WORK),
+            ..._.fill(_.times(8), CARRY),
         ], newName, { memory: { role: 'upgrader', roomN: '2' } });
     }
-    else if (builders2.length < 1) {
+    else if (builders2.length < 0) {
         const newName = 'Builder2' + Game.time;
         Game.spawns['Spawn2'].spawnCreep([
             ..._.fill(_.times(4), MOVE),
@@ -175,14 +175,6 @@ module.exports.loop = () => {
             ..._.fill(_.times(4), CARRY),
         ], newName, { memory: { role: 'builder', roomN: '2' } });
     }
-    // if(Game.spawns['Spawn1'].spawning) {
-    //     const spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
-    //     Game.spawns['Spawn1'].room.visual.text(
-    //         '🛠️' + spawningCreep.memory.role,
-    //         Game.spawns['Spawn1'].pos.x + 1,
-    //         Game.spawns['Spawn1'].pos.y,
-    //         {align: 'left', opacity: 0.8});
-    // }
     for (const name of Object.keys(Game.creeps)) {
         const creep = Game.creeps[name];
         if (harvesters.length < 1 && creep.memory.roomN === '1') {

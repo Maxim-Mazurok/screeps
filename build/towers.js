@@ -16,7 +16,7 @@ class Towers {
             }
             else {
                 const closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-                    filter: (structure) => structure.hits < structure.hitsMax && structure.hits < 25000,
+                    filter: (structure) => structure.hits < structure.hitsMax,
                 });
                 if (closestDamagedStructure) {
                     tower.repair(closestDamagedStructure);
