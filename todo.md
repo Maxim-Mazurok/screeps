@@ -6,3 +6,4 @@
 - claimers should `reserveController` after claiming it
 - add extractor in room 2
 - add extractor in room 3 (later)
+- make upgraders wait near the appropriate link in room 1 and 2
