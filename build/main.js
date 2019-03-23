@@ -141,10 +141,12 @@ module.exports.loop = () => {
     }
     else if (energizers.length < 1) {
         const terminal = Game.rooms['E47N16'].terminal;
-        const amountOfH = terminal.store[RESOURCE_HYDROGEN] || 0;
+        const amountOfHInTerminal = terminal.store[RESOURCE_HYDROGEN] || 0;
+        const amountOfEnergyInStorage = Game.rooms['E47N16'].storage.store.energy || 0;
         if (terminal &&
             terminal.store[RESOURCE_ENERGY] < 50000 &&
-            amountOfH > 1000) {
+            amountOfHInTerminal > 1000 &&
+            amountOfEnergyInStorage > 10000) {
             const newName = 'Energizer' + Game.time;
             Game.spawns['Spawn1'].spawnCreep([..._.fill(_.times(5), MOVE), ..._.fill(_.times(5), CARRY)], newName, {
                 memory: { role: 'energizer', roomN: '1' },
