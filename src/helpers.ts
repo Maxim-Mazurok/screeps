@@ -1,6 +1,14 @@
 import { HelpersFind } from './helpers.find';
 import { HelpersTerminal } from './helpers.terminal';
-import { CLAIM_FLAG_NAME, CLAIM_PATH, HARVEST_PATH, HelpersCreep, TRANSFER_PATH } from './helpers.creep';
+import {
+  BUILD_FLAG_NAME,
+  BUILD_PATH,
+  CLAIM_FLAG_NAME,
+  CLAIM_PATH,
+  HARVEST_PATH,
+  HelpersCreep,
+  TRANSFER_PATH,
+} from './helpers.creep';
 
 export {
   HelpersFind,
@@ -10,4 +18,6 @@ export {
   HARVEST_PATH,
   CLAIM_PATH,
   CLAIM_FLAG_NAME,
+  BUILD_FLAG_NAME,
+  BUILD_PATH,
 };

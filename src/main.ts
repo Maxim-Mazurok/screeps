@@ -2,6 +2,7 @@ import { Rooms } from './rooms';
 import * as _ from 'lodash';
 import { Extractor } from './extractor';
 import { RoleUptownClaimer } from "./uptown.claimer";
+import { RoleUptownBuilder } from "./uptown.builder";
 
 const roleHarvester = require('./harvester');
 const roleUpgrader = require('./upgrader');
@@ -80,6 +81,10 @@ module.exports.loop = () => {
       creep.memory.role === 'upgrader' && creep.memory.roomN === '2'
   );
   const claimers2 = _.filter(
+    Game.creeps,
+    (creep: Creep) => creep.memory.role === 'claimer'
+  );
+  const uptownBuilders2 = _.filter(
     Game.creeps,
     (creep: Creep) => creep.memory.role === 'claimer'
   );
@@ -280,6 +285,17 @@ module.exports.loop = () => {
       newName,
       { memory: { role: 'claimer', roomN: '2' } }
     );
+  } else if (uptownBuilders2.length < 1) {
+    const newName = 'UptownBuilder2' + Game.time;
+    Game.spawns['Spawn2'].spawnCreep(
+      [
+        ..._.fill(_.times(4), MOVE),
+        ..._.fill(_.times(4), WORK),
+        ..._.fill(_.times(4), CARRY),
+      ],
+      newName,
+      { memory: { role: 'uptown-builder', roomN: '2' } }
+    );
   }
 
   for (const name of Object.keys(Game.creeps)) {
@@ -309,6 +325,9 @@ module.exports.loop = () => {
     }
     if (creep.memory.role === 'claimer') {
       RoleUptownClaimer.run(creep);
+    }
+    if (creep.memory.role === 'uptown-builder') {
+      RoleUptownBuilder.run(creep);
     }
     if (creep.memory.role === 'extractor') {
       new Extractor().run(creep);

@@ -3,6 +3,7 @@ const rooms_1 = require("./rooms");
 const _ = require("lodash");
 const extractor_1 = require("./extractor");
 const uptown_claimer_1 = require("./uptown.claimer");
+const uptown_builder_1 = require("./uptown.builder");
 const roleHarvester = require('./harvester');
 const roleUpgrader = require('./upgrader');
 const roleBuilder = require('./builder');
@@ -27,6 +28,7 @@ module.exports.loop = () => {
     const builders2 = _.filter(Game.creeps, (creep) => creep.memory.role === 'builder' && creep.memory.roomN === '2');
     const upgraders2 = _.filter(Game.creeps, (creep) => creep.memory.role === 'upgrader' && creep.memory.roomN === '2');
     const claimers2 = _.filter(Game.creeps, (creep) => creep.memory.role === 'claimer');
+    const uptownBuilders2 = _.filter(Game.creeps, (creep) => creep.memory.role === 'claimer');
     /*const uptownHarvesters = _.filter(
       Game.creeps,
       (creep: Creep) => creep.memory.role === 'uptown-harvester'
@@ -182,6 +184,14 @@ module.exports.loop = () => {
             ..._.fill(_.times(2), CLAIM),
         ], newName, { memory: { role: 'claimer', roomN: '2' } });
     }
+    else if (uptownBuilders2.length < 1) {
+        const newName = 'UptownBuilder2' + Game.time;
+        Game.spawns['Spawn2'].spawnCreep([
+            ..._.fill(_.times(4), MOVE),
+            ..._.fill(_.times(4), WORK),
+            ..._.fill(_.times(4), CARRY),
+        ], newName, { memory: { role: 'uptown-builder', roomN: '2' } });
+    }
     for (const name of Object.keys(Game.creeps)) {
         const creep = Game.creeps[name];
         if (harvesters.length < 1 && creep.memory.roomN === '1') {
@@ -209,6 +219,9 @@ module.exports.loop = () => {
         }
         if (creep.memory.role === 'claimer') {
             uptown_claimer_1.RoleUptownClaimer.run(creep);
+        }
+        if (creep.memory.role === 'uptown-builder') {
+            uptown_builder_1.RoleUptownBuilder.run(creep);
         }
         if (creep.memory.role === 'extractor') {
             new extractor_1.Extractor().run(creep);
