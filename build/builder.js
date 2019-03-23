@@ -62,15 +62,25 @@ var roleBuilder = {
                 }
                 else {
                     let targets;
-                    if (creep.memory.roomN === '2') {
+                    if (creep.memory.roomN === '1') {
+                        targets = [...creep.room.find(FIND_STRUCTURES, {
+                                //filter: object => (object.hits < object.hitsMax && object.hits > 25000 && object.hits < 500000)
+                                filter: object => (object.hits < object.hitsMax && object.hits < 2000000 && object.structureType === STRUCTURE_WALL)
+                            }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
+                    }
+                    else if (creep.memory.roomN === '2') {
                         targets = [...creep.room.find(FIND_STRUCTURES, {
                                 filter: object => (object.hits < object.hitsMax && object.hits < 2000000 && object.structureType === STRUCTURE_WALL)
                             }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
                     }
+                    else if (creep.memory.roomN === '3') {
+                        targets = [...creep.room.find(FIND_STRUCTURES, {
+                                filter: object => (object.hits < object.hitsMax && object.hits < 10000)
+                            }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
+                    }
                     else {
                         targets = [...creep.room.find(FIND_STRUCTURES, {
-                                //filter: object => (object.hits < object.hitsMax && object.hits > 25000 && object.hits < 500000)
-                                filter: object => (object.hits < object.hitsMax && object.hits < 2000000 && object.structureType === STRUCTURE_WALL)
+                                filter: object => (object.hits < object.hitsMax)
                             }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
                     }
                     //targets = targets.filter(x => x.structureType !== 'lab' && x.structureType !== 'terminal');
@@ -135,7 +145,7 @@ var roleBuilder = {
                     //     }
                     // }
                     //wait
-                    if (creep.memory.roomN == '2') {
+                    if (creep.memory.roomN == '2' || creep.memory.roomN == '3') {
                         source = creep.pos.findClosestByPath(creep.room.find(FIND_SOURCES));
                         if ([ERR_NOT_IN_RANGE, ERR_INVALID_TARGET].indexOf(creep.harvest(source)) !== -1) {
                             creep.moveTo(source, { visualizePathStyle: { stroke: '#ffaa00' } });

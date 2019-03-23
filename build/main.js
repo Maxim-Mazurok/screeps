@@ -30,6 +30,7 @@ module.exports.loop = () => {
     const claimers2 = _.filter(Game.creeps, (creep) => creep.memory.role === 'claimer');
     const uptownBuilders2 = _.filter(Game.creeps, (creep) => creep.memory.role === 'uptown-builder');
     const upgraders3 = _.filter(Game.creeps, (creep) => creep.memory.role === 'upgrader' && creep.memory.roomN === '3');
+    const builders3 = _.filter(Game.creeps, (creep) => creep.memory.role === 'builder' && creep.memory.roomN === '3');
     /*const uptownHarvesters = _.filter(
       Game.creeps,
       (creep: Creep) => creep.memory.role === 'uptown-harvester'
@@ -201,6 +202,14 @@ module.exports.loop = () => {
             ..._.fill(_.times(1), WORK),
             ..._.fill(_.times(1), CARRY),
         ], newName, { memory: { role: 'upgrader', roomN: '3' } });
+    }
+    else if (builders3.length < 1) {
+        const newName = 'Builder3' + Game.time;
+        Game.spawns['Spawn3'].spawnCreep([
+            ..._.fill(_.times(1), MOVE),
+            ..._.fill(_.times(1), WORK),
+            ..._.fill(_.times(1), CARRY),
+        ], newName, { memory: { role: 'builder', roomN: '3' } });
     }
     for (const name of Object.keys(Game.creeps)) {
         const creep = Game.creeps[name];
