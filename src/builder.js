@@ -13,6 +13,9 @@ var roleBuilder = {
             creep.say('build');
         }
         if (creep.memory.building) {
+            if (creep.memory.roomN === '3' && creep.pos.y !== 19) {
+                creep.moveTo(36, 19);
+            }
             if (creep.carry[RESOURCE_HYDROGEN] > 0) {
                 var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
