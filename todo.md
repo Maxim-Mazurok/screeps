@@ -3,3 +3,4 @@
 - check that flags do exist before creating uptown creeps
 - check that there is anything to build before spawning builders
 - add harvester in room 3
+- claimers should `reserveController` after claiming it
