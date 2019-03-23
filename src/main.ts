@@ -1,6 +1,7 @@
 import { Rooms } from './rooms';
 import * as _ from 'lodash';
 import { Extractor } from './extractor';
+import { RoleUptownClaimer } from "./uptown.claimer";
 
 const roleHarvester = require('./harvester');
 const roleUpgrader = require('./upgrader');
@@ -8,7 +9,6 @@ const roleBuilder = require('./builder');
 const roleEnergizer = require('./energizer');
 
 const roleUptownHarvester = require('./uptown.harvester');
-const roleUptownClaimer = require('./uptown.claimer');
 
 //const tower = require('tower');
 
@@ -79,15 +79,16 @@ module.exports.loop = () => {
     (creep: Creep) =>
       creep.memory.role === 'upgrader' && creep.memory.roomN === '2'
   );
+  const claimers2 = _.filter(
+    Game.creeps,
+    (creep: Creep) => creep.memory.role === 'claimer'
+  );
 
   /*const uptownHarvesters = _.filter(
     Game.creeps,
     (creep: Creep) => creep.memory.role === 'uptown-harvester'
   );
-  const uptownClaimers = _.filter(
-    Game.creeps,
-    (creep: Creep) => creep.memory.role === 'uptown-claimer'
-  );*/
+  */
 
   if (
     harvesters.length < 1 ||
@@ -269,6 +270,16 @@ module.exports.loop = () => {
       newName,
       { memory: { role: 'builder', roomN: '2' } }
     );
+  } else if (claimers2.length < 1) {
+    const newName = 'Claimer2' + Game.time;
+    Game.spawns['Spawn2'].spawnCreep(
+      [
+        ..._.fill(_.times(6), MOVE),
+        ..._.fill(_.times(2), CLAIM),
+      ],
+      newName,
+      { memory: { role: 'claimer', roomN: '2' } }
+    );
   }
 
   for (const name of Object.keys(Game.creeps)) {
@@ -296,8 +307,8 @@ module.exports.loop = () => {
     if (creep.memory.role === 'uptown-harvester') {
       roleUptownHarvester.run(creep);
     }
-    if (creep.memory.role === 'uptown-claimer') {
-      roleUptownClaimer.run(creep);
+    if (creep.memory.role === 'claimer') {
+      RoleUptownClaimer.run(creep);
     }
     if (creep.memory.role === 'extractor') {
       new Extractor().run(creep);

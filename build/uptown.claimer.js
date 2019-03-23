@@ -1,11 +1,18 @@
-var roleUptownClaimer = {
+Object.defineProperty(exports, "__esModule", { value: true });
+const helpers_1 = require("./helpers");
+class RoleUptownClaimer {
     /** @param {Creep} creep **/
-    run: function (creep) {
-        creep.claimController(creep.room.controller);
-        if ([ERR_NOT_IN_RANGE, ERR_INVALID_TARGET].indexOf(creep.claimController(Game.flags['ClaimMe'])) !== -1) {
-            creep.moveTo(Game.flags['ClaimMe'], { visualizePathStyle: { stroke: '#ffff00' } });
+    static run(creep) {
+        const flag = Game.flags[helpers_1.CLAIM_FLAG_NAME];
+        if (flag.room === creep.room && creep.room.controller !== undefined) {
+            if (creep.claimController(creep.room.controller) === ERR_NOT_IN_RANGE) {
+                creep.moveTo(flag, helpers_1.CLAIM_PATH);
+            }
+        }
+        else {
+            creep.moveTo(flag, helpers_1.CLAIM_PATH);
         }
     }
-};
-module.exports = roleUptownClaimer;
+}
+exports.RoleUptownClaimer = RoleUptownClaimer;
 //# sourceMappingURL=uptown.claimer.js.map

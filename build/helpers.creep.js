@@ -21,4 +21,6 @@ class HelpersCreep {
 exports.HelpersCreep = HelpersCreep;
 exports.TRANSFER_PATH = { visualizePathStyle: { stroke: '#ffffff' } };
 exports.HARVEST_PATH = { visualizePathStyle: { stroke: '#00ff00' } };
+exports.CLAIM_PATH = { visualizePathStyle: { stroke: '#ff00ff' } };
+exports.CLAIM_FLAG_NAME = 'ClaimMe';
 //# sourceMappingURL=helpers.creep.js.map

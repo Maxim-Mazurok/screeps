@@ -30,3 +30,6 @@ export class HelpersCreep {
 
 export const TRANSFER_PATH = { visualizePathStyle: { stroke: '#ffffff' } };
 export const HARVEST_PATH = { visualizePathStyle: { stroke: '#00ff00' } };
+export const CLAIM_PATH = { visualizePathStyle: { stroke: '#ff00ff' } };
+
+export const CLAIM_FLAG_NAME = 'ClaimMe';
