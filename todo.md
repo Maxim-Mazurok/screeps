@@ -7,3 +7,4 @@
 - add extractor in room 2
 - add extractor in room 3 (later)
 - make upgraders wait near the appropriate link in room 1 and 2
+- do not spawn upgraders unless there is enough energy in links and both extensions and spawn are full
