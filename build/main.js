@@ -28,7 +28,7 @@ module.exports.loop = () => {
     const builders2 = _.filter(Game.creeps, (creep) => creep.memory.role === 'builder' && creep.memory.roomN === '2');
     const upgraders2 = _.filter(Game.creeps, (creep) => creep.memory.role === 'upgrader' && creep.memory.roomN === '2');
     const claimers2 = _.filter(Game.creeps, (creep) => creep.memory.role === 'claimer');
-    const uptownBuilders2 = _.filter(Game.creeps, (creep) => creep.memory.role === 'claimer');
+    const uptownBuilders2 = _.filter(Game.creeps, (creep) => creep.memory.role === 'uptown-builder');
     /*const uptownHarvesters = _.filter(
       Game.creeps,
       (creep: Creep) => creep.memory.role === 'uptown-harvester'
