@@ -26,6 +26,16 @@ export class HelpersCreep {
   static logError(creep: Creep, errorMessage = 'unknown error') {
     console.log(`${creep.name} || ${creep.room.name} || ${errorMessage}`);
   }
+
+  private static hasBodyPart(creep: Creep, bodyPartType: BodyPartConstant): boolean {
+    return creep.body.filter((bodyPartDefinition: BodyPartDefinition) => {
+      return bodyPartDefinition.type === bodyPartType;
+    }).length > 0;
+  }
+
+  static canClaim(creep: Creep): boolean {
+    return HelpersCreep.hasBodyPart(creep, CLAIM);
+  }
 }
 
 export const TRANSFER_PATH = { visualizePathStyle: { stroke: '#ffffff' } };

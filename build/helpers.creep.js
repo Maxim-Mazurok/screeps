@@ -17,6 +17,14 @@ class HelpersCreep {
     static logError(creep, errorMessage = 'unknown error') {
         console.log(`${creep.name} || ${creep.room.name} || ${errorMessage}`);
     }
+    static hasBodyPart(creep, bodyPartType) {
+        return creep.body.filter((bodyPartDefinition) => {
+            return bodyPartDefinition.type === bodyPartType;
+        }).length > 0;
+    }
+    static canClaim(creep) {
+        return HelpersCreep.hasBodyPart(creep, CLAIM);
+    }
 }
 exports.HelpersCreep = HelpersCreep;
 exports.TRANSFER_PATH = { visualizePathStyle: { stroke: '#ffffff' } };

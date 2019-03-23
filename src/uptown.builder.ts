@@ -1,10 +1,10 @@
-import { BUILD_FLAG_NAME, BUILD_PATH, CLAIM_FLAG_NAME, CLAIM_PATH, HARVEST_PATH } from "./helpers";
+import { BUILD_FLAG_NAME, BUILD_PATH, CLAIM_FLAG_NAME, CLAIM_PATH, HARVEST_PATH, HelpersCreep } from "./helpers";
 
 export class RoleUptownBuilder {
 
   /** @param {Creep} creep **/
   public static run(creep: Creep) {
-    if (creep.room.controller && creep.room.controller.my === false) {
+    if (creep.room.controller && creep.room.controller.my === false && HelpersCreep.canClaim(creep)) {
       const flag = Game.flags[CLAIM_FLAG_NAME];
       if (flag.room && flag.room.name === creep.room.name && creep.room.controller !== undefined) {
         if (creep.claimController(creep.room.controller) === ERR_NOT_IN_RANGE) {

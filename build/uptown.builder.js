@@ -3,7 +3,7 @@ const helpers_1 = require("./helpers");
 class RoleUptownBuilder {
     /** @param {Creep} creep **/
     static run(creep) {
-        if (creep.room.controller && creep.room.controller.my === false) {
+        if (creep.room.controller && creep.room.controller.my === false && helpers_1.HelpersCreep.canClaim(creep)) {
             const flag = Game.flags[helpers_1.CLAIM_FLAG_NAME];
             if (flag.room && flag.room.name === creep.room.name && creep.room.controller !== undefined) {
                 if (creep.claimController(creep.room.controller) === ERR_NOT_IN_RANGE) {
