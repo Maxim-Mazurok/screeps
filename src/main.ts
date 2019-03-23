@@ -86,7 +86,7 @@ module.exports.loop = () => {
   );
   const uptownBuilders2 = _.filter(
     Game.creeps,
-    (creep: Creep) => creep.memory.role === 'claimer'
+    (creep: Creep) => creep.memory.role === 'uptown-builder'
   );
 
   /*const uptownHarvesters = _.filter(
