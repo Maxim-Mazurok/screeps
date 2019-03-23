@@ -1,4 +1,5 @@
 - if no source to harvest, and linkFrom is empty, and there's energy in storage - get energy from storage to linkFrom
 - refactor JS sources
-- claim the new room E48N17, probably (in progress)
 - check that flags do exist before creating uptown creeps
+- check that there is anything to build before spawning builders
+- add harvester in room 3
