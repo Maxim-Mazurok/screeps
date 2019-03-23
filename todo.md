@@ -1,1 +1,3 @@
 - if no source to harvest, and linkFrom is empty, and there's energy in storage - get energy from storage to linkFrom
+- refactor JS sources
+- claim the new room E48N17, probably
