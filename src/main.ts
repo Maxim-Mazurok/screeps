@@ -275,7 +275,7 @@ module.exports.loop = () => {
       newName,
       { memory: { role: 'builder', roomN: '2' } }
     );
-  } else if (claimers2.length < 1) {
+  } else if (claimers2.length < 0) {
     const newName = 'Claimer2' + Game.time;
     Game.spawns['Spawn2'].spawnCreep(
       [
@@ -292,6 +292,7 @@ module.exports.loop = () => {
         ..._.fill(_.times(4), MOVE),
         ..._.fill(_.times(4), WORK),
         ..._.fill(_.times(4), CARRY),
+        ..._.fill(_.times(1), CLAIM),
       ],
       newName,
       { memory: { role: 'uptown-builder', roomN: '2' } }
