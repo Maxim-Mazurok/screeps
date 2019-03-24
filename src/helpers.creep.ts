@@ -27,10 +27,15 @@ export class HelpersCreep {
     console.log(`${creep.name} || ${creep.room.name} || ${errorMessage}`);
   }
 
-  private static hasBodyPart(creep: Creep, bodyPartType: BodyPartConstant): boolean {
-    return creep.body.filter((bodyPartDefinition: BodyPartDefinition) => {
-      return bodyPartDefinition.type === bodyPartType;
-    }).length > 0;
+  private static hasBodyPart(
+    creep: Creep,
+    bodyPartType: BodyPartConstant
+  ): boolean {
+    return (
+      creep.body.filter((bodyPartDefinition: BodyPartDefinition) => {
+        return bodyPartDefinition.type === bodyPartType;
+      }).length > 0
+    );
   }
 
   static canClaim(creep: Creep): boolean {

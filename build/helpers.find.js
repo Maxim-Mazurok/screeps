@@ -10,13 +10,27 @@ class HelpersFind {
             terminal.my === true &&
             terminal.cooldown === 0);
     }
-    static getRoomTotalEnergyForSpawning(room, rcl = 0) {
+    static getRoomTotalEnergyForSpawning(room) {
+        const rcl = room.controller.level || 0;
         const extensions = HelpersFind.findStructuresByType(room, STRUCTURE_EXTENSION);
         const spawns = HelpersFind.findStructuresByType(room, STRUCTURE_SPAWN);
         const totalEnergy = SPAWN_ENERGY_CAPACITY * spawns.length +
             EXTENSION_ENERGY_CAPACITY[rcl] * extensions.length;
         console.log(`Room ${room.name} has ${totalEnergy} energy for spawning in total`);
         return totalEnergy;
+    }
+    static getRoomTotalEnergyForSpawningAvailable(room) {
+        let totalEnergyAvailable = 0;
+        const extensions = HelpersFind.findStructuresByType(room, STRUCTURE_EXTENSION);
+        extensions.forEach((extension) => {
+            totalEnergyAvailable += extension.energy;
+        });
+        const spawns = HelpersFind.findStructuresByType(room, STRUCTURE_SPAWN);
+        spawns.forEach((spawn) => {
+            totalEnergyAvailable += spawn.energy;
+        });
+        console.log(`Room ${room.name} has ${totalEnergyAvailable} energy for spawning available`);
+        return totalEnergyAvailable;
     }
     static findByFindConstant(room, findConstant) {
         return room.find(findConstant);

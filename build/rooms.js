@@ -1,7 +1,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const towers_1 = require("./towers");
 const market_1 = require("./market");
-const helpers_1 = require("./helpers");
 class Rooms {
     constructor(game = Game) {
         this._rooms = [];
@@ -17,7 +16,6 @@ class Rooms {
         this.rooms.forEach((room) => {
             new towers_1.Towers(room).run();
             new market_1.Market(room).run();
-            helpers_1.HelpersFind.getRoomTotalEnergyForSpawning(room);
         });
     }
 }

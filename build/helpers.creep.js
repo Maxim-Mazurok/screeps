@@ -18,9 +18,9 @@ class HelpersCreep {
         console.log(`${creep.name} || ${creep.room.name} || ${errorMessage}`);
     }
     static hasBodyPart(creep, bodyPartType) {
-        return creep.body.filter((bodyPartDefinition) => {
+        return (creep.body.filter((bodyPartDefinition) => {
             return bodyPartDefinition.type === bodyPartType;
-        }).length > 0;
+        }).length > 0);
     }
     static canClaim(creep) {
         return HelpersCreep.hasBodyPart(creep, CLAIM);

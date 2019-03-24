@@ -1,11 +1,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const helpers_1 = require("./helpers");
 class RoleUptownBuilder {
-    /** @param {Creep} creep **/
     static run(creep) {
-        if (creep.room.controller && creep.room.controller.my === false && helpers_1.HelpersCreep.canClaim(creep)) {
+        if (creep.room.controller &&
+            creep.room.controller.my === false &&
+            helpers_1.HelpersCreep.canClaim(creep)) {
             const flag = Game.flags[helpers_1.CLAIM_FLAG_NAME];
-            if (flag.room && flag.room.name === creep.room.name && creep.room.controller !== undefined) {
+            if (flag.room &&
+                flag.room.name === creep.room.name &&
+                creep.room.controller !== undefined) {
                 if (creep.claimController(creep.room.controller) !== OK) {
                     creep.moveTo(flag, helpers_1.CLAIM_PATH);
                 }
@@ -20,17 +23,18 @@ class RoleUptownBuilder {
                 creep.memory.building = false;
                 creep.say('harvest');
             }
-            if (!creep.memory.building && creep.carry.energy === creep.carryCapacity) {
+            if (!creep.memory.building &&
+                creep.carry.energy === creep.carryCapacity) {
                 creep.memory.building = true;
                 creep.say('build');
             }
             if (creep.memory.building) {
                 if (flag.room && creep.room.name === flag.room.name) {
                     creep.room.lookAt(flag).some((lookObject) => {
-                        if (lookObject.type == LOOK_CONSTRUCTION_SITES) {
+                        if (lookObject.type === LOOK_CONSTRUCTION_SITES) {
                             const target = lookObject.constructionSite;
                             if (target !== undefined) {
-                                if (creep.build(target) == ERR_NOT_IN_RANGE) {
+                                if (creep.build(target) === ERR_NOT_IN_RANGE) {
                                     creep.moveTo(target, helpers_1.BUILD_PATH);
                                 }
                                 return true;
