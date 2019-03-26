@@ -64,12 +64,18 @@ export class HelpersFind {
 
   static findByFindConstant<K extends FindConstant>(
     room: Room,
-    findConstant: K
+    findConstant: K,
+    filter: ((filterObject: AnyStructure) => boolean) | undefined = undefined
   ): Array<FindTypes[K]> {
+    if (filter !== undefined) {
+      return room.find<K>(findConstant, {
+        filter,
+      });
+    }
     return room.find<K>(findConstant);
   }
 
-  static findClosestPathToMineral<T extends FindConstant>(
+  static findClosestPath<T extends FindConstant>(
     roomPosition: RoomPosition,
     room: Room,
     type: T
@@ -77,5 +83,23 @@ export class HelpersFind {
     return roomPosition.findClosestByPath(
       HelpersFind.findByFindConstant<T>(room, type)
     );
+  }
+
+  static findSomethingToBuild(
+    room: Room,
+    maxHits = Infinity,
+    wallsOnly = false
+  ): Array<ConstructionSite | Structure> {
+    return [
+      ...this.findByFindConstant(
+        room,
+        FIND_STRUCTURES,
+        object =>
+          object.hits < object.hitsMax &&
+          object.hits < maxHits &&
+          (wallsOnly ? object.structureType === STRUCTURE_WALL : true)
+      ),
+      ...this.findByFindConstant(room, FIND_CONSTRUCTION_SITES),
+    ];
   }
 }

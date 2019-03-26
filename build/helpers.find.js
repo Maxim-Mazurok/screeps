@@ -32,11 +32,24 @@ class HelpersFind {
         console.log(`Room ${room.name} has ${totalEnergyAvailable} energy for spawning available`);
         return totalEnergyAvailable;
     }
-    static findByFindConstant(room, findConstant) {
+    static findByFindConstant(room, findConstant, filter = undefined) {
+        if (filter !== undefined) {
+            return room.find(findConstant, {
+                filter,
+            });
+        }
         return room.find(findConstant);
     }
-    static findClosestPathToMineral(roomPosition, room, type) {
+    static findClosestPath(roomPosition, room, type) {
         return roomPosition.findClosestByPath(HelpersFind.findByFindConstant(room, type));
+    }
+    static findSomethingToBuild(room, maxHits = Infinity, wallsOnly = false) {
+        return [
+            ...this.findByFindConstant(room, FIND_STRUCTURES, object => object.hits < object.hitsMax &&
+                object.hits < maxHits &&
+                (wallsOnly ? object.structureType === STRUCTURE_WALL : true)),
+            ...this.findByFindConstant(room, FIND_CONSTRUCTION_SITES),
+        ];
     }
 }
 exports.HelpersFind = HelpersFind;

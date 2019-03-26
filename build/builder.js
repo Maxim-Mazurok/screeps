@@ -12,7 +12,7 @@ var roleBuilder = {
             creep.say('build');
         }
         if (creep.memory.building) {
-            if (creep.memory.roomN === '3' && creep.pos.y !== 19) {
+            if (creep.memory.roomN === '3' && creep.pos.y === 20 && creep.pos.x === 36) {
                 creep.moveTo(36, 19);
             }
             if (creep.carry[RESOURCE_HYDROGEN] > 0) {

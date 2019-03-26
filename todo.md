@@ -1,7 +1,7 @@
 - if no source to harvest, and linkFrom is empty, and there's energy in storage - get energy from storage to linkFrom
 - refactor JS sources
 - check that flags do exist before creating uptown creeps
-- check that there is anything to build before spawning builders
+- check that there is anything to build before spawning builders (IN PROGRESS) - `HelpersFind.findSomethingToBuild().length > 0`
 - claimers should `reserveController` after claiming it
 - add extractor in room 2
 - add extractor in room 3 (later)

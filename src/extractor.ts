@@ -48,7 +48,7 @@ export class Extractor {
         HelpersCreep.logError(creep, 'no terminal in room found');
       }
     } else {
-      const mineral = HelpersFind.findClosestPathToMineral<FIND_MINERALS>(
+      const mineral = HelpersFind.findClosestPath<FIND_MINERALS>(
         creep.pos,
         creep.room,
         FIND_MINERALS

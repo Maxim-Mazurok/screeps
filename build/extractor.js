@@ -43,7 +43,7 @@ class Extractor {
             }
         }
         else {
-            const mineral = helpers_1.HelpersFind.findClosestPathToMineral(creep.pos, creep.room, FIND_MINERALS);
+            const mineral = helpers_1.HelpersFind.findClosestPath(creep.pos, creep.room, FIND_MINERALS);
             if (mineral === null) {
                 helpers_creep_1.HelpersCreep.logError(creep, 'no mineral in room found');
                 return;
