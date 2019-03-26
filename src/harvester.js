@@ -64,14 +64,18 @@ var roleHarvester = {
                                 }
                             }
                         } else {
-                            // var targets = creep.room.find(FIND_STRUCTURES, {
-                            //     filter: (structure) => {
-                            //         return ([STRUCTURE_CONTAINER].indexOf(structure.structureType) !== -1) &&
-                            //             structure.store[RESOURCE_ENERGY] < structure.storeCapacity / 2;
-                            //     }
-                            // });
-                            // const target = creep.pos.findClosestByPath(targets);
-                            if (false && target !== null) {
+                            if (creep.memory.roomN == '3') {
+                                var targets = creep.room.find(FIND_STRUCTURES, {
+                                    filter: (structure) => {
+                                        return ([STRUCTURE_CONTAINER].indexOf(structure.structureType) !== -1) &&
+                                            structure.store[RESOURCE_ENERGY] < structure.storeCapacity / 2;
+                                    }
+                                });
+                            } else {
+                                var targets = [];
+                            }
+                            const target = creep.pos.findClosestByPath(targets);
+                            if (target !== null) {
                                 if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                                     creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                                 }
