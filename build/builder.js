@@ -11,10 +11,10 @@ var roleBuilder = {
             creep.memory.building = true;
             creep.say('build');
         }
+        if (creep.memory.roomN === '3' && creep.pos.y === 20 && creep.pos.x === 36) {
+            creep.moveTo(36, 19);
+        }
         if (creep.memory.building) {
-            if (creep.memory.roomN === '3' && creep.pos.y === 20 && creep.pos.x === 36) {
-                creep.moveTo(36, 19);
-            }
             if (creep.carry[RESOURCE_HYDROGEN] > 0) {
                 var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
@@ -78,7 +78,7 @@ var roleBuilder = {
                     }
                     else if (creep.memory.roomN === '3') {
                         targets = [...creep.room.find(FIND_STRUCTURES, {
-                                filter: object => (object.hits < object.hitsMax && object.hits < 10000)
+                                filter: object => (object.hits < object.hitsMax && object.hits < 250000)
                             }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
                     }
                     else {
@@ -148,12 +148,12 @@ var roleBuilder = {
                     //     }
                     // }
                     //wait
-                    if (creep.memory.roomN == '2' || creep.memory.roomN == '3') {
-                        source = creep.pos.findClosestByPath(creep.room.find(FIND_SOURCES));
-                        if ([ERR_NOT_IN_RANGE, ERR_INVALID_TARGET].indexOf(creep.harvest(source)) !== -1) {
-                            creep.moveTo(source, { visualizePathStyle: { stroke: '#ffaa00' } });
-                        }
-                    }
+                    // if (creep.memory.roomN == '2' || creep.memory.roomN == '3') {
+                    //     source = creep.pos.findClosestByPath(creep.room.find(FIND_SOURCES));
+                    //     if ([ERR_NOT_IN_RANGE, ERR_INVALID_TARGET].indexOf(creep.harvest(source)) !== -1) {
+                    //         creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
+                    //     }
+                    // }
                 }
                 else {
                     if (Math.abs(creep.pos.x - source.pos.x) <= 1 && Math.abs(creep.pos.y - source.pos.y) <= 1) {
