@@ -99,6 +99,9 @@ var roleHarvester = {
                                         creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                                     }
                                 }
+                                else {
+                                    creep.drop(RESOURCE_ENERGY);
+                                }
                                 //roleBuilder.run(creep);
                             }
                         }
