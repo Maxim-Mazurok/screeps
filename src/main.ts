@@ -318,7 +318,7 @@ module.exports.loop = () => {
     const newName = 'Harvester3' + Game.time;
     if (
       HelpersFind.getRoomTotalEnergyForSpawningAvailable(new Room('E48N17')) <
-      500
+      800
     ) {
       Game.spawns['Spawn3'].spawnCreep(
         [
@@ -333,8 +333,8 @@ module.exports.loop = () => {
       Game.spawns['Spawn3'].spawnCreep(
         [
           ..._.fill(_.times(4), MOVE),
-          ..._.fill(_.times(2), WORK),
-          ..._.fill(_.times(2), CARRY),
+          ..._.fill(_.times(4), WORK),
+          ..._.fill(_.times(4), CARRY),
         ],
         newName,
         { memory: { role: 'harvester', roomN: '3' } }
@@ -345,8 +345,8 @@ module.exports.loop = () => {
     Game.spawns['Spawn3'].spawnCreep(
       [
         ..._.fill(_.times(4), MOVE),
-        ..._.fill(_.times(2), WORK),
-        ..._.fill(_.times(2), CARRY),
+        ..._.fill(_.times(4), WORK),
+        ..._.fill(_.times(4), CARRY),
       ],
       newName,
       { memory: { role: 'upgrader', roomN: '3' } }
@@ -360,8 +360,8 @@ module.exports.loop = () => {
       Game.spawns['Spawn3'].spawnCreep(
         [
           ..._.fill(_.times(4), MOVE),
-          ..._.fill(_.times(2), WORK),
-          ..._.fill(_.times(2), CARRY),
+          ..._.fill(_.times(4), WORK),
+          ..._.fill(_.times(4), CARRY),
         ],
         newName,
         { memory: { role: 'builder', roomN: '3' } }
