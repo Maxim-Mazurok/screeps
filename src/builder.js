@@ -78,7 +78,7 @@ var roleBuilder = {
                         }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
                     } else if (creep.memory.roomN === '3') {
                         targets = [...creep.room.find(FIND_STRUCTURES, {
-                            filter: object => (object.hits < object.hitsMax && object.hits < 250000)
+                            filter: object => (object.hits < object.hitsMax && object.hits < 1000000)
                         }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
                     } else {
                         targets = [...creep.room.find(FIND_STRUCTURES, {
