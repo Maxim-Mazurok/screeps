@@ -14,7 +14,11 @@ class Rooms {
     }
     run() {
         this.rooms.forEach((room) => {
-            new towers_1.Towers(room).run();
+            let maxHits;
+            if (room.name === 'E48N17') {
+                maxHits = 10000;
+            }
+            new towers_1.Towers(room).run(maxHits);
             new market_1.Market(room).run();
         });
     }
