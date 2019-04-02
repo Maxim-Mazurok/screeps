@@ -8,3 +8,4 @@
 - make upgraders wait near the appropriate link in room 1 and 2
 - do not spawn upgraders unless there is enough energy in links and both extensions and spawn are full
 - use husky to run comile hook before commiting/pushing
+- check that terminal is not full before spawnging extractor
