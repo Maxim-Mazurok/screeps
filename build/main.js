@@ -194,41 +194,66 @@ module.exports.loop = () => {
             ..._.fill(_.times(1), CLAIM),
         ], newName, { memory: { role: 'uptown-builder', roomN: '2' } });
     }
+    const roomTotalEnergyForSpawningAvailable_3 = helpers_1.HelpersFind.getRoomTotalEnergyForSpawningAvailable(new Room('E48N17'));
     if (harvesters3.length < 1) {
         const newName = 'Harvester3' + Game.time;
-        if (helpers_1.HelpersFind.getRoomTotalEnergyForSpawningAvailable(new Room('E48N17')) <
-            800) {
-            Game.spawns['Spawn3'].spawnCreep([
-                ..._.fill(_.times(1), MOVE),
-                ..._.fill(_.times(1), WORK),
-                ..._.fill(_.times(1), CARRY),
-            ], newName, { memory: { role: 'harvester', roomN: '3' } });
-        }
-        else {
+        if (roomTotalEnergyForSpawningAvailable_3 >= 800) {
             Game.spawns['Spawn3'].spawnCreep([
                 ..._.fill(_.times(4), MOVE),
                 ..._.fill(_.times(4), WORK),
                 ..._.fill(_.times(4), CARRY),
             ], newName, { memory: { role: 'harvester', roomN: '3' } });
         }
+        else if (roomTotalEnergyForSpawningAvailable_3 >= 400) {
+            Game.spawns['Spawn3'].spawnCreep([
+                ..._.fill(_.times(2), MOVE),
+                ..._.fill(_.times(2), WORK),
+                ..._.fill(_.times(2), CARRY),
+            ], newName, { memory: { role: 'harvester', roomN: '3' } });
+        }
+        else {
+            Game.spawns['Spawn3'].spawnCreep([
+                ..._.fill(_.times(1), MOVE),
+                ..._.fill(_.times(1), WORK),
+                ..._.fill(_.times(1), CARRY),
+            ], newName, { memory: { role: 'harvester', roomN: '3' } });
+        }
     }
     else if (upgraders3.length < 1) {
         const newName = 'Upgrader3' + Game.time;
-        Game.spawns['Spawn3'].spawnCreep([
-            ..._.fill(_.times(2), MOVE),
-            ..._.fill(_.times(2), WORK),
-            ..._.fill(_.times(2), CARRY),
-        ], newName, { memory: { role: 'upgrader', roomN: '3' } });
+        if (roomTotalEnergyForSpawningAvailable_3 >= 800) {
+            Game.spawns['Spawn3'].spawnCreep([
+                ..._.fill(_.times(2), MOVE),
+                ..._.fill(_.times(2), WORK),
+                ..._.fill(_.times(2), CARRY),
+            ], newName, { memory: { role: 'upgrader', roomN: '3' } });
+        }
+        else {
+            Game.spawns['Spawn3'].spawnCreep([
+                ..._.fill(_.times(1), MOVE),
+                ..._.fill(_.times(1), WORK),
+                ..._.fill(_.times(1), CARRY),
+            ], newName, { memory: { role: 'upgrader', roomN: '3' } });
+        }
     }
     else if (builders3.length < 1) {
         if (helpers_1.HelpersFind.findSomethingToBuild(new Room('E48N17'), 250000, false)
             .length > 0) {
             const newName = 'Builder3' + Game.time;
-            Game.spawns['Spawn3'].spawnCreep([
-                ..._.fill(_.times(2), MOVE),
-                ..._.fill(_.times(2), WORK),
-                ..._.fill(_.times(2), CARRY),
-            ], newName, { memory: { role: 'builder', roomN: '3' } });
+            if (roomTotalEnergyForSpawningAvailable_3 >= 800) {
+                Game.spawns['Spawn3'].spawnCreep([
+                    ..._.fill(_.times(2), MOVE),
+                    ..._.fill(_.times(2), WORK),
+                    ..._.fill(_.times(2), CARRY),
+                ], newName, { memory: { role: 'builder', roomN: '3' } });
+            }
+            else {
+                Game.spawns['Spawn3'].spawnCreep([
+                    ..._.fill(_.times(1), MOVE),
+                    ..._.fill(_.times(1), WORK),
+                    ..._.fill(_.times(1), CARRY),
+                ], newName, { memory: { role: 'builder', roomN: '3' } });
+            }
         }
     }
     for (const name of Object.keys(Game.creeps)) {
