@@ -24,7 +24,7 @@ export class HelpersFind {
   }
 
   static getRoomTotalEnergyForSpawning(room: Room) {
-    const rcl = room.controller!.level || 0;
+    const rcl = room.controller ? room.controller.level : 0;
     const extensions: StructureExtension[] = HelpersFind.findStructuresByType<
       StructureExtension
     >(room, STRUCTURE_EXTENSION);

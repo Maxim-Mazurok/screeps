@@ -12,7 +12,7 @@ class HelpersFind {
             terminal.cooldown === 0);
     }
     static getRoomTotalEnergyForSpawning(room) {
-        const rcl = room.controller.level || 0;
+        const rcl = room.controller ? room.controller.level : 0;
         const extensions = HelpersFind.findStructuresByType(room, STRUCTURE_EXTENSION);
         const spawns = HelpersFind.findStructuresByType(room, STRUCTURE_SPAWN);
         const totalEnergy = SPAWN_ENERGY_CAPACITY * spawns.length +

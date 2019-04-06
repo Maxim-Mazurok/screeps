@@ -35,7 +35,8 @@ export class Extractor {
       if (terminals.length === 1) {
         // only one terminal allowed per room
         const terminal = terminals[0];
-        const transferResult = creep.transfer(terminal, RESOURCE_HYDROGEN);
+        const myResource = creep.carry[RESOURCE_HYDROGEN] !== undefined ? RESOURCE_HYDROGEN : RESOURCE_KEANIUM;
+        const transferResult = creep.transfer(terminal, myResource);
         if (transferResult === ERR_NOT_IN_RANGE) {
           creep.moveTo(terminal, TRANSFER_PATH);
         } else if (transferResult !== OK) {
