@@ -27,6 +27,8 @@ module.exports.loop = () => {
     const upgraders2 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.upgrader && creep.memory.room === '2');
     const claimers2 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.claimer);
     const uptownBuilders2 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.uptownBuilder);
+    const extractors2 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.extractor && creep.memory.room === '2');
+    const energizers2 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.energizer && creep.memory.room === '2');
     const upgraders3 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.upgrader && creep.memory.room === '3');
     const builders3 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.builder && creep.memory.room === '3');
     const harvesters3 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.harvester && creep.memory.room === '3');
@@ -191,6 +193,30 @@ module.exports.loop = () => {
             ..._.fill(_.times(4), CARRY),
             ..._.fill(_.times(1), CLAIM),
         ], newName, { memory: { role: enums_1.CreepRole.uptownBuilder, room: '2' } });
+    }
+    else if (extractors2.length < 1 &&
+        Game.rooms['E47N17'].lookForAt('mineral', 42, 31)[0].mineralAmount > 0 &&
+        helpers_1.HelpersFind.getRoomTerminalFreeStorageAmount(Game.rooms['E47N17']) > 0) {
+        const newName = 'Extractor' + Game.time;
+        Game.spawns['Spawn2'].spawnCreep([
+            ..._.fill(_.times(1), MOVE),
+            ..._.fill(_.times(20), WORK),
+            ..._.fill(_.times(1), CARRY),
+        ], newName, { memory: { role: enums_1.CreepRole.extractor, room: '2' } });
+    }
+    else if (energizers2.length < 1) {
+        const terminal = Game.rooms['E47N17'].terminal;
+        const amountOfKInTerminal = terminal.store[RESOURCE_KEANIUM] || 0;
+        const amountOfEnergyInStorage = Game.rooms['E47N17'].storage.store.energy || 0;
+        if (terminal &&
+            terminal.store[RESOURCE_ENERGY] < 50000 &&
+            amountOfKInTerminal > 1000 &&
+            amountOfEnergyInStorage > 10000) {
+            const newName = 'Energizer' + Game.time;
+            Game.spawns['Spawn2'].spawnCreep([..._.fill(_.times(5), MOVE), ..._.fill(_.times(5), CARRY)], newName, {
+                memory: { role: enums_1.CreepRole.energizer, room: '2' },
+            });
+        }
     }
     const roomTotalEnergyForSpawningAvailable3 = helpers_1.HelpersFind.getRoomTotalEnergyForSpawningAvailable(new Room('E48N17'));
     if (harvesters3.length < 1) {

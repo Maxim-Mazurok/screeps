@@ -1,7 +1,7 @@
 import { Towers } from './towers';
 import { Market } from './market';
 import { filter } from 'lodash';
-import { CreepRole } from "./enums";
+import { CreepRole } from './enums';
 
 export class Rooms {
   constructor() {
