@@ -98,11 +98,9 @@ var roleBuilder = {
                                 creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                             }
                         } else {
-                            import {Upgrader} from './upgrader';
                             Upgrader.run(creep);
                         }
                     } else {
-                        import {Upgrader} from './upgrader';
                         Upgrader.run(creep);
                     }
                 }
