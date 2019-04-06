@@ -3,7 +3,6 @@
 - check that flags do exist before creating uptown creeps
 - check that there is anything to build before spawning builders (IN PROGRESS) - `HelpersFind.findSomethingToBuild().length > 0`
 - claimers should `reserveController` after claiming it
-- add extractor in room 2
 - add extractor in room 3 (later)
 - make upgraders wait near the appropriate link in room 1 and 2
 - do not spawn upgraders unless there is enough energy in links and both extensions and spawn are full
