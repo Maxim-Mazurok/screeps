@@ -6,13 +6,13 @@ const uptown_claimer_1 = require("./uptown.claimer");
 const uptown_builder_1 = require("./uptown.builder");
 const helpers_1 = require("./helpers");
 const enums_1 = require("./enums");
-const harvester = require('./harvester');
 const upgrader_1 = require("./upgrader");
+const harvester = require('./harvester');
 const roleBuilder = require('./builder');
 const roleEnergizer = require('./energizer');
 const roleUptownHarvester = require('./uptown.harvester');
 const roomConfig = {};
-module.exports.loop = () => {
+function loop() {
     helpers_1.HelpersCreep.clearNonExistingCreepsMemory();
     const harvesters = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.harvester && creep.memory.room === '1');
     const harvestersE = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.harvester &&
@@ -362,5 +362,15 @@ module.exports.loop = () => {
     //     //console.log(e);
     // }
     new rooms_1.Rooms().run();
+}
+module.exports.loop = () => {
+    try {
+        loop();
+    }
+    catch (e) {
+        console.error('An error occurred!');
+        console.log(e.message);
+        console.log(e.stack);
+    }
 };
 //# sourceMappingURL=main.js.map
