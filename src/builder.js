@@ -12,9 +12,6 @@ var roleBuilder = {
             creep.memory.building = true;
             creep.say('build');
         }
-        if (creep.memory.roomN === '3' && creep.pos.y === 20 && creep.pos.x === 36) {
-            creep.moveTo(36, 19);
-        }
         if (creep.memory.building) {
             if (creep.carry[RESOURCE_HYDROGEN] > 0) {
                 var targets = creep.room.find(FIND_STRUCTURES, {
@@ -67,16 +64,16 @@ var roleBuilder = {
                     }
                 } else {
                     let targets;
-                    if (creep.memory.roomN === '1') {
+                    if (creep.memory.room === '1') {
                         targets = [...creep.room.find(FIND_STRUCTURES, {
                             //filter: object => (object.hits < object.hitsMax && object.hits > 25000 && object.hits < 500000)
                             filter: object => (object.hits < object.hitsMax && object.hits < 2000000 && object.structureType === STRUCTURE_WALL)
                         }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
-                    } else if (creep.memory.roomN === '2') {
+                    } else if (creep.memory.room === '2') {
                         targets = [...creep.room.find(FIND_STRUCTURES, {
                             filter: object => (object.hits < object.hitsMax && object.hits < 2000000 && object.structureType === STRUCTURE_WALL)
                         }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
-                    } else if (creep.memory.roomN === '3') {
+                    } else if (creep.memory.room === '3') {
                         targets = [...creep.room.find(FIND_STRUCTURES, {
                             filter: object => (object.hits < object.hitsMax && object.hits < 1000000)
                         }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
@@ -147,7 +144,7 @@ var roleBuilder = {
                     //     }
                     // }
                     //wait
-                    // if (creep.memory.roomN == '2' || creep.memory.roomN == '3') {
+                    // if (creep.memory.room == '2' || creep.memory.room == '3') {
                     //     source = creep.pos.findClosestByPath(creep.room.find(FIND_SOURCES));
                     //     if ([ERR_NOT_IN_RANGE, ERR_INVALID_TARGET].indexOf(creep.harvest(source)) !== -1) {
                     //         creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});

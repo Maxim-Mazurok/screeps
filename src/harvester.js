@@ -51,9 +51,9 @@ var roleHarvester = {
                             creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                         }
                     } else {
-                        if (creep.memory.roomN == '1') {
+                        if (creep.memory.room == '1') {
                             var targets = Game.rooms['E47N16'].lookForAt('structure', 9, 31)[0];
-                        } else if (creep.memory.roomN == '2') {
+                        } else if (creep.memory.room == '2') {
                             var targets = Game.rooms['E47N17'].lookForAt('structure', 40, 12)[0];
                         } else targets = false;
                         if (targets && targets.energy < targets.energyCapacity - creep.carryCapacity) {
@@ -64,7 +64,7 @@ var roleHarvester = {
                                 }
                             }
                         } else {
-                            if (creep.memory.roomN == '3') {
+                            if (creep.memory.room == '3') {
                                 var targets = creep.room.find(FIND_STRUCTURES, {
                                     filter: (structure) => {
                                         return ([STRUCTURE_CONTAINER].indexOf(structure.structureType) !== -1) &&

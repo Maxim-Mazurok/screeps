@@ -7,16 +7,35 @@ class Upgrader {
             const link = helpers_find_1.HelpersFind.findClosestStructureByPathFromArray(creep.pos, creep.room, helpers_find_1.HelpersFind.findLinksWithEnergy(creep.room));
             if (link === null) {
                 helpers_creep_1.HelpersCreep.logError(creep, 'no link with energy in room found');
-                return;
+                return false;
             }
             const withdrawalResult = creep.withdraw(link, RESOURCE_ENERGY);
             if (withdrawalResult === ERR_NOT_IN_RANGE ||
                 withdrawalResult === ERR_INVALID_TARGET) {
                 creep.moveTo(link, helpers_creep_1.HARVEST_PATH);
+                return true;
             }
             else if (withdrawalResult !== OK) {
                 helpers_creep_1.HelpersCreep.logError(creep, `energy withdrawal from link failed with result: ${withdrawalResult}`);
             }
+            return false;
+        }
+        function tryStorage() {
+            const storage = creep.room.storage;
+            if (storage === undefined || storage.store[RESOURCE_ENERGY] === 0) {
+                helpers_creep_1.HelpersCreep.logError(creep, 'no storage with energy in room found');
+                return false;
+            }
+            const withdrawalResult = creep.withdraw(storage, RESOURCE_ENERGY);
+            if (withdrawalResult === ERR_NOT_IN_RANGE ||
+                withdrawalResult === ERR_INVALID_TARGET) {
+                creep.moveTo(storage, helpers_creep_1.HARVEST_PATH);
+                return true;
+            }
+            else if (withdrawalResult !== OK) {
+                helpers_creep_1.HelpersCreep.logError(creep, `energy withdrawal from storage failed with result: ${withdrawalResult}`);
+            }
+            return false;
         }
         function upgradeController() {
             if (creep.room.controller === undefined) {
@@ -32,10 +51,13 @@ class Upgrader {
             }
         }
         if (helpers_creep_1.HelpersCreep.totalCarry(creep) > 0) {
-            tryLink();
+            upgradeController();
+        }
+        else if (tryLink() || tryStorage()) {
+            return;
         }
         else {
-            upgradeController();
+            helpers_creep_1.HelpersCreep.logError(creep, `IDLE`);
         }
     }
 }

@@ -74,7 +74,7 @@ var roleEnergizer = {
                     //     }
                     // }
                     //wait
-                    if (creep.memory.roomN == '2') {
+                    if (creep.memory.room == '2') {
                         source = creep.pos.findClosestByPath(creep.room.find(FIND_SOURCES));
                         if ([ERR_NOT_IN_RANGE, ERR_INVALID_TARGET].indexOf(creep.harvest(source)) !== -1) {
                             creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
