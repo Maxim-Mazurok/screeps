@@ -3,7 +3,8 @@ import { Rooms } from './rooms';
 import { Extractor } from './extractor';
 import { RoleUptownClaimer } from './uptown.claimer';
 import { RoleUptownBuilder } from './uptown.builder';
-import { HelpersCreep, HelpersFind, HelpersTerminal } from './helpers';
+import { HelpersCreep, HelpersFind } from './helpers';
+import { CreepRole } from './enums';
 
 const roleHarvester = require('./harvester');
 const roleUpgrader = require('./upgrader');

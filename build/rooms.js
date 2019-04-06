@@ -2,6 +2,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const towers_1 = require("./towers");
 const market_1 = require("./market");
 const lodash_1 = require("lodash");
+const enums_1 = require("./enums");
 class Rooms {
     constructor() {
         this._rooms = [];
@@ -27,11 +28,11 @@ class Rooms {
         function getCreepsByRole(role) {
             return lodash_1.filter(Game.creeps, (creep) => creep.memory.role === role && creep.memory.room === room.name);
         }
-        const harvesters = getCreepsByRole(CreepRole.harvester);
-        const builders = getCreepsByRole(CreepRole.builder);
-        const upgraders = getCreepsByRole(CreepRole.upgrader);
-        const extractors = getCreepsByRole(CreepRole.extractor);
-        const energizers = getCreepsByRole(CreepRole.energizer);
+        const harvesters = getCreepsByRole(enums_1.CreepRole.harvester);
+        const builders = getCreepsByRole(enums_1.CreepRole.builder);
+        const upgraders = getCreepsByRole(enums_1.CreepRole.upgrader);
+        const extractors = getCreepsByRole(enums_1.CreepRole.extractor);
+        const energizers = getCreepsByRole(enums_1.CreepRole.energizer);
         if (harvesters.length < 1) {
         }
     }
