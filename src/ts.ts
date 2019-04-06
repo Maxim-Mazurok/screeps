@@ -5,3 +5,20 @@ type OrderId = ValueOf<Pick<Order, 'id'>>;
 type OrderAmount = ValueOf<Pick<Order, 'amount'>>;
 
 type TerminalMarketResourcesAndAmounts = Map<MarketResourceConstant, number>;
+
+enum CreepRole {
+  harvester,
+  builder,
+  upgrader,
+  extractor,
+  energizer,
+  uptownHarvester,
+  claimer,
+  uptownBuilder,
+}
+
+type RoomsConfig = RoomConfig[];
+
+interface RoomConfig {
+  //TODO: create config for rooms (number of creeps, policies, etc.)
+}

@@ -1,24 +1,23 @@
-import { Rooms } from './rooms';
 import * as _ from 'lodash';
+import { Rooms } from './rooms';
 import { Extractor } from './extractor';
 import { RoleUptownClaimer } from './uptown.claimer';
 import { RoleUptownBuilder } from './uptown.builder';
-import { HelpersFind } from './helpers';
+import { HelpersCreep, HelpersFind } from './helpers';
 
 const roleHarvester = require('./harvester');
 const roleUpgrader = require('./upgrader');
 const roleBuilder = require('./builder');
 const roleEnergizer = require('./energizer');
-
 const roleUptownHarvester = require('./uptown.harvester');
 
-//const tower = require('tower');
+const roomConfig = {};
 
 declare global {
   // noinspection JSUnusedGlobalSymbols
   interface CreepMemory {
-    role: string;
-    roomN: string;
+    role: CreepRole;
+    room: RoomName;
     transferring?: boolean;
 
     [name: string]: string | number | boolean | undefined;
@@ -26,89 +25,84 @@ declare global {
 }
 
 module.exports.loop = () => {
-  for (const name of Object.keys(Memory.creeps)) {
-    if (!Game.creeps[name]) {
-      delete Memory.creeps[name];
-      //console.log('Clearing non-existing creep memory:', name);
-    }
-  }
+  HelpersCreep.clearNonExistingCreepsMemory();
 
   const harvesters = _.filter(
     Game.creeps,
     (creep: Creep) =>
-      creep.memory.role === 'harvester' && creep.memory.roomN === '1'
+      creep.memory.role === CreepRole.harvester && creep.memory.roomN === '1'
   );
   const harvestersE = _.filter(
     Game.creeps,
     (creep: Creep) =>
-      creep.memory.role === 'harvester' &&
+      creep.memory.role === CreepRole.harvester &&
       creep.memory.roomN === '1' &&
       creep.memory.e === '1'
   );
   const builders = _.filter(
     Game.creeps,
     (creep: Creep) =>
-      creep.memory.role === 'builder' && creep.memory.roomN === '1'
+      creep.memory.role === CreepRole.builder && creep.memory.roomN === '1'
   );
   const upgraders = _.filter(
     Game.creeps,
     (creep: Creep) =>
-      creep.memory.role === 'upgrader' && creep.memory.roomN === '1'
+      creep.memory.role === CreepRole.upgrader && creep.memory.roomN === '1'
   );
   const extractors = _.filter(
     Game.creeps,
     (creep: Creep) =>
-      creep.memory.role === 'extractor' && creep.memory.roomN === '1'
+      creep.memory.role === CreepRole.extractor && creep.memory.roomN === '1'
   );
   const energizers = _.filter(
     Game.creeps,
     (creep: Creep) =>
-      creep.memory.role === 'energizer' && creep.memory.roomN === '1'
+      creep.memory.role === CreepRole.energizer && creep.memory.roomN === '1'
   );
 
   const harvesters2 = _.filter(
     Game.creeps,
     (creep: Creep) =>
-      creep.memory.role === 'harvester' && creep.memory.roomN === '2'
+      creep.memory.role === CreepRole.harvester && creep.memory.roomN === '2'
   );
   const builders2 = _.filter(
     Game.creeps,
     (creep: Creep) =>
-      creep.memory.role === 'builder' && creep.memory.roomN === '2'
+      creep.memory.role === CreepRole.builder && creep.memory.roomN === '2'
   );
   const upgraders2 = _.filter(
     Game.creeps,
     (creep: Creep) =>
-      creep.memory.role === 'upgrader' && creep.memory.roomN === '2'
+      creep.memory.role === CreepRole.upgrader && creep.memory.roomN === '2'
   );
   const claimers2 = _.filter(
     Game.creeps,
-    (creep: Creep) => creep.memory.role === 'claimer'
+    (creep: Creep) => creep.memory.role === CreepRole.claimer
   );
   const uptownBuilders2 = _.filter(
     Game.creeps,
-    (creep: Creep) => creep.memory.role === 'uptown-builder'
+    (creep: Creep) => creep.memory.role === CreepRole.uptownBuilder
   );
 
   const upgraders3 = _.filter(
     Game.creeps,
     (creep: Creep) =>
-      creep.memory.role === 'upgrader' && creep.memory.roomN === '3'
+      creep.memory.role === CreepRole.upgrader && creep.memory.roomN === '3'
   );
   const builders3 = _.filter(
     Game.creeps,
     (creep: Creep) =>
-      creep.memory.role === 'builder' && creep.memory.roomN === '3'
+      creep.memory.role === CreepRole.builder && creep.memory.roomN === '3'
   );
   const harvesters3 = _.filter(
     Game.creeps,
     (creep: Creep) =>
-      creep.memory.role === 'harvester' && creep.memory.roomN === '3'
+      creep.memory.role === CreepRole.harvester && creep.memory.roomN === '3'
   );
 
   /*const uptownHarvesters = _.filter(
     Game.creeps,
-    (creep: Creep) => creep.memory.role === 'uptown-harvester'
+    (creep: Creep) => creep.memory.role === CreepRole.uptownHarvester
   );
   */
 
@@ -126,11 +120,11 @@ module.exports.loop = () => {
             ..._.fill(_.times(7), CARRY),
           ],
           newName,
-          { memory: { role: 'harvester', roomN: '1' } }
+          { memory: { role: CreepRole.harvester, room: '1' } }
         ) === ERR_NOT_ENOUGH_ENERGY
       ) {
         Game.spawns['Spawn1'].spawnCreep([MOVE, CARRY, WORK], newName, {
-          memory: { role: 'harvester', roomN: '1', e: '1' },
+          memory: { role: CreepRole.harvester, room: '1', e: '1' },
         });
       }
     } else {
@@ -141,7 +135,7 @@ module.exports.loop = () => {
           ..._.fill(_.times(7), CARRY),
         ],
         newName,
-        { memory: { role: 'harvester', roomN: '1' } }
+        { memory: { role: CreepRole.harvester, room: '1' } }
       );
     }
   } else if (builders.length < 0) {
@@ -154,7 +148,7 @@ module.exports.loop = () => {
         ..._.fill(_.times(12), CARRY),
       ],
       newName,
-      { memory: { role: 'builder', roomN: '1' } }
+      { memory: { role: CreepRole.builder, room: '1' } }
     );
   } else if (upgraders.length < 1) {
     const newName = 'Upgrader' + Game.time;
@@ -166,7 +160,7 @@ module.exports.loop = () => {
         ..._.fill(_.times(10), CARRY),
       ],
       newName,
-      { memory: { role: 'upgrader', roomN: '1' } }
+      { memory: { role: CreepRole.upgrader, room: '1' } }
     );
   } /*else if (uptownHarvesters.length < 0) {
     const newName = 'UptownHarvester' + Game.time;
@@ -202,7 +196,7 @@ module.exports.loop = () => {
         CARRY,
       ],
       newName,
-      { memory: { role: 'uptown-harvester', roomN: '1' } }
+      { memory: { role: CreepRole.uptownharvester', room: '1' } }
     );
   } else if (uptownClaimers.length < 0) {
     const newName = 'UptownClaimer' + Game.time;
@@ -222,7 +216,7 @@ module.exports.loop = () => {
         CLAIM,
       ],
       newName,
-      { memory: { role: 'uptown-claimer', roomN: '1' } }
+      { memory: { role: CreepRole.uptownclaimer', room: '1' } }
     );
   }*/ else if (
     extractors.length < 1 &&
@@ -236,7 +230,7 @@ module.exports.loop = () => {
         ..._.fill(_.times(1), CARRY),
       ],
       newName,
-      { memory: { role: 'extractor', roomN: '1' } }
+      { memory: { role: CreepRole.extractor, room: '1' } }
     );
   } else if (energizers.length < 1) {
     const terminal = Game.rooms['E47N16'].terminal;
@@ -254,7 +248,7 @@ module.exports.loop = () => {
         [..._.fill(_.times(5), MOVE), ..._.fill(_.times(5), CARRY)],
         newName,
         {
-          memory: { role: 'energizer', roomN: '1' },
+          memory: { role: CreepRole.energizer, room: '1' },
         }
       );
     }
@@ -269,7 +263,7 @@ module.exports.loop = () => {
         ..._.fill(_.times(7), CARRY),
       ],
       newName,
-      { memory: { role: 'harvester', roomN: '2' } }
+      { memory: { role: CreepRole.harvester, room: '2' } }
     );
   } else if (upgraders2.length < 1) {
     const newName = 'Upgrader2' + Game.time;
@@ -280,7 +274,7 @@ module.exports.loop = () => {
         ..._.fill(_.times(8), CARRY),
       ],
       newName,
-      { memory: { role: 'upgrader', roomN: '2' } }
+      { memory: { role: CreepRole.upgrader, room: '2' } }
     );
   } else if (builders2.length < 0) {
     const newName = 'Builder2' + Game.time;
@@ -291,14 +285,14 @@ module.exports.loop = () => {
         ..._.fill(_.times(4), CARRY),
       ],
       newName,
-      { memory: { role: 'builder', roomN: '2' } }
+      { memory: { role: CreepRole.builder, room: '2' } }
     );
   } else if (claimers2.length < 0) {
     const newName = 'Claimer2' + Game.time;
     Game.spawns['Spawn2'].spawnCreep(
       [..._.fill(_.times(6), MOVE), ..._.fill(_.times(2), CLAIM)],
       newName,
-      { memory: { role: 'claimer', roomN: '2' } }
+      { memory: { role: CreepRole.claimer, room: '2' } }
     );
   } else if (uptownBuilders2.length < 0) {
     const newName = 'UptownBuilder2' + Game.time;
@@ -310,14 +304,16 @@ module.exports.loop = () => {
         ..._.fill(_.times(1), CLAIM),
       ],
       newName,
-      { memory: { role: 'uptown-builder', roomN: '2' } }
+      { memory: { role: CreepRole.uptownBuilder, room: '2' } }
     );
   }
 
-  const roomTotalEnergyForSpawningAvailable_3 = HelpersFind.getRoomTotalEnergyForSpawningAvailable(new Room('E48N17'));
+  const roomTotalEnergyForSpawningAvailable3 = HelpersFind.getRoomTotalEnergyForSpawningAvailable(
+    new Room('E48N17')
+  );
   if (harvesters3.length < 1) {
     const newName = 'Harvester3' + Game.time;
-    if (roomTotalEnergyForSpawningAvailable_3 >= 800) {
+    if (roomTotalEnergyForSpawningAvailable3 >= 800) {
       Game.spawns['Spawn3'].spawnCreep(
         [
           ..._.fill(_.times(4), MOVE),
@@ -325,9 +321,9 @@ module.exports.loop = () => {
           ..._.fill(_.times(4), CARRY),
         ],
         newName,
-        { memory: { role: 'harvester', roomN: '3' } }
+        { memory: { role: CreepRole.harvester, room: '3' } }
       );
-    } else if (roomTotalEnergyForSpawningAvailable_3 >= 400) {
+    } else if (roomTotalEnergyForSpawningAvailable3 >= 400) {
       Game.spawns['Spawn3'].spawnCreep(
         [
           ..._.fill(_.times(2), MOVE),
@@ -335,7 +331,7 @@ module.exports.loop = () => {
           ..._.fill(_.times(2), CARRY),
         ],
         newName,
-        { memory: { role: 'harvester', roomN: '3' } }
+        { memory: { role: CreepRole.harvester, room: '3' } }
       );
     } else {
       Game.spawns['Spawn3'].spawnCreep(
@@ -345,12 +341,12 @@ module.exports.loop = () => {
           ..._.fill(_.times(1), CARRY),
         ],
         newName,
-        { memory: { role: 'harvester', roomN: '3' } }
+        { memory: { role: CreepRole.harvester, room: '3' } }
       );
     }
   } else if (upgraders3.length < 1) {
     const newName = 'Upgrader3' + Game.time;
-    if (roomTotalEnergyForSpawningAvailable_3 >= 800) {
+    if (roomTotalEnergyForSpawningAvailable3 >= 800) {
       Game.spawns['Spawn3'].spawnCreep(
         [
           ..._.fill(_.times(2), MOVE),
@@ -358,7 +354,7 @@ module.exports.loop = () => {
           ..._.fill(_.times(2), CARRY),
         ],
         newName,
-        { memory: { role: 'upgrader', roomN: '3' } }
+        { memory: { role: CreepRole.upgrader, room: '3' } }
       );
     } else {
       Game.spawns['Spawn3'].spawnCreep(
@@ -368,7 +364,7 @@ module.exports.loop = () => {
           ..._.fill(_.times(1), CARRY),
         ],
         newName,
-        { memory: { role: 'upgrader', roomN: '3' } }
+        { memory: { role: CreepRole.upgrader, room: '3' } }
       );
     }
   } else if (builders3.length < 1) {
@@ -377,7 +373,7 @@ module.exports.loop = () => {
         .length > 0
     ) {
       const newName = 'Builder3' + Game.time;
-      if (roomTotalEnergyForSpawningAvailable_3 >= 800) {
+      if (roomTotalEnergyForSpawningAvailable3 >= 800) {
         Game.spawns['Spawn3'].spawnCreep(
           [
             ..._.fill(_.times(2), MOVE),
@@ -385,7 +381,7 @@ module.exports.loop = () => {
             ..._.fill(_.times(2), CARRY),
           ],
           newName,
-          { memory: { role: 'builder', roomN: '3' } }
+          { memory: { role: CreepRole.builder, room: '3' } }
         );
       } else {
         Game.spawns['Spawn3'].spawnCreep(
@@ -395,7 +391,7 @@ module.exports.loop = () => {
             ..._.fill(_.times(1), CARRY),
           ],
           newName,
-          { memory: { role: 'builder', roomN: '3' } }
+          { memory: { role: CreepRole.builder, room: '3' } }
         );
       }
     }
@@ -409,13 +405,13 @@ module.exports.loop = () => {
     if (harvesters2.length < 1 && creep.memory.roomN === '2') {
       roleHarvester.run(creep);
     }
-    if (creep.memory.role === 'harvester') {
+    if (creep.memory.role === CreepRole.harvester) {
       roleHarvester.run(creep);
     }
-    if (creep.memory.role === 'upgrader') {
+    if (creep.memory.role === CreepRole.upgrader) {
       roleUpgrader.run(creep);
     }
-    if (creep.memory.role === 'builder') {
+    if (creep.memory.role === CreepRole.builder) {
       roleBuilder.run(creep);
       // try {
       //     roleUptownHarvester.run(creep);
@@ -423,19 +419,19 @@ module.exports.loop = () => {
       //     //console.log(e.message);
       // }
     }
-    if (creep.memory.role === 'uptown-harvester') {
+    if (creep.memory.role === CreepRole.uptownHarvester) {
       roleUptownHarvester.run(creep);
     }
-    if (creep.memory.role === 'claimer') {
+    if (creep.memory.role === CreepRole.claimer) {
       RoleUptownClaimer.run(creep);
     }
-    if (creep.memory.role === 'uptown-builder') {
+    if (creep.memory.role === CreepRole.uptownBuilder) {
       RoleUptownBuilder.run(creep);
     }
-    if (creep.memory.role === 'extractor') {
+    if (creep.memory.role === CreepRole.extractor) {
       new Extractor().run(creep);
     }
-    if (creep.memory.role === 'energizer') {
+    if (creep.memory.role === CreepRole.energizer) {
       roleEnergizer.run(creep);
     }
   }
@@ -481,5 +477,5 @@ module.exports.loop = () => {
   //     //console.log(e);
   // }
 
-  new Rooms(Game).run();
+  new Rooms().run();
 };

@@ -1,10 +1,11 @@
 import { Towers } from './towers';
 import { Market } from './market';
+import { filter } from 'lodash';
 
 export class Rooms {
-  constructor(game: Game = Game) {
-    for (const roomCoordinates of Object.keys(game.rooms)) {
-      const room = game.rooms[roomCoordinates];
+  constructor() {
+    for (const roomCoordinates of Object.keys(Game.rooms)) {
+      const room = Game.rooms[roomCoordinates];
       this._rooms.push(room);
     }
   }
@@ -24,5 +25,24 @@ export class Rooms {
       new Towers(room).run(maxHits);
       new Market(room).run();
     });
+  }
+
+  private spawnCreeps(room: Room) {
+    function getCreepsByRole(role: CreepRole): Creep[] {
+      return filter(
+        Game.creeps,
+        (creep: Creep) =>
+          creep.memory.role === role && creep.memory.room === room.name
+      );
+    }
+
+    const harvesters = getCreepsByRole(CreepRole.harvester);
+    const builders = getCreepsByRole(CreepRole.builder);
+    const upgraders = getCreepsByRole(CreepRole.upgrader);
+    const extractors = getCreepsByRole(CreepRole.extractor);
+    const energizers = getCreepsByRole(CreepRole.energizer);
+
+    if (harvesters.length < 1) {
+    }
   }
 }

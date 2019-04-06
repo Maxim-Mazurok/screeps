@@ -25,6 +25,13 @@ class HelpersCreep {
     static canClaim(creep) {
         return HelpersCreep.hasBodyPart(creep, CLAIM);
     }
+    static clearNonExistingCreepsMemory() {
+        for (const name of Object.keys(Memory.creeps)) {
+            if (!Game.creeps[name]) {
+                delete Memory.creeps[name];
+            }
+        }
+    }
 }
 exports.HelpersCreep = HelpersCreep;
 exports.TRANSFER_PATH = { visualizePathStyle: { stroke: '#ffffff' } };

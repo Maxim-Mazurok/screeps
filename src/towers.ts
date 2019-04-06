@@ -9,7 +9,7 @@ export class Towers {
     });
   }
 
-  run(maxHits: number = 500000) {
+  run(maxHits = 500000) {
     this.towers.forEach((tower: StructureTower) => {
       const closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
       if (closestHostile) {

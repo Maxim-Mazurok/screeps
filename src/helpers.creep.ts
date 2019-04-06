@@ -41,6 +41,14 @@ export class HelpersCreep {
   static canClaim(creep: Creep): boolean {
     return HelpersCreep.hasBodyPart(creep, CLAIM);
   }
+
+  static clearNonExistingCreepsMemory() {
+    for (const name of Object.keys(Memory.creeps)) {
+      if (!Game.creeps[name]) {
+        delete Memory.creeps[name];
+      }
+    }
+  }
 }
 
 export const TRANSFER_PATH = { visualizePathStyle: { stroke: '#ffffff' } };
