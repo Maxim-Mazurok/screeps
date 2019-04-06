@@ -14,22 +14,22 @@ const roleUptownHarvester = require('./uptown.harvester');
 const roomConfig = {};
 module.exports.loop = () => {
     helpers_1.HelpersCreep.clearNonExistingCreepsMemory();
-    const harvesters = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.harvester && creep.memory.roomN === '1');
+    const harvesters = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.harvester && creep.memory.room === '1');
     const harvestersE = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.harvester &&
-        creep.memory.roomN === '1' &&
+        creep.memory.room === '1' &&
         creep.memory.e === '1');
-    const builders = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.builder && creep.memory.roomN === '1');
-    const upgraders = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.upgrader && creep.memory.roomN === '1');
-    const extractors = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.extractor && creep.memory.roomN === '1');
-    const energizers = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.energizer && creep.memory.roomN === '1');
-    const harvesters2 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.harvester && creep.memory.roomN === '2');
-    const builders2 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.builder && creep.memory.roomN === '2');
-    const upgraders2 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.upgrader && creep.memory.roomN === '2');
+    const builders = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.builder && creep.memory.room === '1');
+    const upgraders = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.upgrader && creep.memory.room === '1');
+    const extractors = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.extractor && creep.memory.room === '1');
+    const energizers = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.energizer && creep.memory.room === '1');
+    const harvesters2 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.harvester && creep.memory.room === '2');
+    const builders2 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.builder && creep.memory.room === '2');
+    const upgraders2 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.upgrader && creep.memory.room === '2');
     const claimers2 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.claimer);
     const uptownBuilders2 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.uptownBuilder);
-    const upgraders3 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.upgrader && creep.memory.roomN === '3');
-    const builders3 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.builder && creep.memory.roomN === '3');
-    const harvesters3 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.harvester && creep.memory.roomN === '3');
+    const upgraders3 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.upgrader && creep.memory.room === '3');
+    const builders3 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.builder && creep.memory.room === '3');
+    const harvesters3 = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.harvester && creep.memory.room === '3');
     /*const uptownHarvesters = _.filter(
       Game.creeps,
       (creep: Creep) => creep.memory.role === CreepRole.uptownHarvester
@@ -256,10 +256,10 @@ module.exports.loop = () => {
     }
     for (const name of Object.keys(Game.creeps)) {
         const creep = Game.creeps[name];
-        if (harvesters.length < 1 && creep.memory.roomN === '1') {
+        if (harvesters.length < 1 && creep.memory.room === '1') {
             roleHarvester.run(creep);
         }
-        if (harvesters2.length < 1 && creep.memory.roomN === '2') {
+        if (harvesters2.length < 1 && creep.memory.room === '2') {
             roleHarvester.run(creep);
         }
         if (creep.memory.role === enums_1.CreepRole.harvester) {
