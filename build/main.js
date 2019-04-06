@@ -195,7 +195,14 @@ module.exports.loop = () => {
     const roomTotalEnergyForSpawningAvailable3 = helpers_1.HelpersFind.getRoomTotalEnergyForSpawningAvailable(new Room('E48N17'));
     if (harvesters3.length < 1) {
         const newName = 'Harvester3' + Game.time;
-        if (roomTotalEnergyForSpawningAvailable3 >= 800) {
+        if (roomTotalEnergyForSpawningAvailable3 >= 1500) {
+            Game.spawns['Spawn3'].spawnCreep([
+                ..._.fill(_.times(12), MOVE),
+                ..._.fill(_.times(6), WORK),
+                ..._.fill(_.times(6), CARRY),
+            ], newName, { memory: { role: enums_1.CreepRole.harvester, room: '3' } });
+        }
+        else if (roomTotalEnergyForSpawningAvailable3 >= 800) {
             Game.spawns['Spawn3'].spawnCreep([
                 ..._.fill(_.times(4), MOVE),
                 ..._.fill(_.times(4), WORK),
@@ -219,7 +226,14 @@ module.exports.loop = () => {
     }
     else if (upgraders3.length < 1) {
         const newName = 'Upgrader3' + Game.time;
-        if (roomTotalEnergyForSpawningAvailable3 >= 800) {
+        if (roomTotalEnergyForSpawningAvailable3 >= 1500) {
+            Game.spawns['Spawn3'].spawnCreep([
+                ..._.fill(_.times(12), MOVE),
+                ..._.fill(_.times(6), WORK),
+                ..._.fill(_.times(6), CARRY),
+            ], newName, { memory: { role: enums_1.CreepRole.upgrader, room: '3' } });
+        }
+        else if (roomTotalEnergyForSpawningAvailable3 >= 800) {
             Game.spawns['Spawn3'].spawnCreep([
                 ..._.fill(_.times(2), MOVE),
                 ..._.fill(_.times(2), WORK),
@@ -238,7 +252,14 @@ module.exports.loop = () => {
         if (helpers_1.HelpersFind.findSomethingToBuild(new Room('E48N17'), 250000, false)
             .length > 0) {
             const newName = 'Builder3' + Game.time;
-            if (roomTotalEnergyForSpawningAvailable3 >= 800) {
+            if (roomTotalEnergyForSpawningAvailable3 >= 1500) {
+                Game.spawns['Spawn3'].spawnCreep([
+                    ..._.fill(_.times(12), MOVE),
+                    ..._.fill(_.times(6), WORK),
+                    ..._.fill(_.times(6), CARRY),
+                ], newName, { memory: { role: enums_1.CreepRole.builder, room: '3' } });
+            }
+            else if (roomTotalEnergyForSpawningAvailable3 >= 800) {
                 Game.spawns['Spawn3'].spawnCreep([
                     ..._.fill(_.times(2), MOVE),
                     ..._.fill(_.times(2), WORK),
