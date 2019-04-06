@@ -199,7 +199,7 @@ module.exports.loop = () => {
         helpers_1.HelpersFind.getRoomTerminalFreeStorageAmount(Game.rooms['E47N17']) > 0) {
         const newName = 'Extractor' + Game.time;
         Game.spawns['Spawn2'].spawnCreep([
-            ..._.fill(_.times(1), MOVE),
+            ..._.fill(_.times(5), MOVE),
             ..._.fill(_.times(20), WORK),
             ..._.fill(_.times(1), CARRY),
         ], newName, { memory: { role: enums_1.CreepRole.extractor, room: '2' } });
