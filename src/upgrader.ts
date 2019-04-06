@@ -44,9 +44,9 @@ export class Upgrader {
     }
 
     if (HelpersCreep.totalCarry(creep) > 0) {
-      tryLink();
-    } else {
       upgradeController();
+    } else {
+      tryLink();
     }
   }
 }
