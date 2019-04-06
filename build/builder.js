@@ -93,11 +93,11 @@ var roleBuilder = {
                             }
                         }
                         else {
-                            require('./upgrader').run(creep);
+                            Promise.resolve().then(() => require('./upgrader')).run(creep);
                         }
                     }
                     else {
-                        require('./upgrader').run(creep);
+                        Promise.resolve().then(() => require('./upgrader')).run(creep);
                     }
                 }
             }
