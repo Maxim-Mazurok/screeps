@@ -72,7 +72,7 @@ export class HelpersFind {
     let freeStorage = 0;
     const terminals: StructureTerminal[] = HelpersFind.findStructuresByType<
       StructureTerminal
-    >(room, STRUCTURE_EXTENSION);
+    >(room, STRUCTURE_TERMINAL);
     terminals.forEach((terminal: StructureTerminal) => {
       freeStorage += terminal.storeCapacity - this.getAllStore(terminal.store);
     });

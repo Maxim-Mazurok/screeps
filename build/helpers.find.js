@@ -38,7 +38,7 @@ class HelpersFind {
     }
     static getRoomTerminalFreeStorageAmount(room) {
         let freeStorage = 0;
-        const terminals = HelpersFind.findStructuresByType(room, STRUCTURE_EXTENSION);
+        const terminals = HelpersFind.findStructuresByType(room, STRUCTURE_TERMINAL);
         terminals.forEach((terminal) => {
             freeStorage += terminal.storeCapacity - this.getAllStore(terminal.store);
         });
