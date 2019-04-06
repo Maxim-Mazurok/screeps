@@ -1,3 +1,5 @@
+import {Upgrader} from "./upgrader";
+
 var roleBuilder = {
 
     /** @param {Creep} creep **/
@@ -96,10 +98,12 @@ var roleBuilder = {
                                 creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                             }
                         } else {
-                            import('./upgrader').run(creep);
+                            import {Upgrader} from './upgrader';
+                            Upgrader.run(creep);
                         }
                     } else {
-                        import('./upgrader').run(creep);
+                        import {Upgrader} from './upgrader';
+                        Upgrader.run(creep);
                     }
                 }
             }

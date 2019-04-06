@@ -1,3 +1,4 @@
+Object.defineProperty(exports, "__esModule", { value: true });
 var roleBuilder = {
     /** @param {Creep} creep **/
     run: function (creep) {
@@ -93,11 +94,13 @@ var roleBuilder = {
                             }
                         }
                         else {
-                            Promise.resolve().then(() => require('./upgrader')).run(creep);
+                            import { Upgrader } from './upgrader';
+                            upgrader_1.Upgrader.run(creep);
                         }
                     }
                     else {
-                        Promise.resolve().then(() => require('./upgrader')).run(creep);
+                        import { Upgrader } from './upgrader';
+                        upgrader_1.Upgrader.run(creep);
                     }
                 }
             }
