@@ -8,6 +8,7 @@ import {
   HARVEST_PATH,
   HelpersCreep,
   TRANSFER_PATH,
+  UPGRADE_PATH,
 } from './helpers.creep';
 
 export {
@@ -20,4 +21,5 @@ export {
   CLAIM_FLAG_NAME,
   BUILD_FLAG_NAME,
   BUILD_PATH,
+  UPGRADE_PATH,
 };

@@ -2,7 +2,7 @@ import { HARVEST_PATH, HelpersCreep, TRANSFER_PATH } from './helpers.creep';
 import { HelpersFind } from './helpers';
 
 export class Extractor {
-  run(creep: Creep) {
+  static run(creep: Creep) {
     //// STATE MANAGEMENT
     if (creep.memory.transferring && HelpersCreep.totalCarry(creep) === 0) {
       // If creep is transferring and he has no goods, then start extracting

@@ -6,8 +6,8 @@ import { RoleUptownBuilder } from './uptown.builder';
 import { HelpersCreep, HelpersFind } from './helpers';
 import { CreepRole } from './enums';
 
-const roleHarvester = require('./harvester');
-const roleUpgrader = require('./upgrader');
+const harvester = require('./harvester');
+import { Upgrader } from './upgrader';
 const roleBuilder = require('./builder');
 const roleEnergizer = require('./energizer');
 const roleUptownHarvester = require('./uptown.harvester');
@@ -477,16 +477,16 @@ module.exports.loop = () => {
   for (const name of Object.keys(Game.creeps)) {
     const creep = Game.creeps[name];
     if (harvesters.length < 1 && creep.memory.room === '1') {
-      roleHarvester.run(creep);
+      harvester.run(creep);
     }
     if (harvesters2.length < 1 && creep.memory.room === '2') {
-      roleHarvester.run(creep);
+      harvester.run(creep);
     }
     if (creep.memory.role === CreepRole.harvester) {
-      roleHarvester.run(creep);
+      harvester.run(creep);
     }
     if (creep.memory.role === CreepRole.upgrader) {
-      roleUpgrader.run(creep);
+      Upgrader.run(creep);
     }
     if (creep.memory.role === CreepRole.builder) {
       roleBuilder.run(creep);
@@ -506,7 +506,7 @@ module.exports.loop = () => {
       RoleUptownBuilder.run(creep);
     }
     if (creep.memory.role === CreepRole.extractor) {
-      new Extractor().run(creep);
+      Extractor.run(creep);
     }
     if (creep.memory.role === CreepRole.energizer) {
       roleEnergizer.run(creep);

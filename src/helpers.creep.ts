@@ -55,6 +55,7 @@ export const TRANSFER_PATH = { visualizePathStyle: { stroke: '#ffffff' } };
 export const HARVEST_PATH = { visualizePathStyle: { stroke: '#00ff00' } };
 export const CLAIM_PATH = { visualizePathStyle: { stroke: '#ff00ff' } };
 export const BUILD_PATH = { visualizePathStyle: { stroke: '#000aff' } };
+export const UPGRADE_PATH = { visualizePathStyle: { stroke: '#fff000' } };
 
 export const CLAIM_FLAG_NAME = 'ClaimMe';
 export const BUILD_FLAG_NAME = 'BuildMe';

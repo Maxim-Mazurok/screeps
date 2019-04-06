@@ -106,6 +106,14 @@ export class HelpersFind {
     );
   }
 
+  static findClosestStructureByPathFromArray<T extends AnyStructure>(
+    roomPosition: RoomPosition,
+    room: Room,
+    array: T[]
+  ): T | null {
+    return roomPosition.findClosestByPath(array);
+  }
+
   static findSomethingToBuild(
     room: Room,
     maxHits = Infinity,
@@ -122,5 +130,12 @@ export class HelpersFind {
       ),
       ...this.findByFindConstant(room, FIND_CONSTRUCTION_SITES),
     ];
+  }
+
+  static findLinksWithEnergy(room: Room): StructureLink[] {
+    return HelpersFind.findStructuresByType<StructureLink>(
+      room,
+      STRUCTURE_LINK
+    ).filter((link: StructureLink) => link.energy > 0);
   }
 }

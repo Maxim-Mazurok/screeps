@@ -2,7 +2,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const helpers_creep_1 = require("./helpers.creep");
 const helpers_1 = require("./helpers");
 class Extractor {
-    run(creep) {
+    static run(creep) {
         //// STATE MANAGEMENT
         if (creep.memory.transferring && helpers_creep_1.HelpersCreep.totalCarry(creep) === 0) {
             // If creep is transferring and he has no goods, then start extracting
@@ -30,7 +30,9 @@ class Extractor {
             if (terminals.length === 1) {
                 // only one terminal allowed per room
                 const terminal = terminals[0];
-                const myResource = creep.carry[RESOURCE_HYDROGEN] !== undefined ? RESOURCE_HYDROGEN : RESOURCE_KEANIUM;
+                const myResource = creep.carry[RESOURCE_HYDROGEN] !== undefined
+                    ? RESOURCE_HYDROGEN
+                    : RESOURCE_KEANIUM;
                 const transferResult = creep.transfer(terminal, myResource);
                 if (transferResult === ERR_NOT_IN_RANGE) {
                     creep.moveTo(terminal, helpers_creep_1.TRANSFER_PATH);

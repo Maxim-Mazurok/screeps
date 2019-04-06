@@ -11,4 +11,5 @@ exports.CLAIM_PATH = helpers_creep_1.CLAIM_PATH;
 exports.HARVEST_PATH = helpers_creep_1.HARVEST_PATH;
 exports.HelpersCreep = helpers_creep_1.HelpersCreep;
 exports.TRANSFER_PATH = helpers_creep_1.TRANSFER_PATH;
+exports.UPGRADE_PATH = helpers_creep_1.UPGRADE_PATH;
 //# sourceMappingURL=helpers.js.map
