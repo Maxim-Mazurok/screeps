@@ -1,4 +1,5 @@
 Object.defineProperty(exports, "__esModule", { value: true });
+const upgrader_1 = require("./upgrader");
 var roleBuilder = {
     /** @param {Creep} creep **/
     run: function (creep) {
@@ -94,12 +95,10 @@ var roleBuilder = {
                             }
                         }
                         else {
-                            import { Upgrader } from './upgrader';
                             upgrader_1.Upgrader.run(creep);
                         }
                     }
                     else {
-                        import { Upgrader } from './upgrader';
                         upgrader_1.Upgrader.run(creep);
                     }
                 }
