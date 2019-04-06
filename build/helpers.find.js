@@ -1,4 +1,5 @@
 Object.defineProperty(exports, "__esModule", { value: true });
+const lodash_1 = require("lodash");
 class HelpersFind {
     static findStructuresByType(room, structureType) {
         return room.find(FIND_STRUCTURES, {
@@ -31,6 +32,18 @@ class HelpersFind {
         });
         console.log(`Room ${room.name} has ${totalEnergyAvailable} energy for spawning available`);
         return totalEnergyAvailable;
+    }
+    static getAllStore(store) {
+        return lodash_1.sum(Object.values(store));
+    }
+    static getRoomTerminalFreeStorageAmount(room) {
+        let freeStorage = 0;
+        const terminals = HelpersFind.findStructuresByType(room, STRUCTURE_EXTENSION);
+        terminals.forEach((terminal) => {
+            freeStorage += terminal.storeCapacity - this.getAllStore(terminal.store);
+        });
+        console.log(`Room ${room.name} has ${freeStorage} free storage in terminal`);
+        return freeStorage;
     }
     static findByFindConstant(room, findConstant, filter = undefined) {
         if (filter !== undefined) {

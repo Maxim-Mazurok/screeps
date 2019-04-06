@@ -131,7 +131,8 @@ module.exports.loop = () => {
       );
     }*/
     else if (extractors.length < 1 &&
-        Game.rooms['E47N16'].lookForAt('mineral', 20, 21)[0].mineralAmount > 0) {
+        Game.rooms['E47N16'].lookForAt('mineral', 20, 21)[0].mineralAmount > 0 &&
+        helpers_1.HelpersFind.getRoomTerminalFreeStorageAmount(Game.rooms['E47N16']) > 0) {
         const newName = 'Extractor' + Game.time;
         Game.spawns['Spawn1'].spawnCreep([
             ..._.fill(_.times(1), MOVE),

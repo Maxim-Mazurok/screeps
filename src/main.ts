@@ -3,7 +3,7 @@ import { Rooms } from './rooms';
 import { Extractor } from './extractor';
 import { RoleUptownClaimer } from './uptown.claimer';
 import { RoleUptownBuilder } from './uptown.builder';
-import { HelpersCreep, HelpersFind } from './helpers';
+import { HelpersCreep, HelpersFind, HelpersTerminal } from './helpers';
 
 const roleHarvester = require('./harvester');
 const roleUpgrader = require('./upgrader');
@@ -220,7 +220,8 @@ module.exports.loop = () => {
     );
   }*/ else if (
     extractors.length < 1 &&
-    Game.rooms['E47N16'].lookForAt('mineral', 20, 21)[0].mineralAmount > 0
+    Game.rooms['E47N16'].lookForAt('mineral', 20, 21)[0].mineralAmount > 0 &&
+    HelpersFind.getRoomTerminalFreeStorageAmount(Game.rooms['E47N16']) > 0
   ) {
     const newName = 'Extractor' + Game.time;
     Game.spawns['Spawn1'].spawnCreep(

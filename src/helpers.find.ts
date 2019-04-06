@@ -1,3 +1,5 @@
+import { sum } from 'lodash';
+
 export class HelpersFind {
   static findStructuresByType<T extends Structure>(
     room: Room,
@@ -60,6 +62,25 @@ export class HelpersFind {
       } has ${totalEnergyAvailable} energy for spawning available`
     );
     return totalEnergyAvailable;
+  }
+
+  static getAllStore(store: StoreDefinition): number {
+    return sum(Object.values(store));
+  }
+
+  static getRoomTerminalFreeStorageAmount(room: Room) {
+    let freeStorage = 0;
+    const terminals: StructureTerminal[] = HelpersFind.findStructuresByType<
+      StructureTerminal
+    >(room, STRUCTURE_EXTENSION);
+    terminals.forEach((terminal: StructureTerminal) => {
+      freeStorage += terminal.storeCapacity - this.getAllStore(terminal.store);
+    });
+
+    console.log(
+      `Room ${room.name} has ${freeStorage} free storage in terminal`
+    );
+    return freeStorage;
   }
 
   static findByFindConstant<K extends FindConstant>(
