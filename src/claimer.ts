@@ -1,6 +1,10 @@
-// todo: harvest in claiming room, not in own
-
-import {CLAIM_FLAG_NAME, CLAIM_PATH, HelpersCreep} from './helpers';
+const roleBuilder = require('./builder');
+import {
+  CLAIM_FLAG_NAME,
+  CLAIM_PATH,
+  HelpersCreep,
+  HelpersFind,
+} from './helpers';
 import {Upgrader} from './upgrader';
 
 export class ClaimBuilder {
@@ -26,6 +30,9 @@ export class ClaimBuilder {
       } else {
         creep.moveTo(flag, CLAIM_PATH);
       }
+    } else if (flag.room && HelpersFind.findSomethingToBuild(flag.room)) {
+      // should build
+      roleBuilder.run(creep);
     } else {
       // should upgrade
       Upgrader.run(creep, {

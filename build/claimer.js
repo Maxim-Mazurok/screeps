@@ -1,6 +1,6 @@
-// todo: harvest in claiming room, not in own
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClaimBuilder = void 0;
+const roleBuilder = require('./builder');
 const helpers_1 = require("./helpers");
 const upgrader_1 = require("./upgrader");
 class ClaimBuilder {
@@ -23,6 +23,10 @@ class ClaimBuilder {
             else {
                 creep.moveTo(flag, helpers_1.CLAIM_PATH);
             }
+        }
+        else if (flag.room && helpers_1.HelpersFind.findSomethingToBuild(flag.room)) {
+            // should build
+            roleBuilder.run(creep);
         }
         else {
             // should upgrade
