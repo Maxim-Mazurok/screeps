@@ -5,6 +5,7 @@ import {ClaimBuilder as Claimer} from './claimer';
 import {HelpersCreep, HelpersFind} from './helpers';
 import {CreepRole} from './enums';
 import {Upgrader} from './upgrader';
+import {RoomsConfig, RoomName} from './ts';
 
 const harvester = require('./harvester');
 const roleBuilder = require('./builder');
@@ -19,6 +20,24 @@ const roomsConfig: RoomsConfig = [
         to: 'E48N18',
       },
     ],
+    skills: {
+      [CreepRole.claimer]: [
+        ..._.fill(_.times(4), MOVE),
+        ..._.fill(_.times(4), WORK),
+        ..._.fill(_.times(4), CARRY),
+        ..._.fill(_.times(1), CLAIM),
+      ],
+    },
+  },
+  {
+    roomName: 'E47N17',
+    skills: {
+      [CreepRole.builder]: [
+        ..._.fill(_.times(12), MOVE),
+        ..._.fill(_.times(6), WORK),
+        ..._.fill(_.times(6), CARRY),
+      ],
+    },
   },
 ];
 

@@ -1,3 +1,10 @@
+import {
+  TerminalMarketResourcesAndAmounts,
+  RoomName,
+  OrderId,
+  OrderAmount,
+} from './ts';
+
 const AVERAGE_PRICES: {[key: string]: number} = {}; // TODO: use MarketResourceConstant instead of string
 AVERAGE_PRICES[RESOURCE_HYDROGEN] = 0.2;
 AVERAGE_PRICES[RESOURCE_ENERGY] = 0.02;

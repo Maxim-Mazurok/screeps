@@ -18,6 +18,24 @@ const roomsConfig = [
                 to: 'E48N18',
             },
         ],
+        skills: {
+            [enums_1.CreepRole.claimer]: [
+                ..._.fill(_.times(4), MOVE),
+                ..._.fill(_.times(4), WORK),
+                ..._.fill(_.times(4), CARRY),
+                ..._.fill(_.times(1), CLAIM),
+            ],
+        },
+    },
+    {
+        roomName: 'E47N17',
+        skills: {
+            [enums_1.CreepRole.builder]: [
+                ..._.fill(_.times(12), MOVE),
+                ..._.fill(_.times(6), WORK),
+                ..._.fill(_.times(6), CARRY),
+            ],
+        },
     },
 ];
 function loop() {

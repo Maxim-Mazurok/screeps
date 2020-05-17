@@ -1,3 +1,4 @@
+// todo: harvest in claiming room, not in own
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClaimBuilder = void 0;
 const helpers_1 = require("./helpers");

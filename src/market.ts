@@ -1,4 +1,5 @@
 import {HelpersFind, HelpersTerminal} from './helpers';
+import {RoomName} from './ts';
 
 export class Market {
   private terminals: StructureTerminal[] = [];

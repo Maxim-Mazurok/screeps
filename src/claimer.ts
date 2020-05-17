@@ -1,3 +1,5 @@
+// todo: harvest in claiming room, not in own
+
 import {CLAIM_FLAG_NAME, CLAIM_PATH, HelpersCreep} from './helpers';
 import {Upgrader} from './upgrader';
 

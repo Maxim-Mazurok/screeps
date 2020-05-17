@@ -1,8 +1,9 @@
-import * as _ from 'lodash';
 import {Towers} from './towers';
 import {Market} from './market';
 import {filter} from 'lodash';
 import {CreepRole} from './enums';
+import {HelpersFind} from './helpers';
+import {RoomsConfig, RoomConfig} from './ts';
 
 export class Rooms {
   constructor(roomsConfig: RoomsConfig) {
@@ -36,31 +37,42 @@ export class Rooms {
     }
 
     // const harvesters = getCreepsByRole(CreepRole.harvester);
-    // const builders = getCreepsByRole(CreepRole.builder);
     // const upgraders = getCreepsByRole(CreepRole.upgrader);
     // const extractors = getCreepsByRole(CreepRole.extractor);
     // const energizers = getCreepsByRole(CreepRole.energizer);
 
-    if (config.claim) {
-      const claimBuilders = getCreepsByRole(CreepRole.claimer);
+    const spawn = room.find(FIND_MY_SPAWNS)[0];
+    if (!spawn) return;
 
-      if (claimBuilders.length < 1) {
+    if (config.claim && config.skills && config.skills[CreepRole.claimer]) {
+      const claimers = getCreepsByRole(CreepRole.claimer);
+
+      if (!claimers) {
+        const claimerSkills = config.skills[CreepRole.claimer];
         config.claim.forEach(({to: claimRoomName}) => {
           const newName = `Claimer_${room.name}->${claimRoomName}_${Game.time}`;
-          const spawn = room.find(FIND_MY_SPAWNS)[0];
-          if (spawn) {
-            spawn.spawnCreep(
-              [
-                ..._.fill(_.times(4), MOVE),
-                ..._.fill(_.times(4), WORK),
-                ..._.fill(_.times(4), CARRY),
-                ..._.fill(_.times(1), CLAIM),
-              ],
-              newName,
-              {memory: {role: CreepRole.claimer, room: room.name}}
-            );
-          }
+          claimerSkills &&
+            spawn.spawnCreep(claimerSkills, newName, {
+              memory: {role: CreepRole.claimer, room: room.name},
+            });
         });
+      }
+    }
+
+    if (
+      HelpersFind.findSomethingToBuild(room) &&
+      config.skills &&
+      config.skills[CreepRole.builder]
+    ) {
+      const builders = getCreepsByRole(CreepRole.builder);
+      if (!builders) {
+        const builderSkills = config.skills[CreepRole.claimer];
+
+        const newName = `Builder_${room.name}_${Game.time}`;
+        builderSkills &&
+          spawn.spawnCreep(builderSkills, newName, {
+            memory: {role: CreepRole.builder, room: room.name},
+          });
       }
     }
   }

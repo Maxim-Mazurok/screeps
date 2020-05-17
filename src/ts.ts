@@ -1,17 +1,25 @@
+import {CreepRole} from './enums';
+
 type ValueOf<T> = T[keyof T];
 
-type RoomName = ValueOf<Pick<Room, 'name'>>;
-type OrderId = ValueOf<Pick<Order, 'id'>>;
-type OrderAmount = ValueOf<Pick<Order, 'amount'>>;
+export type RoomName = ValueOf<Pick<Room, 'name'>>;
+export type OrderId = ValueOf<Pick<Order, 'id'>>;
+export type OrderAmount = ValueOf<Pick<Order, 'amount'>>;
 
-type TerminalMarketResourcesAndAmounts = Map<MarketResourceConstant, number>;
+export type TerminalMarketResourcesAndAmounts = Map<
+  MarketResourceConstant,
+  number
+>;
 
-type RoomsConfig = RoomConfig[];
+export type RoomsConfig = RoomConfig[];
 
-interface RoomConfig {
+export interface RoomConfig {
   //TODO: create config for rooms (number of creeps, policies, etc.)
-  roomName: Room['name'];
-  claim: Array<{
-    to: Room['name'];
+  roomName: RoomName;
+  claim?: Array<{
+    to: RoomName;
   }>;
+  skills?: {
+    [index in CreepRole]?: BodyPartConstant[];
+  };
 }
