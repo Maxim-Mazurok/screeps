@@ -7,7 +7,9 @@ export class ClaimBuilder {
   static run(creep: Creep) {
     const flag = Game.flags[CLAIM_FLAG_NAME];
 
-    if (
+    if (flag.room && flag.room.name !== creep.room.name) {
+      creep.moveTo(flag, CLAIM_PATH);
+    } else if (
       creep.room.controller &&
       creep.room.controller.my === false &&
       HelpersCreep.canClaim(creep)
