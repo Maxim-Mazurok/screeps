@@ -36,13 +36,25 @@ export class HelpersCreep {
       }
     }
   }
+
+  static moveTo(
+    creep: Creep,
+    target: RoomPosition,
+    pathStyle: PolyStyle
+  ): CreepMoveReturnCode | ERR_NO_PATH | ERR_INVALID_TARGET | ERR_NOT_FOUND {
+    const result = creep.moveTo(target, {visualizePathStyle: pathStyle});
+    if (result !== OK) {
+      HelpersCreep.logError(creep, `can't move: ${result}`);
+    }
+    return result;
+  }
 }
 
-export const TRANSFER_PATH = {visualizePathStyle: {stroke: '#ffffff'}};
-export const HARVEST_PATH = {visualizePathStyle: {stroke: '#00ff00'}};
-export const CLAIM_PATH = {visualizePathStyle: {stroke: '#ff00ff'}};
-export const BUILD_PATH = {visualizePathStyle: {stroke: '#000aff'}};
-export const UPGRADE_PATH = {visualizePathStyle: {stroke: '#fff000'}};
+export const TRANSFER_PATH = {stroke: '#ffffff'};
+export const GET_ENERGY_PATH = {stroke: '#ffff00'}; /// yellow
+export const CLAIM_PATH = {stroke: '#ff00ff'};
+export const BUILD_PATH = {stroke: '#000aff'};
+export const UPGRADE_PATH = {stroke: '#fff000'};
 
 export const CLAIM_FLAG_NAME = 'ClaimMe';
 export const BUILD_FLAG_NAME = 'BuildMe';

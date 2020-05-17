@@ -1,5 +1,5 @@
 /* eslint-disable */
-const Upgrader = require('./upgrader');
+const General = require('./generalCreep');
 
 roleBuilder = {
   /** @param {Creep} creep **/
@@ -164,10 +164,10 @@ roleBuilder = {
                 creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
               }
             } else {
-              Upgrader.run(creep);
+              General.run(creep);
             }
           } else {
-            Upgrader.run(creep);
+            General.run(creep);
           }
         }
       }

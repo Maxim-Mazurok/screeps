@@ -3,8 +3,8 @@ import {Rooms} from './rooms';
 import {Extractor} from './extractor';
 import {ClaimBuilder as Claimer} from './claimer';
 import {HelpersCreep, HelpersFind} from './helpers';
-import {CreepRole} from './enums';
-import {Upgrader} from './upgrader';
+import {CreepRole, EnergySource} from './enums';
+import {GeneralCreep} from './generalCreep';
 import {RoomsConfig, RoomName} from './ts';
 
 const harvester = require('./harvester');
@@ -453,7 +453,14 @@ function loop() {
       harvester.run(creep);
     }
     if (creep.memory.role === CreepRole.upgrader) {
-      Upgrader.run(creep);
+      GeneralCreep.run(creep, {
+        sources: [
+          EnergySource.link,
+          EnergySource.storage,
+          EnergySource.dropped,
+          EnergySource.tombstone,
+        ],
+      });
     }
     if (creep.memory.role === CreepRole.builder) {
       roleBuilder.run(creep);

@@ -1,4 +1,4 @@
-import {HARVEST_PATH, HelpersCreep, TRANSFER_PATH} from './helpers.creep';
+import {GET_ENERGY_PATH, HelpersCreep, TRANSFER_PATH} from './helpers.creep';
 import {HelpersFind} from './helpers';
 
 export class Extractor {
@@ -40,7 +40,7 @@ export class Extractor {
           : RESOURCE_KEANIUM;
         const transferResult = creep.transfer(terminal, myResource);
         if (transferResult === ERR_NOT_IN_RANGE) {
-          creep.moveTo(terminal, TRANSFER_PATH);
+          creep.moveTo(terminal);
         } else if (transferResult !== OK) {
           HelpersCreep.logError(
             creep,
@@ -65,7 +65,7 @@ export class Extractor {
         harvestResult === ERR_NOT_IN_RANGE ||
         harvestResult === ERR_INVALID_TARGET
       ) {
-        creep.moveTo(mineral, HARVEST_PATH);
+        creep.moveTo(mineral);
       } else if (harvestResult !== OK) {
         HelpersCreep.logError(
           creep,

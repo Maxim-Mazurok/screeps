@@ -1,4 +1,4 @@
-import {HARVEST_PATH, HelpersCreep, UPGRADE_PATH} from './helpers.creep';
+import {GET_ENERGY_PATH, HelpersCreep, UPGRADE_PATH} from './helpers.creep';
 import {HelpersFind} from './helpers.find';
 import {EnergySourcesConfig} from './ts';
 import {EnergySource} from './enums';
@@ -88,14 +88,28 @@ export class GeneralCreep {
         }
       }
 
-      sources.sources.some(source => {
+      return sources.sources.some(source => {
         const object = getResourceObject(source);
         if (object !== null) {
-          const result = withdraw(source, object);
-          if (result === ERR_NOT_IN_RANGE) {
-            HelpersCreep.
+          const withdrawResult = withdraw(source, object);
+          if (withdrawResult === ERR_NOT_IN_RANGE) {
+            const moveResult = HelpersCreep.moveTo(
+              creep,
+              object.pos,
+              GET_ENERGY_PATH
+            );
+            if (moveResult !== OK) {
+              HelpersCreep.logError(creep, `can't move: ${moveResult}`);
+            } else {
+              return true;
+            }
+          } else if (withdrawResult !== OK) {
+            HelpersCreep.logError(creep, `can't get energy: ${withdrawResult}`);
+          } else {
+            return true;
           }
         }
+        return false;
       });
     }
 
@@ -106,7 +120,7 @@ export class GeneralCreep {
       }
       const upgradingResult = creep.upgradeController(creep.room.controller);
       if (upgradingResult === ERR_NOT_IN_RANGE) {
-        creep.moveTo(creep.room.controller, UPGRADE_PATH);
+        HelpersCreep.moveTo(creep, creep.room.controller.pos, UPGRADE_PATH);
       } else if (upgradingResult !== OK) {
         HelpersCreep.logError(
           creep,
@@ -125,16 +139,13 @@ export class GeneralCreep {
       HelpersCreep.totalCarry(creep) === creep.carryCapacity
     ) {
       creep.memory.working = true;
-      creep.say('build');
+      creep.say('work');
     }
 
     if (creep.memory.working) {
       upgradeController();
     } else {
-      (sources.link && tryLink()) ||
-        (sources.storage && tryStorage()) ||
-        (sources.mine && tryMine()) ||
-        HelpersCreep.logError(creep, 'IDLE');
+      getEnergy() || HelpersCreep.logError(creep, 'IDLE');
     }
   }
 }
