@@ -7,7 +7,7 @@ import {
   HelpersCreep,
 } from './helpers';
 
-export class RoleUptownBuilder {
+export class ClaimBuilder {
   static run(creep: Creep) {
     if (
       creep.room.controller &&

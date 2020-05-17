@@ -1,8 +1,7 @@
 import * as _ from 'lodash';
 import {Rooms} from './rooms';
 import {Extractor} from './extractor';
-import {RoleClaimer} from './uptown.claimer';
-import {RoleUptownBuilder} from './uptown.builder';
+import {ClaimBuilder as Claimer} from './claimer';
 import {HelpersCreep, HelpersFind} from './helpers';
 import {CreepRole} from './enums';
 import {Upgrader} from './upgrader';
@@ -91,7 +90,7 @@ function loop() {
   );
   const uptownBuilders2 = _.filter(
     Game.creeps,
-    (creep: Creep) => creep.memory.role === CreepRole.uptownBuilder
+    (creep: Creep) => creep.memory.role === CreepRole.claimer
   );
   const extractors2 = _.filter(
     Game.creeps,
@@ -261,7 +260,7 @@ function loop() {
         ..._.fill(_.times(1), CLAIM),
       ],
       newName,
-      {memory: {role: CreepRole.uptownBuilder, room: '2'}}
+      {memory: {role: CreepRole.claimer, room: '2'}}
     );
   } else if (
     extractors2.length < 1 &&
@@ -445,10 +444,7 @@ function loop() {
       roleUptownHarvester.run(creep);
     }
     if (creep.memory.role === CreepRole.claimer) {
-      RoleClaimer.run(creep);
-    }
-    if (creep.memory.role === CreepRole.uptownBuilder) {
-      RoleUptownBuilder.run(creep);
+      Claimer.run(creep);
     }
     if (creep.memory.role === CreepRole.extractor) {
       Extractor.run(creep);

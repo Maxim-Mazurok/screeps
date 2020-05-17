@@ -6,5 +6,4 @@ export enum CreepRole {
   energizer,
   uptownHarvester,
   claimer,
-  uptownBuilder,
 }
