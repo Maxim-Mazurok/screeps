@@ -45,8 +45,15 @@ class Upgrader {
         function tryMine() {
             const source = creep.pos.findClosestByPath(creep.room.find(FIND_SOURCES));
             if (source !== null) {
-                if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(source, helpers_creep_1.HARVEST_PATH);
+                const harvestResult = creep.harvest(source);
+                if (harvestResult === ERR_NOT_IN_RANGE) {
+                    const moveResult = creep.moveTo(source, helpers_creep_1.HARVEST_PATH);
+                    if (moveResult !== OK) {
+                        helpers_creep_1.HelpersCreep.logError(creep, `can't move to mine: ${moveResult}`);
+                    }
+                }
+                else if (harvestResult !== OK) {
+                    helpers_creep_1.HelpersCreep.logError(creep, `can't harvest: ${harvestResult}`);
                 }
                 return true;
             }
