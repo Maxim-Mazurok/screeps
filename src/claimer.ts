@@ -26,7 +26,11 @@ export class ClaimBuilder {
       } else {
         creep.moveTo(flag);
       }
-    } else if (flag.room && HelpersFind.findSomethingToBuild(flag.room)) {
+    } else if (
+      flag.room &&
+      HelpersFind.findSomethingToBuild(flag.room) &&
+      (creep.room.controller?.progress || Infinity) > 1500
+    ) {
       // should build
       roleBuilder.run(creep, {mine: true});
     } else {
