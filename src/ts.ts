@@ -1,4 +1,4 @@
-import {CreepRole} from './enums';
+import {CreepRole, EnergySource} from './enums';
 
 type ValueOf<T> = T[keyof T];
 
@@ -22,4 +22,8 @@ export interface RoomConfig {
   skills?: {
     [index in CreepRole]?: BodyPartConstant[];
   };
+}
+
+export interface EnergySourcesConfig {
+  sources: EnergySource[];
 }

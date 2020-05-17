@@ -7,3 +7,11 @@ export enum CreepRole {
   uptownHarvester,
   claimer,
 }
+
+export enum EnergySource {
+  link,
+  storage,
+  tombstone,
+  dropped,
+  mine,
+}
