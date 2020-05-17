@@ -42,22 +42,7 @@ export class Rooms {
     // const energizers = getCreepsByRole(CreepRole.energizer);
 
     if (config.claim) {
-      const claimers = getCreepsByRole(CreepRole.claimer);
       const claimBuilders = getCreepsByRole(CreepRole.claimer);
-
-      if (claimers.length < 1) {
-        config.claim.forEach(({to: claimRoomName}) => {
-          const newName = `Claimer_${room.name}->${claimRoomName}_${Game.time}`;
-          const spawn = room.find(FIND_MY_SPAWNS)[0];
-          if (spawn) {
-            spawn.spawnCreep(
-              [..._.fill(_.times(6), MOVE), ..._.fill(_.times(2), CLAIM)],
-              newName,
-              {memory: {role: CreepRole.claimer, room: room.name}}
-            );
-          }
-        });
-      }
 
       if (claimBuilders.length < 1) {
         config.claim.forEach(({to: claimRoomName}) => {

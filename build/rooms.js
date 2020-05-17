@@ -32,17 +32,7 @@ class Rooms {
         // const extractors = getCreepsByRole(CreepRole.extractor);
         // const energizers = getCreepsByRole(CreepRole.energizer);
         if (config.claim) {
-            const claimers = getCreepsByRole(enums_1.CreepRole.claimer);
             const claimBuilders = getCreepsByRole(enums_1.CreepRole.claimer);
-            if (claimers.length < 1) {
-                config.claim.forEach(({ to: claimRoomName }) => {
-                    const newName = `Claimer_${room.name}->${claimRoomName}_${Game.time}`;
-                    const spawn = room.find(FIND_MY_SPAWNS)[0];
-                    if (spawn) {
-                        spawn.spawnCreep([..._.fill(_.times(6), MOVE), ..._.fill(_.times(2), CLAIM)], newName, { memory: { role: enums_1.CreepRole.claimer, room: room.name } });
-                    }
-                });
-            }
             if (claimBuilders.length < 1) {
                 config.claim.forEach(({ to: claimRoomName }) => {
                     const newName = `ClaimBuilder_${room.name}->${claimRoomName}_${Game.time}`;
