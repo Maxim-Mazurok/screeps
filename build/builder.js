@@ -47,16 +47,16 @@ roleBuilder = {
                 // if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                 //         creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
                 //     }
-                // creep.moveTo(Game.flags['BuildMe']);
-                // const look = creep.room.lookAt(Game.flags['BuildMe']);
-                //     look.forEach(function(lookObject) {
-                //         if(lookObject.type == LOOK_CONSTRUCTION_SITES) {
-                //             let target = lookObject.constructionSite;
-                //             if(creep.build(target) == ERR_NOT_IN_RANGE) {
-                //                 creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
-                //             }
-                //         }
-                //     });
+                const look = creep.room.lookAt(Game.flags['BuildMe']);
+                look.forEach(function (lookObject) {
+                    if (lookObject.type == LOOK_CONSTRUCTION_SITES) {
+                        let target = lookObject.constructionSite;
+                        if (creep.build(target) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
+                        }
+                        return;
+                    }
+                });
                 var source = creep.pos.findClosestByPath(FIND_SOURCES);
                 if (false // &&
                 //[ERR_NOT_IN_RANGE,ERR_INVALID_TARGET].indexOf(creep.harvest(source)) === -1
