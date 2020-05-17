@@ -99,14 +99,22 @@ export class Upgrader {
       }
     }
 
+    if (creep.memory.working && creep.carry.energy === 0) {
+      creep.memory.working = false;
+      creep.say('harvest');
+    }
+
     if (
-      creep.memory.working ||
+      !creep.memory.working &&
       HelpersCreep.totalCarry(creep) === creep.carryCapacity
     ) {
       creep.memory.working = true;
+      creep.say('build');
+    }
+
+    if (creep.memory.working) {
       upgradeController();
     } else {
-      creep.memory.working = false;
       (sources.link && tryLink()) ||
         (sources.storage && tryStorage()) ||
         (sources.mine && tryMine()) ||
