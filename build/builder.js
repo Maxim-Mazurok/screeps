@@ -150,6 +150,8 @@ roleBuilder = {
             }
         }
         else {
+            if (sources.mine && tryMine())
+                return;
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: structure => {
                     return ([STRUCTURE_LINK].indexOf(structure.structureType) !== -1 &&
@@ -175,7 +177,6 @@ roleBuilder = {
                 if (targets.length > 0)
                     source = targets[0];
                 if (!source) {
-                    sources.mine && tryMine();
                     // if (isContainer) {
                     //     let info = creep.room.lookAtArea(creep.pos.y - 1, creep.pos.x - 1, creep.pos.y + 1, creep.pos.x + 1);
                     //     for (y in info) {
