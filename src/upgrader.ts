@@ -96,12 +96,14 @@ export class Upgrader {
           creep,
           `upgrading controller failed with result: ${upgradingResult}`
         );
-      } else {
-        creep.memory.working = true;
       }
     }
 
-    if (creep.memory.working && HelpersCreep.totalCarry(creep)) {
+    if (
+      creep.memory.working ||
+      HelpersCreep.totalCarry(creep) === creep.carryCapacity
+    ) {
+      creep.memory.working = true;
       upgradeController();
     } else {
       creep.memory.working = false;

@@ -71,11 +71,10 @@ class Upgrader {
             else if (upgradingResult !== OK) {
                 helpers_creep_1.HelpersCreep.logError(creep, `upgrading controller failed with result: ${upgradingResult}`);
             }
-            else {
-                creep.memory.working = true;
-            }
         }
-        if (creep.memory.working && helpers_creep_1.HelpersCreep.totalCarry(creep)) {
+        if (creep.memory.working ||
+            helpers_creep_1.HelpersCreep.totalCarry(creep) === creep.carryCapacity) {
+            creep.memory.working = true;
             upgradeController();
         }
         else {
