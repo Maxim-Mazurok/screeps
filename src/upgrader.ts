@@ -101,16 +101,14 @@ export class Upgrader {
       }
     }
 
-    if (
-      !creep.memory.working &&
-      HelpersCreep.totalCarry(creep) < creep.carryCapacity
-    ) {
+    if (creep.memory.working && HelpersCreep.totalCarry(creep)) {
+      upgradeController();
+    } else {
+      creep.memory.working = false;
       (sources.link && tryLink()) ||
         (sources.storage && tryStorage()) ||
         (sources.mine && tryMine()) ||
         HelpersCreep.logError(creep, 'IDLE');
-    } else {
-      upgradeController();
     }
   }
 }

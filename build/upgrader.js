@@ -75,15 +75,15 @@ class Upgrader {
                 creep.memory.working = true;
             }
         }
-        if (!creep.memory.working &&
-            helpers_creep_1.HelpersCreep.totalCarry(creep) < creep.carryCapacity) {
+        if (creep.memory.working && helpers_creep_1.HelpersCreep.totalCarry(creep)) {
+            upgradeController();
+        }
+        else {
+            creep.memory.working = false;
             (sources.link && tryLink()) ||
                 (sources.storage && tryStorage()) ||
                 (sources.mine && tryMine()) ||
                 helpers_creep_1.HelpersCreep.logError(creep, 'IDLE');
-        }
-        else {
-            upgradeController();
         }
     }
 }
