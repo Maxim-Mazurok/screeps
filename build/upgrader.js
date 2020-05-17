@@ -6,6 +6,7 @@ class Upgrader {
     static run(creep, sources = {
         link: true,
         storage: true,
+        mine: false,
     }) {
         function tryLink() {
             const link = helpers_find_1.HelpersFind.findClosestStructureByPathFromArray(creep.pos, creep.room, helpers_find_1.HelpersFind.findLinksWithEnergy(creep.room));
@@ -41,6 +42,16 @@ class Upgrader {
             }
             return false;
         }
+        function tryMine() {
+            const source = creep.pos.findClosestByPath(creep.room.find(FIND_SOURCES));
+            if (source !== null) {
+                if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
+                    creep.moveTo(source, helpers_creep_1.HARVEST_PATH);
+                }
+                return true;
+            }
+            return false;
+        }
         function upgradeController() {
             if (creep.room.controller === undefined) {
                 helpers_creep_1.HelpersCreep.logError(creep, 'no controller found');
@@ -58,7 +69,8 @@ class Upgrader {
             upgradeController();
         }
         else if ((sources.link && tryLink()) ||
-            (sources.storage && tryStorage())) {
+            (sources.storage && tryStorage()) ||
+            (sources.mine && tryMine())) {
             return;
         }
         else {

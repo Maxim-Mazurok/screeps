@@ -25,6 +25,7 @@ class ClaimBuilder {
             upgrader_1.Upgrader.run(creep, {
                 link: false,
                 storage: false,
+                mine: true,
             });
         }
     }

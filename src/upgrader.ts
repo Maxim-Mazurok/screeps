@@ -7,9 +7,11 @@ export class Upgrader {
     sources: {
       link: boolean;
       storage: boolean;
+      mine: boolean;
     } = {
       link: true,
       storage: true,
+      mine: false,
     }
   ) {
     function tryLink(): boolean {
@@ -64,6 +66,17 @@ export class Upgrader {
       return false;
     }
 
+    function tryMine(): boolean {
+      const source = creep.pos.findClosestByPath(creep.room.find(FIND_SOURCES));
+      if (source !== null) {
+        if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
+          creep.moveTo(source, HARVEST_PATH);
+        }
+        return true;
+      }
+      return false;
+    }
+
     function upgradeController() {
       if (creep.room.controller === undefined) {
         HelpersCreep.logError(creep, 'no controller found');
@@ -84,7 +97,8 @@ export class Upgrader {
       upgradeController();
     } else if (
       (sources.link && tryLink()) ||
-      (sources.storage && tryStorage())
+      (sources.storage && tryStorage()) ||
+      (sources.mine && tryMine())
     ) {
       return;
     } else {

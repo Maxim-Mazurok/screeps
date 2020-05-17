@@ -27,6 +27,7 @@ export class ClaimBuilder {
       Upgrader.run(creep, {
         link: false,
         storage: false,
+        mine: true,
       });
     }
   }
