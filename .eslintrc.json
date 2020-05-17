@@ -1,0 +1,23 @@
+{
+  "extends": "./node_modules/gts/",
+  "rules": {
+    "no-undef": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "no-prototype-builtins": "off"
+  },
+  "overrides": [
+    {
+      "files": ["build/**/*", "*.js"],
+      "rules": {
+        "block-scoped-var": "off",
+        "eqeqeq": "off",
+        "no-var": "off",
+        "no-redeclare": "off",
+        "no-unused-vars": "off",
+        "no-empty": "off",
+        "no-prototype-builtins": "off",
+        "no-constant-condition": "off"
+      }
+    }
+  ]
+}

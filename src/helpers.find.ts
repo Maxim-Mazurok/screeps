@@ -1,4 +1,4 @@
-import { sum } from 'lodash';
+import {sum} from 'lodash';
 
 export class HelpersFind {
   static findStructuresByType<T extends Structure>(
@@ -57,9 +57,7 @@ export class HelpersFind {
     });
 
     console.log(
-      `Room ${
-        room.name
-      } has ${totalEnergyAvailable} energy for spawning available`
+      `Room ${room.name} has ${totalEnergyAvailable} energy for spawning available`
     );
     return totalEnergyAvailable;
   }

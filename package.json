@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "check": "gts check",
     "clean": "gts clean",
-    "compile": "rm -rf build && tsc -p . --allowJs",
+    "compile": "npx rimraf build && tsc -p . --allowJs",
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
@@ -21,13 +21,14 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@types/lodash": "^4.14.123",
-    "@types/node": "^11.13.0",
-    "@types/screeps": "^2.5.3",
-    "lodash": "^4.17.11"
+    "@types/lodash": "^4.14.151",
+    "@types/node": "^12.12.39",
+    "@types/screeps": "^3.1.2",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "gts": "^1.0.0-0",
-    "typescript": "^3.4.2"
+    "gts": "^2.0.2",
+    "typescript": "^3.9.2",
+    "@types/node": "^13.11.1"
   }
 }

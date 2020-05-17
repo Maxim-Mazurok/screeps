@@ -1,6 +1,6 @@
-import { CLAIM_FLAG_NAME, CLAIM_PATH } from './helpers';
+import {CLAIM_FLAG_NAME, CLAIM_PATH} from './helpers';
 
-export class RoleUptownClaimer {
+export class RoleClaimer {
   static run(creep: Creep) {
     const flag = Game.flags[CLAIM_FLAG_NAME];
     if (

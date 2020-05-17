@@ -1,4 +1,4 @@
-import { sum } from 'lodash';
+import {sum} from 'lodash';
 
 export class HelpersCreep {
   static totalCarry(creep: Creep): number {
@@ -8,19 +8,6 @@ export class HelpersCreep {
   static logAction(creep: Creep, action = 'unknown action') {
     console.log(`${creep.name} || ${action}`);
     creep.say(action);
-  }
-
-  /**
-   * @deprecated
-   */
-  static logErrorDeprecated(
-    creep: Creep,
-    errorTemplateString: (...args: string[]) => string,
-    ...args: string[]
-  ) {
-    console.log(
-      errorTemplateString.apply([creep.name, creep.room.name, ...args])
-    );
   }
 
   static logError(creep: Creep, errorMessage = 'unknown error') {
@@ -51,11 +38,11 @@ export class HelpersCreep {
   }
 }
 
-export const TRANSFER_PATH = { visualizePathStyle: { stroke: '#ffffff' } };
-export const HARVEST_PATH = { visualizePathStyle: { stroke: '#00ff00' } };
-export const CLAIM_PATH = { visualizePathStyle: { stroke: '#ff00ff' } };
-export const BUILD_PATH = { visualizePathStyle: { stroke: '#000aff' } };
-export const UPGRADE_PATH = { visualizePathStyle: { stroke: '#fff000' } };
+export const TRANSFER_PATH = {visualizePathStyle: {stroke: '#ffffff'}};
+export const HARVEST_PATH = {visualizePathStyle: {stroke: '#00ff00'}};
+export const CLAIM_PATH = {visualizePathStyle: {stroke: '#ff00ff'}};
+export const BUILD_PATH = {visualizePathStyle: {stroke: '#000aff'}};
+export const UPGRADE_PATH = {visualizePathStyle: {stroke: '#fff000'}};
 
 export const CLAIM_FLAG_NAME = 'ClaimMe';
 export const BUILD_FLAG_NAME = 'BuildMe';

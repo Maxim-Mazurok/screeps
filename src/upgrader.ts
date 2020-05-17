@@ -1,10 +1,12 @@
-import { HARVEST_PATH, HelpersCreep, UPGRADE_PATH } from './helpers.creep';
-import { HelpersFind } from './helpers.find';
+import {HARVEST_PATH, HelpersCreep, UPGRADE_PATH} from './helpers.creep';
+import {HelpersFind} from './helpers.find';
 
 export class Upgrader {
   static run(creep: Creep) {
     function tryLink(): boolean {
-      const link = HelpersFind.findClosestStructureByPathFromArray<StructureLink>(creep.pos, creep.room, HelpersFind.findLinksWithEnergy(creep.room));
+      const link = HelpersFind.findClosestStructureByPathFromArray<
+        StructureLink
+      >(creep.pos, creep.room, HelpersFind.findLinksWithEnergy(creep.room));
 
       if (link === null) {
         HelpersCreep.logError(creep, 'no link with energy in room found');
@@ -21,7 +23,7 @@ export class Upgrader {
       } else if (withdrawalResult !== OK) {
         HelpersCreep.logError(
           creep,
-          `energy withdrawal from link failed with result: ${withdrawalResult}`,
+          `energy withdrawal from link failed with result: ${withdrawalResult}`
         );
       }
 
@@ -46,7 +48,7 @@ export class Upgrader {
       } else if (withdrawalResult !== OK) {
         HelpersCreep.logError(
           creep,
-          `energy withdrawal from storage failed with result: ${withdrawalResult}`,
+          `energy withdrawal from storage failed with result: ${withdrawalResult}`
         );
       }
 
@@ -55,7 +57,7 @@ export class Upgrader {
 
     function upgradeController() {
       if (creep.room.controller === undefined) {
-        HelpersCreep.logError(creep, `no controller found`);
+        HelpersCreep.logError(creep, 'no controller found');
         return;
       }
       const upgradingResult = creep.upgradeController(creep.room.controller);
@@ -64,7 +66,7 @@ export class Upgrader {
       } else if (upgradingResult !== OK) {
         HelpersCreep.logError(
           creep,
-          `upgrading controller failed with result: ${upgradingResult}`,
+          `upgrading controller failed with result: ${upgradingResult}`
         );
       }
     }
@@ -74,10 +76,7 @@ export class Upgrader {
     } else if (tryLink() || tryStorage()) {
       return;
     } else {
-      HelpersCreep.logError(
-        creep,
-        `IDLE`,
-      );
+      HelpersCreep.logError(creep, 'IDLE');
     }
   }
 }

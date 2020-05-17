@@ -1,5 +1,5 @@
-import { HelpersFind } from './helpers.find';
-import { HelpersTerminal } from './helpers.terminal';
+import {HelpersFind} from './helpers.find';
+import {HelpersTerminal} from './helpers.terminal';
 import {
   BUILD_FLAG_NAME,
   BUILD_PATH,

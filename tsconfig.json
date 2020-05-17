@@ -4,21 +4,13 @@
     "rootDir": "src",
     "outDir": "build",
     "target": "es2017",
-    "lib": [
-      "es2017"
-    ],
+    "lib": ["es2017"],
 
     "declaration": false,
     "allowJs": false,
     "noImplicitUseStrict": true,
     "alwaysStrict": false
   },
-  "include": [
-    "src/*.ts",
-    "src/**/*.ts",
-    "src/*.js",
-    "src/**/*.js",
-    "test/*.ts",
-    "test/**/*.ts"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.js", "test/**/*.ts"],
+  "exclude": ["build/**/*"]
 }

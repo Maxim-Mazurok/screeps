@@ -1,6 +1,6 @@
-Object.defineProperty(exports, "__esModule", { value: true });
-const upgrader_1 = require("./upgrader");
-var roleBuilder = {
+/* eslint-disable */
+const Upgrader = require('./upgrader');
+roleBuilder = {
     /** @param {Creep} creep **/
     run: function (creep) {
         //var isContainer = creep.room.lookAt(creep.pos.x, creep.pos.y).filter(x => x.type === 'structure' && x.structure.structureType === STRUCTURE_CONTAINER).length;
@@ -16,11 +16,12 @@ var roleBuilder = {
         if (creep.memory.building) {
             if (creep.carry[RESOURCE_HYDROGEN] > 0) {
                 var targets = creep.room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return ([STRUCTURE_LAB].indexOf(structure.structureType) !== -1) &&
-                            structure.mineralAmount < structure.mineralCapacity
-                            && (structure.mineralType == RESOURCE_HYDROGEN || structure.mineralType == null);
-                    }
+                    filter: structure => {
+                        return ([STRUCTURE_LAB].indexOf(structure.structureType) !== -1 &&
+                            structure.mineralAmount < structure.mineralCapacity &&
+                            (structure.mineralType == RESOURCE_HYDROGEN ||
+                                structure.mineralType == null));
+                    },
                 });
                 if (targets.length > 0) {
                     const target = creep.pos.findClosestByPath(targets);
@@ -52,8 +53,10 @@ var roleBuilder = {
                     for (y in info) {
                         for (x in info[y]) {
                             ////console.log(JSON.stringify(info[y][x]));
-                            if (info[y][x].filter(c => c.type === 'creep' || c.type === 'terrain' && c.terrain === 'wall').length === 0) {
-                                let filter = info[y][x].filter(c => c.type === 'terrain' && (c.terrain === 'plain' || c.terrain === 'swamp'));
+                            if (info[y][x].filter(c => c.type === 'creep' ||
+                                (c.type === 'terrain' && c.terrain === 'wall')).length === 0) {
+                                let filter = info[y][x].filter(c => c.type === 'terrain' &&
+                                    (c.terrain === 'plain' || c.terrain === 'swamp'));
                                 if (filter.length > 0) {
                                     creep.say(`${x}, ${y}`);
                                     creep.moveTo(parseInt(x), parseInt(y));
@@ -65,51 +68,74 @@ var roleBuilder = {
                 else {
                     let targets;
                     if (creep.memory.room === '1') {
-                        targets = [...creep.room.find(FIND_STRUCTURES, {
+                        targets = [
+                            ...creep.room.find(FIND_STRUCTURES, {
                                 //filter: object => (object.hits < object.hitsMax && object.hits > 25000 && object.hits < 500000)
-                                filter: object => (object.hits < object.hitsMax && object.hits < 2000000 && object.structureType === STRUCTURE_WALL)
-                            }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
+                                filter: object => object.hits < object.hitsMax &&
+                                    object.hits < 2000000 &&
+                                    object.structureType === STRUCTURE_WALL,
+                            }),
+                            ...creep.room.find(FIND_CONSTRUCTION_SITES),
+                        ];
                     }
                     else if (creep.memory.room === '2') {
-                        targets = [...creep.room.find(FIND_STRUCTURES, {
-                                filter: object => (object.hits < object.hitsMax && object.hits < 2000000 && object.structureType === STRUCTURE_WALL)
-                            }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
+                        targets = [
+                            ...creep.room.find(FIND_STRUCTURES, {
+                                filter: object => object.hits < object.hitsMax &&
+                                    object.hits < 2000000 &&
+                                    object.structureType === STRUCTURE_WALL,
+                            }),
+                            ...creep.room.find(FIND_CONSTRUCTION_SITES),
+                        ];
                     }
                     else if (creep.memory.room === '3') {
-                        targets = [...creep.room.find(FIND_STRUCTURES, {
-                                filter: object => (object.hits < object.hitsMax && object.hits < 1000000)
-                            }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
+                        targets = [
+                            ...creep.room.find(FIND_STRUCTURES, {
+                                filter: object => object.hits < object.hitsMax && object.hits < 1000000,
+                            }),
+                            ...creep.room.find(FIND_CONSTRUCTION_SITES),
+                        ];
                     }
                     else {
-                        targets = [...creep.room.find(FIND_STRUCTURES, {
-                                filter: object => (object.hits < object.hitsMax)
-                            }), ...creep.room.find(FIND_CONSTRUCTION_SITES)];
+                        targets = [
+                            ...creep.room.find(FIND_STRUCTURES, {
+                                filter: object => object.hits < object.hitsMax,
+                            }),
+                            ...creep.room.find(FIND_CONSTRUCTION_SITES),
+                        ];
                     }
                     //targets = targets.filter(x => x.structureType !== 'lab' && x.structureType !== 'terminal');
-                    targets.sort((a, b) => (a.hasOwnProperty('progress') && a.progress !== undefined ? a.progress : a.hits) - (b.hasOwnProperty('progress') && b.progress !== undefined ? b.progress : b.hits));
+                    targets.sort((a, b) => (a.hasOwnProperty('progress') && a.progress !== undefined
+                        ? a.progress
+                        : a.hits) -
+                        (b.hasOwnProperty('progress') && b.progress !== undefined
+                            ? b.progress
+                            : b.hits));
                     if (targets.length > 0) {
                         const target = creep.pos.findClosestByPath(targets);
                         if (target !== null) {
-                            if ((target.progress !== undefined ? creep.build(target) : creep.repair(target)) == ERR_NOT_IN_RANGE) {
+                            if ((target.progress !== undefined
+                                ? creep.build(target)
+                                : creep.repair(target)) == ERR_NOT_IN_RANGE) {
                                 creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                             }
                         }
                         else {
-                            upgrader_1.Upgrader.run(creep);
+                            Upgrader.run(creep);
                         }
                     }
                     else {
-                        upgrader_1.Upgrader.run(creep);
+                        Upgrader.run(creep);
                     }
                 }
             }
         }
         else {
             var targets = creep.room.find(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return ([STRUCTURE_LINK].indexOf(structure.structureType) !== -1) &&
-                        structure.energy > 0;
-                }
+                filter: structure => {
+                    return ([STRUCTURE_LINK].indexOf(structure.structureType) !== -1 &&
+                        structure.energy > 0);
+                },
             });
             if (targets.length > 0)
                 source = targets[0];
@@ -123,10 +149,9 @@ var roleBuilder = {
             if (!source) {
                 //var source = creep.pos.findClosestByPath(creep.room.find(FIND_TOMBSTONES));
                 var targets = creep.room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return ([STRUCTURE_CONTAINER, STRUCTURE_STORAGE].indexOf(structure.structureType) !== -1) &&
-                            structure.store[RESOURCE_ENERGY] > 0;
-                    }
+                    filter: structure => {
+                        return ([STRUCTURE_CONTAINER, STRUCTURE_STORAGE].indexOf(structure.structureType) !== -1 && structure.store[RESOURCE_ENERGY] > 0);
+                    },
                 });
                 if (targets.length > 0)
                     source = targets[0];
@@ -155,7 +180,8 @@ var roleBuilder = {
                     // }
                 }
                 else {
-                    if (Math.abs(creep.pos.x - source.pos.x) <= 1 && Math.abs(creep.pos.y - source.pos.y) <= 1) {
+                    if (Math.abs(creep.pos.x - source.pos.x) <= 1 &&
+                        Math.abs(creep.pos.y - source.pos.y) <= 1) {
                         creep.withdraw(source, RESOURCE_ENERGY);
                     }
                     else {
@@ -169,7 +195,7 @@ var roleBuilder = {
                 }
             }
         }
-    }
+    },
 };
 module.exports = roleBuilder;
 //# sourceMappingURL=builder.js.map

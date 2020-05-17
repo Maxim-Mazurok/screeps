@@ -1,11 +1,12 @@
-var roleEnergizer = {
+/* eslint-disable */
+const roleEnergizer = {
     /** @param {Creep} creep **/
     run: function (creep) {
         if (creep.carry[RESOURCE_HYDROGEN] > 0) {
             var targets = creep.room.find(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return ([STRUCTURE_TERMINAL].indexOf(structure.structureType) !== -1);
-                }
+                filter: structure => {
+                    return [STRUCTURE_TERMINAL].indexOf(structure.structureType) !== -1;
+                },
             });
             if (targets.length > 0) {
                 const target = creep.pos.findClosestByPath(targets);
@@ -16,9 +17,9 @@ var roleEnergizer = {
         }
         else if (creep.carry.energy > 0) {
             var targets = creep.room.find(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return ([STRUCTURE_TERMINAL].indexOf(structure.structureType) !== -1);
-                }
+                filter: structure => {
+                    return [STRUCTURE_TERMINAL].indexOf(structure.structureType) !== -1;
+                },
             });
             if (targets.length > 0) {
                 const target = creep.pos.findClosestByPath(targets);
@@ -29,10 +30,10 @@ var roleEnergizer = {
         }
         else if (creep.carry.energy < creep.carryCapacity) {
             var targets = creep.room.find(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return ([STRUCTURE_LINK].indexOf(structure.structureType) !== -1) &&
-                        structure.energy > 0;
-                }
+                filter: structure => {
+                    return ([STRUCTURE_LINK].indexOf(structure.structureType) !== -1 &&
+                        structure.energy > 0);
+                },
             });
             if (targets.length > 0)
                 source = targets[0];
@@ -52,10 +53,9 @@ var roleEnergizer = {
             var source = creep.pos.findClosestByPath(creep.room.find(FIND_TOMBSTONES));
             if (!source) {
                 var targets = creep.room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return ([STRUCTURE_CONTAINER, STRUCTURE_STORAGE].indexOf(structure.structureType) !== -1) &&
-                            structure.store[RESOURCE_ENERGY] > 0;
-                    }
+                    filter: structure => {
+                        return ([STRUCTURE_CONTAINER, STRUCTURE_STORAGE].indexOf(structure.structureType) !== -1 && structure.store[RESOURCE_ENERGY] > 0);
+                    },
                 });
                 if (targets.length > 0)
                     source = targets[0];
@@ -85,9 +85,9 @@ var roleEnergizer = {
                     }
                     else {
                         var targets = creep.room.find(FIND_STRUCTURES, {
-                            filter: (structure) => {
+                            filter: structure => {
                                 return ([STRUCTURE_TERMINAL].indexOf(structure.structureType) !== -1);
-                            }
+                            },
                         });
                         if (targets.length > 0) {
                             const target = creep.pos.findClosestByPath(targets);
@@ -96,7 +96,8 @@ var roleEnergizer = {
                     }
                 }
                 else {
-                    if (Math.abs(creep.pos.x - source.pos.x) <= 1 && Math.abs(creep.pos.y - source.pos.y) <= 1) {
+                    if (Math.abs(creep.pos.x - source.pos.x) <= 1 &&
+                        Math.abs(creep.pos.y - source.pos.y) <= 1) {
                         creep.withdraw(source, RESOURCE_ENERGY);
                     }
                     else {
@@ -112,11 +113,13 @@ var roleEnergizer = {
         }
         else {
             if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(creep.room.controller, { visualizePathStyle: { stroke: '#ffaa00' } });
+                creep.moveTo(creep.room.controller, {
+                    visualizePathStyle: { stroke: '#ffaa00' },
+                });
             }
         }
         //creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffaa00'}});
-    }
+    },
 };
 module.exports = roleEnergizer;
 //# sourceMappingURL=energizer.js.map

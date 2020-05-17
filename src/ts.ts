@@ -10,4 +10,8 @@ type RoomsConfig = RoomConfig[];
 
 interface RoomConfig {
   //TODO: create config for rooms (number of creeps, policies, etc.)
+  roomName: Room['name'];
+  claim: Array<{
+    to: Room['name'];
+  }>;
 }

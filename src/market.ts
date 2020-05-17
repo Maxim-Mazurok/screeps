@@ -1,4 +1,4 @@
-import { HelpersFind, HelpersTerminal } from './helpers';
+import {HelpersFind, HelpersTerminal} from './helpers';
 
 export class Market {
   private terminals: StructureTerminal[] = [];
