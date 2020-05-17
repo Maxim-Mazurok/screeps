@@ -28,7 +28,7 @@ class ClaimBuilder {
         }
         else if (flag.room &&
             helpers_1.HelpersFind.findSomethingToBuild(flag.room) &&
-            (((_a = creep.room.controller) === null || _a === void 0 ? void 0 : _a.progress) || Infinity) > 1500) {
+            (((_a = creep.room.controller) === null || _a === void 0 ? void 0 : _a.ticksToDowngrade) || Infinity) > 1500) {
             // should build
             roleBuilder.run(creep, { mine: true });
         }
