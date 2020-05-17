@@ -46,17 +46,20 @@ export class Rooms {
 
       if (claimBuilders.length < 1) {
         config.claim.forEach(({to: claimRoomName}) => {
-          const newName = `ClaimBuilder_${room.name}->${claimRoomName}_${Game.time}`;
-          Game.spawns['Spawn2'].spawnCreep(
-            [
-              ..._.fill(_.times(4), MOVE),
-              ..._.fill(_.times(4), WORK),
-              ..._.fill(_.times(4), CARRY),
-              ..._.fill(_.times(1), CLAIM),
-            ],
-            newName,
-            {memory: {role: CreepRole.claimer, room: room.name}}
-          );
+          const newName = `Claimer_${room.name}->${claimRoomName}_${Game.time}`;
+          const spawn = room.find(FIND_MY_SPAWNS)[0];
+          if (spawn) {
+            spawn.spawnCreep(
+              [
+                ..._.fill(_.times(4), MOVE),
+                ..._.fill(_.times(4), WORK),
+                ..._.fill(_.times(4), CARRY),
+                ..._.fill(_.times(1), CLAIM),
+              ],
+              newName,
+              {memory: {role: CreepRole.claimer, room: room.name}}
+            );
+          }
         });
       }
     }
