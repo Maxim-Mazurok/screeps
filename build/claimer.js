@@ -11,7 +11,7 @@ class ClaimBuilder {
             helpers_1.HelpersCreep.canClaim(creep)) {
             // should claim
             if (flag.room &&
-                flag.room.name === creep.room.name &&
+                flag.room.name !== creep.room.name &&
                 creep.room.controller !== undefined) {
                 if (creep.claimController(creep.room.controller) !== OK) {
                     creep.moveTo(flag, helpers_1.CLAIM_PATH);

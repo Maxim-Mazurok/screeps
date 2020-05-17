@@ -15,7 +15,7 @@ export class ClaimBuilder {
       // should claim
       if (
         flag.room &&
-        flag.room.name === creep.room.name &&
+        flag.room.name !== creep.room.name &&
         creep.room.controller !== undefined
       ) {
         if (creep.claimController(creep.room.controller) !== OK) {

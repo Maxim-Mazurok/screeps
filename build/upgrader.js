@@ -65,16 +65,14 @@ class Upgrader {
                 helpers_creep_1.HelpersCreep.logError(creep, `upgrading controller failed with result: ${upgradingResult}`);
             }
         }
-        if (helpers_creep_1.HelpersCreep.totalCarry(creep) > 0) {
-            upgradeController();
-        }
-        else if ((sources.link && tryLink()) ||
-            (sources.storage && tryStorage()) ||
-            (sources.mine && tryMine())) {
-            return;
+        if (helpers_creep_1.HelpersCreep.totalCarry(creep) < creep.carryCapacity) {
+            (sources.link && tryLink()) ||
+                (sources.storage && tryStorage()) ||
+                (sources.mine && tryMine()) ||
+                helpers_creep_1.HelpersCreep.logError(creep, 'IDLE');
         }
         else {
-            helpers_creep_1.HelpersCreep.logError(creep, 'IDLE');
+            upgradeController();
         }
     }
 }

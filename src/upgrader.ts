@@ -93,16 +93,13 @@ export class Upgrader {
       }
     }
 
-    if (HelpersCreep.totalCarry(creep) > 0) {
-      upgradeController();
-    } else if (
+    if (HelpersCreep.totalCarry(creep) < creep.carryCapacity) {
       (sources.link && tryLink()) ||
-      (sources.storage && tryStorage()) ||
-      (sources.mine && tryMine())
-    ) {
-      return;
+        (sources.storage && tryStorage()) ||
+        (sources.mine && tryMine()) ||
+        HelpersCreep.logError(creep, 'IDLE');
     } else {
-      HelpersCreep.logError(creep, 'IDLE');
+      upgradeController();
     }
   }
 }
