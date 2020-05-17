@@ -183,7 +183,7 @@ function loop() {
     );
   } else if (
     upgraders.length < 1 &&
-    (Game.rooms['E47N16'].storage!.store.energy > 1000 ||
+    (Game.rooms['E47N16'].storage!.store.energy > 20000 ||
       Game.rooms['E47N16'].terminal!.store[RESOURCE_HYDROGEN] === 0)
   ) {
     const newName = 'Upgrader' + Game.time;
