@@ -47,7 +47,7 @@ export class Rooms {
     if (config.claim && config.skills && config.skills[CreepRole.claimer]) {
       const claimers = getCreepsByRole(CreepRole.claimer);
 
-      if (!claimers) {
+      if (!claimers.length) {
         const claimerSkills = config.skills[CreepRole.claimer];
         config.claim.forEach(({to: claimRoomName}) => {
           const newName = `Claimer_${room.name}->${claimRoomName}_${Game.time}`;
@@ -65,8 +65,8 @@ export class Rooms {
       config.skills[CreepRole.builder]
     ) {
       const builders = getCreepsByRole(CreepRole.builder);
-      if (!builders) {
-        const builderSkills = config.skills[CreepRole.claimer];
+      if (!builders.length) {
+        const builderSkills = config.skills[CreepRole.builder];
 
         const newName = `Builder_${room.name}_${Game.time}`;
         builderSkills &&

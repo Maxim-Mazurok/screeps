@@ -521,7 +521,7 @@ module.exports.loop = () => {
   try {
     loop();
   } catch (e) {
-    console.error('An error occurred!');
+    console.log('An error occurred!');
     console.log(e.message);
     console.log(e.stack);
   }
