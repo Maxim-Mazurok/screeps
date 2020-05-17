@@ -1,5 +1,4 @@
 /* eslint-disable */
-const HelpersCreep = require('./helpers.creep');
 const Upgrader = require('./upgrader');
 roleBuilder = {
     /** @param {Creep} creep **/
@@ -11,13 +10,7 @@ roleBuilder = {
             if (source !== null) {
                 const harvestResult = creep.harvest(source);
                 if (harvestResult === ERR_NOT_IN_RANGE) {
-                    const moveResult = creep.moveTo(source, HARVEST_PATH);
-                    if (moveResult !== OK) {
-                        HelpersCreep.logError(creep, `can't move to mine: ${moveResult}`);
-                    }
-                }
-                else if (harvestResult !== OK) {
-                    HelpersCreep.logError(creep, `can't harvest: ${harvestResult}`);
+                    creep.moveTo(source, HARVEST_PATH);
                 }
                 return true;
             }
