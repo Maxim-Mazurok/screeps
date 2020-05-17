@@ -5,9 +5,8 @@ import {
   OrderAmount,
 } from './ts';
 
-const AVERAGE_PRICES: {[key: string]: number} = {}; // TODO: use MarketResourceConstant instead of string
-AVERAGE_PRICES[RESOURCE_HYDROGEN] = 0.2;
-AVERAGE_PRICES[RESOURCE_ENERGY] = 0.02;
+const AVERAGE_PRICES: {[key in MarketResourceConstant]?: number} = {};
+AVERAGE_PRICES[RESOURCE_ENERGY] = 0.079;
 
 export class HelpersTerminal {
   static getTerminalMarketResourcesAndAmounts(
@@ -27,10 +26,9 @@ export class HelpersTerminal {
       .filter(order => order.amount > 0)
       .filter(order => {
         if (AVERAGE_PRICES.hasOwnProperty(order.resourceType)) {
-          return order.price >= AVERAGE_PRICES[order.resourceType];
-        } else {
-          return true;
+          // return order.price >= AVERAGE_PRICES[order.resourceType];
         }
+        return true;
       })
       .sort((order1, order2) => order2.price - order1.price);
   }
@@ -51,11 +49,10 @@ export class HelpersTerminal {
           ? Game.market.calcTransactionCost(amount, roomName, order.roomName)
           : 0;
       let realPrice = Infinity;
-      if (AVERAGE_PRICES.hasOwnProperty(order.resourceType)) {
+      const energyPrice = AVERAGE_PRICES[RESOURCE_ENERGY];
+      if (energyPrice) {
         realPrice =
-          (amount * order.price -
-            transactionCost * AVERAGE_PRICES[RESOURCE_ENERGY]) /
-          amount;
+          (amount * order.price - transactionCost * energyPrice) / amount;
       }
       if (transactionCost <= energy) {
         if (realPrice !== Infinity) {
