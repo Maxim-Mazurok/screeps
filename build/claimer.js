@@ -45,7 +45,7 @@ class ClaimBuilder {
                     });
                 }
                 else {
-                    creep.moveTo(flag);
+                    creep.moveTo(flag, helpers_1.BUILD_PATH);
                 }
             }
             else {

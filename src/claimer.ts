@@ -56,7 +56,7 @@ export class ClaimBuilder {
             return false;
           });
         } else {
-          creep.moveTo(flag);
+          creep.moveTo(flag, BUILD_PATH);
         }
       } else {
         const source = creep.pos.findClosestByPath(
