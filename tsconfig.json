@@ -5,7 +5,7 @@
     "outDir": "build",
     "target": "es2017",
     "lib": ["es2017"],
-
+    "sourceMap": false,
     "declaration": false,
     "allowJs": false,
     "noImplicitUseStrict": true,

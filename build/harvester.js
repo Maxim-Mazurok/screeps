@@ -186,4 +186,3 @@ const roleHarvester = {
     },
 };
 module.exports = roleHarvester;
-//# sourceMappingURL=harvester.js.map

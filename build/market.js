@@ -30,4 +30,3 @@ class Market {
     }
 }
 exports.Market = Market;
-//# sourceMappingURL=market.js.map

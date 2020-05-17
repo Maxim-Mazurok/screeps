@@ -6,7 +6,7 @@ roleBuilder = {
   run: function (
     creep,
     sources = {
-      mine: true,
+      mine: false,
     }
   ) {
     function tryMine() {

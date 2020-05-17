@@ -10,4 +10,3 @@ var CreepRole;
     CreepRole[CreepRole["uptownHarvester"] = 5] = "uptownHarvester";
     CreepRole[CreepRole["claimer"] = 6] = "claimer";
 })(CreepRole = exports.CreepRole || (exports.CreepRole = {}));
-//# sourceMappingURL=enums.js.map

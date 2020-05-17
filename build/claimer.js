@@ -39,4 +39,3 @@ class ClaimBuilder {
     }
 }
 exports.ClaimBuilder = ClaimBuilder;
-//# sourceMappingURL=claimer.js.map

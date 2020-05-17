@@ -3,7 +3,7 @@ const Upgrader = require('./upgrader');
 roleBuilder = {
     /** @param {Creep} creep **/
     run: function (creep, sources = {
-        mine: true,
+        mine: false,
     }) {
         function tryMine() {
             const source = creep.pos.findClosestByPath(creep.room.find(FIND_SOURCES));
@@ -212,4 +212,3 @@ roleBuilder = {
     },
 };
 module.exports = roleBuilder;
-//# sourceMappingURL=builder.js.map

@@ -64,4 +64,3 @@ class Extractor {
     }
 }
 exports.Extractor = Extractor;
-//# sourceMappingURL=extractor.js.map

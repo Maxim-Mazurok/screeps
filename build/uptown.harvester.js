@@ -65,4 +65,3 @@ const roleUptownHarvester = {
     },
 };
 module.exports = roleUptownHarvester;
-//# sourceMappingURL=uptown.harvester.js.map

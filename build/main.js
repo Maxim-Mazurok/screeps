@@ -335,4 +335,3 @@ module.exports.loop = () => {
         console.log(e.stack);
     }
 };
-//# sourceMappingURL=main.js.map

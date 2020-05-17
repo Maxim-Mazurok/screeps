@@ -122,4 +122,3 @@ const roleEnergizer = {
     },
 };
 module.exports = roleEnergizer;
-//# sourceMappingURL=energizer.js.map

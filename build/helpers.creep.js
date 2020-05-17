@@ -36,4 +36,3 @@ exports.BUILD_PATH = { visualizePathStyle: { stroke: '#000aff' } };
 exports.UPGRADE_PATH = { visualizePathStyle: { stroke: '#fff000' } };
 exports.CLAIM_FLAG_NAME = 'ClaimMe';
 exports.BUILD_FLAG_NAME = 'BuildMe';
-//# sourceMappingURL=helpers.creep.js.map

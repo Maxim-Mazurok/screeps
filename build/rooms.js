@@ -62,4 +62,3 @@ class Rooms {
     }
 }
 exports.Rooms = Rooms;
-//# sourceMappingURL=rooms.js.map
