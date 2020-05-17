@@ -5,10 +5,27 @@ import {
   CLAIM_PATH,
   HARVEST_PATH,
   HelpersCreep,
+  UPGRADE_PATH,
 } from './helpers';
 
 export class ClaimBuilder {
   static run(creep: Creep) {
+    function upgradeController() {
+      if (creep.room.controller === undefined) {
+        HelpersCreep.logError(creep, 'no controller found');
+        return;
+      }
+      const upgradingResult = creep.upgradeController(creep.room.controller);
+      if (upgradingResult === ERR_NOT_IN_RANGE) {
+        creep.moveTo(creep.room.controller, UPGRADE_PATH);
+      } else if (upgradingResult !== OK) {
+        HelpersCreep.logError(
+          creep,
+          `upgrading controller failed with result: ${upgradingResult}`
+        );
+      }
+    }
+
     if (
       creep.room.controller &&
       creep.room.controller.my === false &&
@@ -42,22 +59,7 @@ export class ClaimBuilder {
       }
 
       if (creep.memory.building) {
-        if (flag.room && creep.room.name === flag.room.name) {
-          creep.room.lookAt(flag).some((lookObject: LookAtResult) => {
-            if (lookObject.type === LOOK_CONSTRUCTION_SITES) {
-              const target = lookObject.constructionSite;
-              if (target !== undefined) {
-                if (creep.build(target) === ERR_NOT_IN_RANGE) {
-                  creep.moveTo(target, BUILD_PATH);
-                }
-                return true;
-              }
-            }
-            return false;
-          });
-        } else {
-          creep.moveTo(flag, BUILD_PATH);
-        }
+        upgradeController();
       } else {
         const source = creep.pos.findClosestByPath(
           creep.room.find(FIND_SOURCES)

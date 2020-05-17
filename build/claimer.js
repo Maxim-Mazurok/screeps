@@ -3,6 +3,19 @@ exports.ClaimBuilder = void 0;
 const helpers_1 = require("./helpers");
 class ClaimBuilder {
     static run(creep) {
+        function upgradeController() {
+            if (creep.room.controller === undefined) {
+                helpers_1.HelpersCreep.logError(creep, 'no controller found');
+                return;
+            }
+            const upgradingResult = creep.upgradeController(creep.room.controller);
+            if (upgradingResult === ERR_NOT_IN_RANGE) {
+                creep.moveTo(creep.room.controller, helpers_1.UPGRADE_PATH);
+            }
+            else if (upgradingResult !== OK) {
+                helpers_1.HelpersCreep.logError(creep, `upgrading controller failed with result: ${upgradingResult}`);
+            }
+        }
         if (creep.room.controller &&
             creep.room.controller.my === false &&
             helpers_1.HelpersCreep.canClaim(creep)) {
@@ -30,23 +43,7 @@ class ClaimBuilder {
                 creep.say('build');
             }
             if (creep.memory.building) {
-                if (flag.room && creep.room.name === flag.room.name) {
-                    creep.room.lookAt(flag).some((lookObject) => {
-                        if (lookObject.type === LOOK_CONSTRUCTION_SITES) {
-                            const target = lookObject.constructionSite;
-                            if (target !== undefined) {
-                                if (creep.build(target) === ERR_NOT_IN_RANGE) {
-                                    creep.moveTo(target, helpers_1.BUILD_PATH);
-                                }
-                                return true;
-                            }
-                        }
-                        return false;
-                    });
-                }
-                else {
-                    creep.moveTo(flag, helpers_1.BUILD_PATH);
-                }
+                upgradeController();
             }
             else {
                 const source = creep.pos.findClosestByPath(creep.room.find(FIND_SOURCES));
