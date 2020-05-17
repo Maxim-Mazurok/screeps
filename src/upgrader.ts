@@ -2,7 +2,16 @@ import {HARVEST_PATH, HelpersCreep, UPGRADE_PATH} from './helpers.creep';
 import {HelpersFind} from './helpers.find';
 
 export class Upgrader {
-  static run(creep: Creep) {
+  static run(
+    creep: Creep,
+    sources: {
+      link: boolean;
+      storage: boolean;
+    } = {
+      link: true,
+      storage: true,
+    }
+  ) {
     function tryLink(): boolean {
       const link = HelpersFind.findClosestStructureByPathFromArray<
         StructureLink
@@ -73,7 +82,10 @@ export class Upgrader {
 
     if (HelpersCreep.totalCarry(creep) > 0) {
       upgradeController();
-    } else if (tryLink() || tryStorage()) {
+    } else if (
+      (sources.link && tryLink()) ||
+      (sources.storage && tryStorage())
+    ) {
       return;
     } else {
       HelpersCreep.logError(creep, 'IDLE');

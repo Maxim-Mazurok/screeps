@@ -3,7 +3,10 @@ exports.Upgrader = void 0;
 const helpers_creep_1 = require("./helpers.creep");
 const helpers_find_1 = require("./helpers.find");
 class Upgrader {
-    static run(creep) {
+    static run(creep, sources = {
+        link: true,
+        storage: true,
+    }) {
         function tryLink() {
             const link = helpers_find_1.HelpersFind.findClosestStructureByPathFromArray(creep.pos, creep.room, helpers_find_1.HelpersFind.findLinksWithEnergy(creep.room));
             if (link === null) {
@@ -54,7 +57,8 @@ class Upgrader {
         if (helpers_creep_1.HelpersCreep.totalCarry(creep) > 0) {
             upgradeController();
         }
-        else if (tryLink() || tryStorage()) {
+        else if ((sources.link && tryLink()) ||
+            (sources.storage && tryStorage())) {
             return;
         }
         else {
