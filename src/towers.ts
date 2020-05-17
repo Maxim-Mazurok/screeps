@@ -22,7 +22,13 @@ export class Towers {
               structure.hits < structure.hitsMax && structure.hits < maxHits,
           }
         );
-        if (closestDamagedStructure) {
+        const weakStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+          filter: (structure: Structure) =>
+            structure.hits < structure.hitsMax && structure.hits < 100,
+        });
+        if (weakStructure) {
+          tower.repair(weakStructure);
+        } else if (closestDamagedStructure) {
           tower.repair(closestDamagedStructure);
         }
       }
