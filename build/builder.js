@@ -10,7 +10,7 @@ roleBuilder = {
             if (source !== null) {
                 const harvestResult = creep.harvest(source);
                 if (harvestResult === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(source, HARVEST_PATH);
+                    creep.moveTo(source);
                 }
                 return true;
             }
