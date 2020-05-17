@@ -32,7 +32,7 @@ export class ClaimBuilder {
       }
     } else if (flag.room && HelpersFind.findSomethingToBuild(flag.room)) {
       // should build
-      roleBuilder.run(creep);
+      roleBuilder.run(creep, {mine: true});
     } else {
       // should upgrade
       Upgrader.run(creep, {

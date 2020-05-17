@@ -3,7 +3,29 @@ const Upgrader = require('./upgrader');
 
 roleBuilder = {
   /** @param {Creep} creep **/
-  run: function (creep) {
+  run: function (
+    creep,
+    sources = {
+      mine: true,
+    }
+  ) {
+    function tryMine() {
+      const source = creep.pos.findClosestByPath(creep.room.find(FIND_SOURCES));
+      if (source !== null) {
+        const harvestResult = creep.harvest(source);
+        if (harvestResult === ERR_NOT_IN_RANGE) {
+          const moveResult = creep.moveTo(source, HARVEST_PATH);
+          if (moveResult !== OK) {
+            HelpersCreep.logError(creep, `can't move to mine: ${moveResult}`);
+          }
+        } else if (harvestResult !== OK) {
+          HelpersCreep.logError(creep, `can't harvest: ${harvestResult}`);
+        }
+        return true;
+      }
+      return false;
+    }
+
     //var isContainer = creep.room.lookAt(creep.pos.x, creep.pos.y).filter(x => x.type === 'structure' && x.structure.structureType === STRUCTURE_CONTAINER).length;
     if (creep.memory.building && creep.carry.energy == 0) {
       creep.memory.building = false;
@@ -188,6 +210,7 @@ roleBuilder = {
         });
         if (targets.length > 0) source = targets[0];
         if (!source) {
+          sources.mine && tryMine();
           // if (isContainer) {
           //     let info = creep.room.lookAtArea(creep.pos.y - 1, creep.pos.x - 1, creep.pos.y + 1, creep.pos.x + 1);
           //     for (y in info) {

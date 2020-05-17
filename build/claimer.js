@@ -26,7 +26,7 @@ class ClaimBuilder {
         }
         else if (flag.room && helpers_1.HelpersFind.findSomethingToBuild(flag.room)) {
             // should build
-            roleBuilder.run(creep);
+            roleBuilder.run(creep, { mine: true });
         }
         else {
             // should upgrade
