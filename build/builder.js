@@ -138,11 +138,13 @@ roleBuilder = {
                             }
                         }
                         else {
-                            General.run(creep);
+                            // TODO: fix that
+                            // General.run(creep);
                         }
                     }
                     else {
-                        General.run(creep);
+                        // TODO: fix that
+                        // General.run(creep);
                     }
                 }
             }
