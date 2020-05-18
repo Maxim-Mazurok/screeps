@@ -30,7 +30,7 @@ export class ClaimBuilder {
       flag.room &&
       HelpersFind.findSomethingToBuild(flag.room) &&
       (creep.room.controller?.ticksToDowngrade || Infinity) > 1500 &&
-      (creep.room.controller?.ticksToDowngrade || Infinity) < 3000
+      (creep.room.controller?.ticksToDowngrade || 0) < 3000
     ) {
       // should build
       roleBuilder.run(creep, {mine: true});
