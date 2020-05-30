@@ -275,7 +275,7 @@ export class GeneralCreep {
     }
 
     if (creep.memory.working) {
-      replanish() || upgradeController();
+      replanish() || build() || upgradeController();
     } else {
       getEnergy() || HelpersCreep.logError(creep, 'IDLE');
     }

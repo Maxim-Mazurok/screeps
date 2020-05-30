@@ -178,7 +178,7 @@ class GeneralCreep {
             creep.say('work');
         }
         if (creep.memory.working) {
-            replanish() || upgradeController();
+            replanish() || build() || upgradeController();
         }
         else {
             getEnergy() || helpers_creep_1.HelpersCreep.logError(creep, 'IDLE');
