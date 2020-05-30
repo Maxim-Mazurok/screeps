@@ -12,7 +12,7 @@ const roleEnergizer = require('./energizer');
 const roleUptownHarvester = require('./uptown.harvester');
 const roomsConfig = [
     {
-        roomName: 'E48N17',
+        roomName: 'E48N18',
         autoSpawn: {
             enabled: true,
             maxCreeps: 3,
