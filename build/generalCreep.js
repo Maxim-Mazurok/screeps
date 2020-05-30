@@ -39,8 +39,8 @@ class GeneralCreep {
                             .filter(x => x.resourceType === RESOURCE_ENERGY)) || null);
                     case enums_1.EnergySource.tombstone:
                         return (creep.pos.findClosestByPath(creep.room
-                            .find(FIND_DROPPED_RESOURCES)
-                            .filter(x => x.resourceType === RESOURCE_ENERGY)) || null);
+                            .find(FIND_TOMBSTONES)
+                            .filter(x => x.store[RESOURCE_ENERGY] > 0)) || null);
                     default:
                         return null;
                 }

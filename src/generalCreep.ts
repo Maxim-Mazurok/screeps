@@ -75,8 +75,8 @@ export class GeneralCreep {
             return (
               creep.pos.findClosestByPath(
                 creep.room
-                  .find(FIND_DROPPED_RESOURCES)
-                  .filter(x => x.resourceType === RESOURCE_ENERGY)
+                  .find(FIND_TOMBSTONES)
+                  .filter(x => x.store[RESOURCE_ENERGY] > 0)
               ) || null
             );
           default:
