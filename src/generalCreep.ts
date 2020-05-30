@@ -283,9 +283,9 @@ export class GeneralCreep {
     if (creep.memory.working) {
       while (jobs[creep.memory.jobId || 0]() === false) {
         creep.memory.jobId =
-          creep.memory.jobId || 0 + 1 > jobs.length - 1
+          (creep.memory.jobId || 0) + 1 > jobs.length - 1
             ? 0
-            : creep.memory.jobId || 0 + 1;
+            : (creep.memory.jobId || 0) + 1;
       }
     } else {
       getEnergy() || HelpersCreep.logError(creep, 'IDLE');
