@@ -19,6 +19,7 @@ class GeneralCreep {
         enums_1.CreepActivity.replanishLinkEnergy,
         enums_1.CreepActivity.replanishStorageEnergy,
     ]) {
+        const jobs = [replanish, build, upgradeController];
         // try to get energy from link, storage or mine, depending on sources config
         function getEnergy() {
             function getResourceObject(energySource) {
@@ -84,7 +85,7 @@ class GeneralCreep {
         function upgradeController() {
             if (creep.room.controller === undefined) {
                 helpers_creep_1.HelpersCreep.logError(creep, 'no controller found');
-                return;
+                return false;
             }
             const upgradingResult = creep.upgradeController(creep.room.controller);
             if (upgradingResult === ERR_NOT_IN_RANGE) {
@@ -92,7 +93,9 @@ class GeneralCreep {
             }
             else if (upgradingResult !== OK) {
                 helpers_creep_1.HelpersCreep.logError(creep, `upgrading controller failed with result: ${upgradingResult}`);
+                return false;
             }
+            return true;
         }
         function replanish() {
             function replanishTarget(target) {
@@ -171,6 +174,7 @@ class GeneralCreep {
         if (creep.memory.working && creep.carry.energy === 0) {
             creep.memory.working = false;
             creep.say('harvest');
+            creep.memory.jobId = Math.floor(Math.random() * jobs.length);
         }
         if (!creep.memory.working &&
             helpers_creep_1.HelpersCreep.totalCarry(creep) === creep.carryCapacity) {
@@ -178,7 +182,12 @@ class GeneralCreep {
             creep.say('work');
         }
         if (creep.memory.working) {
-            replanish() || build() || upgradeController();
+            while (jobs[creep.memory.jobId || 0]() === false) {
+                creep.memory.jobId =
+                    creep.memory.jobId || 0 + 1 > jobs.length - 1
+                        ? 0
+                        : creep.memory.jobId || 0 + 1;
+            }
         }
         else {
             getEnergy() || helpers_creep_1.HelpersCreep.logError(creep, 'IDLE');

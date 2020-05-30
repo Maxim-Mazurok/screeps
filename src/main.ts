@@ -54,6 +54,7 @@ declare global {
     role: CreepRole;
     room: RoomName;
     transferring?: boolean;
+    jobId?: number;
 
     [name: string]: string | number | boolean | undefined;
   }

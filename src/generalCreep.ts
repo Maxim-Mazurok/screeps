@@ -36,6 +36,8 @@ export class GeneralCreep {
       CreepActivity.replanishStorageEnergy,
     ]
   ) {
+    const jobs = [replanish, build, upgradeController];
+
     // try to get energy from link, storage or mine, depending on sources config
     function getEnergy(): boolean {
       function getResourceObject(
@@ -128,10 +130,10 @@ export class GeneralCreep {
       });
     }
 
-    function upgradeController() {
+    function upgradeController(): boolean {
       if (creep.room.controller === undefined) {
         HelpersCreep.logError(creep, 'no controller found');
-        return;
+        return false;
       }
       const upgradingResult = creep.upgradeController(creep.room.controller);
       if (upgradingResult === ERR_NOT_IN_RANGE) {
@@ -141,7 +143,9 @@ export class GeneralCreep {
           creep,
           `upgrading controller failed with result: ${upgradingResult}`
         );
+        return false;
       }
+      return true;
     }
 
     function replanish(): boolean {
@@ -264,6 +268,8 @@ export class GeneralCreep {
     if (creep.memory.working && creep.carry.energy === 0) {
       creep.memory.working = false;
       creep.say('harvest');
+
+      creep.memory.jobId = Math.floor(Math.random() * jobs.length);
     }
 
     if (
@@ -275,7 +281,12 @@ export class GeneralCreep {
     }
 
     if (creep.memory.working) {
-      replanish() || build() || upgradeController();
+      while (jobs[creep.memory.jobId || 0]() === false) {
+        creep.memory.jobId =
+          creep.memory.jobId || 0 + 1 > jobs.length - 1
+            ? 0
+            : creep.memory.jobId || 0 + 1;
+      }
     } else {
       getEnergy() || HelpersCreep.logError(creep, 'IDLE');
     }
