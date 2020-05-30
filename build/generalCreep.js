@@ -12,7 +12,12 @@ class GeneralCreep {
             enums_1.EnergySource.tombstone,
             enums_1.EnergySource.mine,
         ],
-    }) {
+    }, activities = [
+        enums_1.CreepActivity.replanishExtensionEnergy,
+        enums_1.CreepActivity.replanishSpawnEnergy,
+        enums_1.CreepActivity.replanishLinkEnergy,
+        enums_1.CreepActivity.replanishStorageEnergy,
+    ]) {
         // try to get energy from link, storage or mine, depending on sources config
         function getEnergy() {
             function getResourceObject(energySource) {
@@ -25,7 +30,7 @@ class GeneralCreep {
                             ? creep.room.storage
                             : null;
                     case enums_1.EnergySource.mine:
-                        return (creep.pos.findClosestByPath(creep.room.find(FIND_SOURCES)) || null);
+                        return (creep.pos.findClosestByPath(creep.room.find(FIND_SOURCES_ACTIVE)) || null);
                     case enums_1.EnergySource.dropped:
                         return (creep.pos.findClosestByPath(creep.room
                             .find(FIND_DROPPED_RESOURCES)
@@ -88,6 +93,55 @@ class GeneralCreep {
                 helpers_creep_1.HelpersCreep.logError(creep, `upgrading controller failed with result: ${upgradingResult}`);
             }
         }
+        function replanish() {
+            function replanishTarget(target) {
+                if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target, { visualizePathStyle: helpers_creep_1.TRANSFER_PATH });
+                }
+            }
+            function findTarget() {
+                function findNotFullStructure(type) {
+                    return helpers_find_1.HelpersFind.findClosestStructureByPathFromArray(creep.pos, creep.room, helpers_find_1.HelpersFind.findByFindConstant(creep.room, FIND_MY_STRUCTURES, structure => {
+                        if (type === structure.structureType) {
+                            switch (structure.structureType) {
+                                case STRUCTURE_SPAWN:
+                                case STRUCTURE_EXTENSION:
+                                case STRUCTURE_LINK:
+                                    return structure.energy < structure.energyCapacity;
+                                case STRUCTURE_STORAGE:
+                                    return (structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0);
+                            }
+                        }
+                        return false;
+                    }));
+                }
+                const extension = findNotFullStructure(STRUCTURE_EXTENSION);
+                if (activities.includes(enums_1.CreepActivity.replanishExtensionEnergy) &&
+                    extension) {
+                    return extension;
+                }
+                const spawn = findNotFullStructure(STRUCTURE_SPAWN);
+                if (activities.includes(enums_1.CreepActivity.replanishSpawnEnergy) && spawn) {
+                    return spawn;
+                }
+                const link = findNotFullStructure(STRUCTURE_LINK);
+                if (activities.includes(enums_1.CreepActivity.replanishLinkEnergy) && link) {
+                    return link;
+                }
+                const storage = findNotFullStructure(STRUCTURE_STORAGE);
+                if (activities.includes(enums_1.CreepActivity.replanishStorageEnergy) &&
+                    storage) {
+                    return storage;
+                }
+                return false;
+            }
+            const target = findTarget();
+            if (target) {
+                replanishTarget(target);
+                return true;
+            }
+            return false;
+        }
         if (creep.memory.working && creep.carry.energy === 0) {
             creep.memory.working = false;
             creep.say('harvest');
@@ -98,7 +152,7 @@ class GeneralCreep {
             creep.say('work');
         }
         if (creep.memory.working) {
-            upgradeController();
+            replanish() || upgradeController();
         }
         else {
             getEnergy() || helpers_creep_1.HelpersCreep.logError(creep, 'IDLE');

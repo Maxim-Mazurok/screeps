@@ -315,15 +315,7 @@ function loop() {
             roleEnergizer.run(creep);
         }
         else {
-            generalCreep_1.GeneralCreep.run(creep, {
-                sources: [
-                    enums_1.EnergySource.link,
-                    enums_1.EnergySource.storage,
-                    enums_1.EnergySource.dropped,
-                    enums_1.EnergySource.tombstone,
-                    enums_1.EnergySource.mine,
-                ],
-            });
+            generalCreep_1.GeneralCreep.run(creep);
         }
     }
     // tslint:disable-next-line

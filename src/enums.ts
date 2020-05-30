@@ -15,3 +15,10 @@ export enum EnergySource {
   dropped,
   mine,
 }
+
+export enum CreepActivity {
+  replanishSpawnEnergy,
+  replanishExtensionEnergy,
+  replanishLinkEnergy,
+  replanishStorageEnergy,
+}

@@ -1,5 +1,5 @@
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EnergySource = exports.CreepRole = void 0;
+exports.CreepActivity = exports.EnergySource = exports.CreepRole = void 0;
 var CreepRole;
 (function (CreepRole) {
     CreepRole[CreepRole["harvester"] = 0] = "harvester";
@@ -18,3 +18,10 @@ var EnergySource;
     EnergySource[EnergySource["dropped"] = 3] = "dropped";
     EnergySource[EnergySource["mine"] = 4] = "mine";
 })(EnergySource = exports.EnergySource || (exports.EnergySource = {}));
+var CreepActivity;
+(function (CreepActivity) {
+    CreepActivity[CreepActivity["replanishSpawnEnergy"] = 0] = "replanishSpawnEnergy";
+    CreepActivity[CreepActivity["replanishExtensionEnergy"] = 1] = "replanishExtensionEnergy";
+    CreepActivity[CreepActivity["replanishLinkEnergy"] = 2] = "replanishLinkEnergy";
+    CreepActivity[CreepActivity["replanishStorageEnergy"] = 3] = "replanishStorageEnergy";
+})(CreepActivity = exports.CreepActivity || (exports.CreepActivity = {}));

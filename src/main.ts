@@ -481,15 +481,7 @@ function loop() {
     } else if (creep.memory.role === CreepRole.energizer) {
       roleEnergizer.run(creep);
     } else {
-      GeneralCreep.run(creep, {
-        sources: [
-          EnergySource.link,
-          EnergySource.storage,
-          EnergySource.dropped,
-          EnergySource.tombstone,
-          EnergySource.mine,
-        ],
-      });
+      GeneralCreep.run(creep);
     }
   }
 

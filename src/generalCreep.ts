@@ -1,7 +1,12 @@
-import {GET_ENERGY_PATH, HelpersCreep, UPGRADE_PATH} from './helpers.creep';
+import {
+  GET_ENERGY_PATH,
+  HelpersCreep,
+  UPGRADE_PATH,
+  TRANSFER_PATH,
+} from './helpers.creep';
 import {HelpersFind} from './helpers.find';
-import {EnergySourcesConfig} from './ts';
-import {EnergySource} from './enums';
+import {EnergySourcesConfig, ReplenishableStructures} from './ts';
+import {EnergySource, CreepActivity} from './enums';
 
 type ResourceObject =
   | StructureLink
@@ -21,7 +26,13 @@ export class GeneralCreep {
         EnergySource.tombstone,
         EnergySource.mine,
       ],
-    }
+    },
+    activities: CreepActivity[] = [
+      CreepActivity.replanishExtensionEnergy,
+      CreepActivity.replanishSpawnEnergy,
+      CreepActivity.replanishLinkEnergy,
+      CreepActivity.replanishStorageEnergy,
+    ]
   ) {
     // try to get energy from link, storage or mine, depending on sources config
     function getEnergy(): boolean {
@@ -44,7 +55,9 @@ export class GeneralCreep {
               : null;
           case EnergySource.mine:
             return (
-              creep.pos.findClosestByPath(creep.room.find(FIND_SOURCES)) || null
+              creep.pos.findClosestByPath(
+                creep.room.find(FIND_SOURCES_ACTIVE)
+              ) || null
             );
           case EnergySource.dropped:
             return (
@@ -129,6 +142,78 @@ export class GeneralCreep {
       }
     }
 
+    function replanish(): boolean {
+      function replanishTarget(
+        target: ConcreteStructure<ReplenishableStructures>
+      ) {
+        if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+          creep.moveTo(target, {visualizePathStyle: TRANSFER_PATH});
+        }
+      }
+
+      function findTarget() {
+        function findNotFullStructure(type: ReplenishableStructures) {
+          return HelpersFind.findClosestStructureByPathFromArray<
+            ConcreteStructure<ReplenishableStructures>
+          >(
+            creep.pos,
+            creep.room,
+            HelpersFind.findByFindConstant<FIND_MY_STRUCTURES>(
+              creep.room,
+              FIND_MY_STRUCTURES,
+              structure => {
+                if (type === structure.structureType) {
+                  switch (structure.structureType) {
+                    case STRUCTURE_SPAWN:
+                    case STRUCTURE_EXTENSION:
+                    case STRUCTURE_LINK:
+                      return structure.energy < structure.energyCapacity;
+                    case STRUCTURE_STORAGE:
+                      return (
+                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
+                      );
+                  }
+                }
+                return false;
+              }
+            ) as ConcreteStructure<ReplenishableStructures>[]
+          );
+        }
+
+        const extension = findNotFullStructure(STRUCTURE_EXTENSION);
+        if (
+          activities.includes(CreepActivity.replanishExtensionEnergy) &&
+          extension
+        ) {
+          return extension;
+        }
+        const spawn = findNotFullStructure(STRUCTURE_SPAWN);
+        if (activities.includes(CreepActivity.replanishSpawnEnergy) && spawn) {
+          return spawn;
+        }
+        const link = findNotFullStructure(STRUCTURE_LINK);
+        if (activities.includes(CreepActivity.replanishLinkEnergy) && link) {
+          return link;
+        }
+        const storage = findNotFullStructure(STRUCTURE_STORAGE);
+        if (
+          activities.includes(CreepActivity.replanishStorageEnergy) &&
+          storage
+        ) {
+          return storage;
+        }
+
+        return false;
+      }
+
+      const target = findTarget();
+      if (target) {
+        replanishTarget(target);
+        return true;
+      }
+      return false;
+    }
+
     if (creep.memory.working && creep.carry.energy === 0) {
       creep.memory.working = false;
       creep.say('harvest');
@@ -143,7 +228,7 @@ export class GeneralCreep {
     }
 
     if (creep.memory.working) {
-      upgradeController();
+      replanish() || upgradeController();
     } else {
       getEnergy() || HelpersCreep.logError(creep, 'IDLE');
     }

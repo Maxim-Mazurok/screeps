@@ -31,3 +31,9 @@ export interface RoomConfig {
 export interface EnergySourcesConfig {
   sources: EnergySource[];
 }
+
+export type ReplenishableStructures =
+  | STRUCTURE_SPAWN
+  | STRUCTURE_EXTENSION
+  | STRUCTURE_LINK
+  | STRUCTURE_STORAGE;
