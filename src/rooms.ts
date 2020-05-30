@@ -85,26 +85,24 @@ export class Rooms {
       const totalEnergy = HelpersFind.getRoomTotalEnergyForSpawningAvailable(
         room
       );
-      const bodyParts: BodyPartConstant[] = [];
-      const bodyPartsOrder = [MOVE, WORK, CARRY];
+      const body: BodyPartConstant[] = [];
+      const bodyParts = [MOVE, WORK, CARRY];
       let lastBodyPartIndex = bodyParts.length - 1;
-      while (HelpersCreep.bodyCost(bodyParts) < totalEnergy) {
+      while (HelpersCreep.bodyCost(body) < totalEnergy) {
         lastBodyPartIndex =
           lastBodyPartIndex === bodyParts.length - 1
             ? 0
             : lastBodyPartIndex + 1;
         if (
-          HelpersCreep.bodyCost([
-            ...bodyParts,
-            bodyPartsOrder[lastBodyPartIndex],
-          ]) <= totalEnergy
+          HelpersCreep.bodyCost([...body, bodyParts[lastBodyPartIndex]]) <=
+          totalEnergy
         ) {
-          bodyParts.push(bodyPartsOrder[lastBodyPartIndex]);
+          body.push(bodyParts[lastBodyPartIndex]);
         } else {
           break;
         }
       }
-      spawn.spawnCreep(bodyParts, Math.random().toString());
+      spawn.spawnCreep(body, Math.random().toString());
     }
   }
 }

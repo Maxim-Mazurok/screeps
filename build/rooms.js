@@ -64,25 +64,23 @@ class Rooms {
             helpers_1.HelpersFind.findAllMyCreepsInRoom(room).length <
                 config.autoSpawn.maxCreeps) {
             const totalEnergy = helpers_1.HelpersFind.getRoomTotalEnergyForSpawningAvailable(room);
-            const bodyParts = [];
-            const bodyPartsOrder = [MOVE, WORK, CARRY];
+            const body = [];
+            const bodyParts = [MOVE, WORK, CARRY];
             let lastBodyPartIndex = bodyParts.length - 1;
-            while (helpers_1.HelpersCreep.bodyCost(bodyParts) < totalEnergy) {
+            while (helpers_1.HelpersCreep.bodyCost(body) < totalEnergy) {
                 lastBodyPartIndex =
                     lastBodyPartIndex === bodyParts.length - 1
                         ? 0
                         : lastBodyPartIndex + 1;
-                if (helpers_1.HelpersCreep.bodyCost([
-                    ...bodyParts,
-                    bodyPartsOrder[lastBodyPartIndex],
-                ]) <= totalEnergy) {
-                    bodyParts.push(bodyPartsOrder[lastBodyPartIndex]);
+                if (helpers_1.HelpersCreep.bodyCost([...body, bodyParts[lastBodyPartIndex]]) <=
+                    totalEnergy) {
+                    body.push(bodyParts[lastBodyPartIndex]);
                 }
                 else {
                     break;
                 }
             }
-            spawn.spawnCreep(bodyParts, Math.random().toString());
+            spawn.spawnCreep(body, Math.random().toString());
         }
     }
 }
