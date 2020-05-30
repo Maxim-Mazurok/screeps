@@ -78,6 +78,9 @@ class Rooms {
                 ]) <= totalEnergy) {
                     bodyParts.push(bodyPartsOrder[lastBodyPartIndex]);
                 }
+                else {
+                    break;
+                }
             }
             spawn.spawnCreep(bodyPartsOrder, Math.random().toString());
         }
