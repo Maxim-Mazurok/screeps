@@ -104,7 +104,7 @@ export class Rooms {
           break;
         }
       }
-      spawn.spawnCreep(bodyPartsOrder, Math.random().toString());
+      spawn.spawnCreep(bodyParts, Math.random().toString());
     }
   }
 }
