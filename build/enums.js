@@ -22,6 +22,7 @@ var CreepActivity;
 (function (CreepActivity) {
     CreepActivity[CreepActivity["replanishSpawnEnergy"] = 0] = "replanishSpawnEnergy";
     CreepActivity[CreepActivity["replanishExtensionEnergy"] = 1] = "replanishExtensionEnergy";
-    CreepActivity[CreepActivity["replanishLinkEnergy"] = 2] = "replanishLinkEnergy";
-    CreepActivity[CreepActivity["replanishStorageEnergy"] = 3] = "replanishStorageEnergy";
+    CreepActivity[CreepActivity["build"] = 2] = "build";
+    CreepActivity[CreepActivity["replanishLinkEnergy"] = 3] = "replanishLinkEnergy";
+    CreepActivity[CreepActivity["replanishStorageEnergy"] = 4] = "replanishStorageEnergy";
 })(CreepActivity = exports.CreepActivity || (exports.CreepActivity = {}));

@@ -3,6 +3,7 @@ import {
   HelpersCreep,
   UPGRADE_PATH,
   TRANSFER_PATH,
+  BUILD_PATH,
 } from './helpers.creep';
 import {HelpersFind} from './helpers.find';
 import {EnergySourcesConfig, ReplenishableStructures} from './ts';
@@ -30,6 +31,7 @@ export class GeneralCreep {
     activities: CreepActivity[] = [
       CreepActivity.replanishExtensionEnergy,
       CreepActivity.replanishSpawnEnergy,
+      CreepActivity.build,
       CreepActivity.replanishLinkEnergy,
       CreepActivity.replanishStorageEnergy,
     ]
@@ -210,6 +212,51 @@ export class GeneralCreep {
       if (target) {
         replanishTarget(target);
         return true;
+      }
+      return false;
+    }
+
+    function build(): boolean {
+      function findWeakWall() {
+        return HelpersFind.findClosestStructureByPathFromArray<StructureWall>(
+          creep.pos,
+          creep.room,
+          HelpersFind.findStructuresByType<StructureWall>(
+            creep.room,
+            STRUCTURE_WALL
+          ).filter(wall => wall.hits < 100000)
+        );
+      }
+
+      function findConstructionSite() {
+        return HelpersFind.findClosestStructureByPathFromArray<
+          ConstructionSite
+        >(
+          creep.pos,
+          creep.room,
+          HelpersFind.findByFindConstant<FIND_MY_CONSTRUCTION_SITES>(
+            creep.room,
+            FIND_MY_CONSTRUCTION_SITES
+          ) as ConstructionSite[]
+        );
+      }
+
+      if (activities.includes(CreepActivity.build)) {
+        const weakWall = findWeakWall();
+        if (weakWall) {
+          if (creep.repair(weakWall) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(weakWall, {visualizePathStyle: BUILD_PATH});
+          }
+          return true;
+        }
+
+        const constructionSite = findConstructionSite();
+        if (constructionSite) {
+          if (creep.build(constructionSite) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(constructionSite, {visualizePathStyle: BUILD_PATH});
+          }
+          return true;
+        }
       }
       return false;
     }

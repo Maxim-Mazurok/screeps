@@ -104,7 +104,7 @@ export class HelpersFind {
     );
   }
 
-  static findClosestStructureByPathFromArray<T extends AnyStructure>(
+  static findClosestStructureByPathFromArray<T extends AnyStructure | ConstructionSite>(
     roomPosition: RoomPosition,
     room: Room,
     array: T[]

@@ -15,6 +15,7 @@ class GeneralCreep {
     }, activities = [
         enums_1.CreepActivity.replanishExtensionEnergy,
         enums_1.CreepActivity.replanishSpawnEnergy,
+        enums_1.CreepActivity.build,
         enums_1.CreepActivity.replanishLinkEnergy,
         enums_1.CreepActivity.replanishStorageEnergy,
     ]) {
@@ -139,6 +140,31 @@ class GeneralCreep {
             if (target) {
                 replanishTarget(target);
                 return true;
+            }
+            return false;
+        }
+        function build() {
+            function findWeakWall() {
+                return helpers_find_1.HelpersFind.findClosestStructureByPathFromArray(creep.pos, creep.room, helpers_find_1.HelpersFind.findStructuresByType(creep.room, STRUCTURE_WALL).filter(wall => wall.hits < 100000));
+            }
+            function findConstructionSite() {
+                return helpers_find_1.HelpersFind.findClosestStructureByPathFromArray(creep.pos, creep.room, helpers_find_1.HelpersFind.findByFindConstant(creep.room, FIND_MY_CONSTRUCTION_SITES));
+            }
+            if (activities.includes(enums_1.CreepActivity.build)) {
+                const weakWall = findWeakWall();
+                if (weakWall) {
+                    if (creep.repair(weakWall) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(weakWall, { visualizePathStyle: helpers_creep_1.BUILD_PATH });
+                    }
+                    return true;
+                }
+                const constructionSite = findConstructionSite();
+                if (constructionSite) {
+                    if (creep.build(constructionSite) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(constructionSite, { visualizePathStyle: helpers_creep_1.BUILD_PATH });
+                    }
+                    return true;
+                }
             }
             return false;
         }
