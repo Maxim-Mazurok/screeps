@@ -20,11 +20,11 @@ const roomsConfig = [
     },
     {
         roomName: 'E48N17',
-        claim: [
-            {
-                to: 'E48N18',
-            },
-        ],
+        // claim: [
+        //   {
+        //     to: 'E48N18',
+        //   },
+        // ],
         skills: {
             [enums_1.CreepRole.claimer]: [
                 ..._.fill(_.times(4), MOVE),
