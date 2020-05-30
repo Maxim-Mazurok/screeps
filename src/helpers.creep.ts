@@ -48,6 +48,10 @@ export class HelpersCreep {
     }
     return result;
   }
+
+  static bodyCost(body: BodyPartConstant[]) {
+    return body.reduce((cost, part) => cost + BODYPART_COST[part], 0);
+  }
 }
 
 export const TRANSFER_PATH = {stroke: '#ffffff'};

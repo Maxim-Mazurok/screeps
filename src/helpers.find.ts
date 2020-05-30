@@ -136,4 +136,10 @@ export class HelpersFind {
       STRUCTURE_LINK
     ).filter((link: StructureLink) => link.energy > 0);
   }
+
+  static findAllMyCreepsInRoom(room: Room): Creep[] {
+    return Object.values(Game.creeps).filter(
+      (creep: Creep) => creep.my && creep.room.name === room.name
+    );
+  }
 }

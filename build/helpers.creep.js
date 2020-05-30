@@ -34,6 +34,9 @@ class HelpersCreep {
         }
         return result;
     }
+    static bodyCost(body) {
+        return body.reduce((cost, part) => cost + BODYPART_COST[part], 0);
+    }
 }
 exports.HelpersCreep = HelpersCreep;
 exports.TRANSFER_PATH = { stroke: '#ffffff' };

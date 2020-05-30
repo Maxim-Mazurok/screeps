@@ -59,6 +59,28 @@ class Rooms {
                     });
             }
         }
+        if (config.autoSpawn &&
+            config.autoSpawn.enabled &&
+            helpers_1.HelpersFind.findAllMyCreepsInRoom(room).length <
+                config.autoSpawn.maxCreeps) {
+            const totalEnergy = helpers_1.HelpersFind.getRoomTotalEnergyForSpawningAvailable(room);
+            const bodyParts = [];
+            const bodyPartsOrder = [MOVE, WORK, CARRY];
+            let lastBodyPartIndex = bodyParts.length - 1;
+            while (helpers_1.HelpersCreep.bodyCost(bodyParts) < totalEnergy) {
+                lastBodyPartIndex =
+                    lastBodyPartIndex === bodyParts.length - 1
+                        ? 0
+                        : lastBodyPartIndex + 1;
+                if (helpers_1.HelpersCreep.bodyCost([
+                    ...bodyParts,
+                    bodyPartsOrder[lastBodyPartIndex],
+                ]) <= totalEnergy) {
+                    bodyParts.push(bodyPartsOrder[lastBodyPartIndex]);
+                }
+            }
+            spawn.spawnCreep(bodyPartsOrder, Math.random().toString());
+        }
     }
 }
 exports.Rooms = Rooms;

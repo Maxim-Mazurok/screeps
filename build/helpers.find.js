@@ -71,5 +71,8 @@ class HelpersFind {
     static findLinksWithEnergy(room) {
         return HelpersFind.findStructuresByType(room, STRUCTURE_LINK).filter((link) => link.energy > 0);
     }
+    static findAllMyCreepsInRoom(room) {
+        return Object.values(Game.creeps).filter((creep) => creep.my && creep.room.name === room.name);
+    }
 }
 exports.HelpersFind = HelpersFind;

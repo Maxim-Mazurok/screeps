@@ -2,7 +2,7 @@ import {Towers} from './towers';
 import {Market} from './market';
 import {filter} from 'lodash';
 import {CreepRole} from './enums';
-import {HelpersFind} from './helpers';
+import {HelpersFind, HelpersCreep} from './helpers';
 import {RoomsConfig, RoomConfig} from './ts';
 
 export class Rooms {
@@ -74,6 +74,35 @@ export class Rooms {
             memory: {role: CreepRole.builder, room: room.name},
           });
       }
+    }
+
+    if (
+      config.autoSpawn &&
+      config.autoSpawn.enabled &&
+      HelpersFind.findAllMyCreepsInRoom(room).length <
+        config.autoSpawn.maxCreeps
+    ) {
+      const totalEnergy = HelpersFind.getRoomTotalEnergyForSpawningAvailable(
+        room
+      );
+      const bodyParts: BodyPartConstant[] = [];
+      const bodyPartsOrder = [MOVE, WORK, CARRY];
+      let lastBodyPartIndex = bodyParts.length - 1;
+      while (HelpersCreep.bodyCost(bodyParts) < totalEnergy) {
+        lastBodyPartIndex =
+          lastBodyPartIndex === bodyParts.length - 1
+            ? 0
+            : lastBodyPartIndex + 1;
+        if (
+          HelpersCreep.bodyCost([
+            ...bodyParts,
+            bodyPartsOrder[lastBodyPartIndex],
+          ]) <= totalEnergy
+        ) {
+          bodyParts.push(bodyPartsOrder[lastBodyPartIndex]);
+        }
+      }
+      spawn.spawnCreep(bodyPartsOrder, Math.random().toString());
     }
   }
 }

@@ -22,6 +22,10 @@ export interface RoomConfig {
   skills?: {
     [index in CreepRole]?: BodyPartConstant[];
   };
+  autoSpawn?: {
+    enabled: boolean;
+    maxCreeps: number;
+  };
 }
 
 export interface EnergySourcesConfig {

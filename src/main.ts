@@ -15,6 +15,13 @@ const roleUptownHarvester = require('./uptown.harvester');
 const roomsConfig: RoomsConfig = [
   {
     roomName: 'E48N17',
+    autoSpawn: {
+      enabled: true,
+      maxCreeps: 3,
+    },
+  },
+  {
+    roomName: 'E48N17',
     claim: [
       {
         to: 'E48N18',
