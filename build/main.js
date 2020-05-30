@@ -278,13 +278,13 @@ function loop() {
         if (harvesters.length < 1 && creep.memory.room === '1') {
             harvester.run(creep);
         }
-        if (harvesters2.length < 1 && creep.memory.room === '2') {
+        else if (harvesters2.length < 1 && creep.memory.room === '2') {
             harvester.run(creep);
         }
-        if (creep.memory.role === enums_1.CreepRole.harvester) {
+        else if (creep.memory.role === enums_1.CreepRole.harvester) {
             harvester.run(creep);
         }
-        if (creep.memory.role === enums_1.CreepRole.upgrader) {
+        else if (creep.memory.role === enums_1.CreepRole.upgrader) {
             generalCreep_1.GeneralCreep.run(creep, {
                 sources: [
                     enums_1.EnergySource.link,
@@ -294,7 +294,7 @@ function loop() {
                 ],
             });
         }
-        if (creep.memory.role === enums_1.CreepRole.builder) {
+        else if (creep.memory.role === enums_1.CreepRole.builder) {
             roleBuilder.run(creep);
             // try {
             //     roleUptownHarvester.run(creep);
@@ -302,17 +302,28 @@ function loop() {
             //     //console.log(e.message);
             // }
         }
-        if (creep.memory.role === enums_1.CreepRole.uptownHarvester) {
+        else if (creep.memory.role === enums_1.CreepRole.uptownHarvester) {
             roleUptownHarvester.run(creep);
         }
-        if (creep.memory.role === enums_1.CreepRole.claimer) {
+        else if (creep.memory.role === enums_1.CreepRole.claimer) {
             claimer_1.ClaimBuilder.run(creep);
         }
-        if (creep.memory.role === enums_1.CreepRole.extractor) {
+        else if (creep.memory.role === enums_1.CreepRole.extractor) {
             extractor_1.Extractor.run(creep);
         }
-        if (creep.memory.role === enums_1.CreepRole.energizer) {
+        else if (creep.memory.role === enums_1.CreepRole.energizer) {
             roleEnergizer.run(creep);
+        }
+        else {
+            generalCreep_1.GeneralCreep.run(creep, {
+                sources: [
+                    enums_1.EnergySource.link,
+                    enums_1.EnergySource.storage,
+                    enums_1.EnergySource.dropped,
+                    enums_1.EnergySource.tombstone,
+                    enums_1.EnergySource.mine,
+                ],
+            });
         }
     }
     // tslint:disable-next-line

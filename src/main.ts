@@ -452,14 +452,11 @@ function loop() {
     const creep = Game.creeps[name];
     if (harvesters.length < 1 && creep.memory.room === '1') {
       harvester.run(creep);
-    }
-    if (harvesters2.length < 1 && creep.memory.room === '2') {
+    } else if (harvesters2.length < 1 && creep.memory.room === '2') {
       harvester.run(creep);
-    }
-    if (creep.memory.role === CreepRole.harvester) {
+    } else if (creep.memory.role === CreepRole.harvester) {
       harvester.run(creep);
-    }
-    if (creep.memory.role === CreepRole.upgrader) {
+    } else if (creep.memory.role === CreepRole.upgrader) {
       GeneralCreep.run(creep, {
         sources: [
           EnergySource.link,
@@ -468,26 +465,31 @@ function loop() {
           EnergySource.tombstone,
         ],
       });
-    }
-    if (creep.memory.role === CreepRole.builder) {
+    } else if (creep.memory.role === CreepRole.builder) {
       roleBuilder.run(creep);
       // try {
       //     roleUptownHarvester.run(creep);
       // } catch (e) {
       //     //console.log(e.message);
       // }
-    }
-    if (creep.memory.role === CreepRole.uptownHarvester) {
+    } else if (creep.memory.role === CreepRole.uptownHarvester) {
       roleUptownHarvester.run(creep);
-    }
-    if (creep.memory.role === CreepRole.claimer) {
+    } else if (creep.memory.role === CreepRole.claimer) {
       Claimer.run(creep);
-    }
-    if (creep.memory.role === CreepRole.extractor) {
+    } else if (creep.memory.role === CreepRole.extractor) {
       Extractor.run(creep);
-    }
-    if (creep.memory.role === CreepRole.energizer) {
+    } else if (creep.memory.role === CreepRole.energizer) {
       roleEnergizer.run(creep);
+    } else {
+      GeneralCreep.run(creep, {
+        sources: [
+          EnergySource.link,
+          EnergySource.storage,
+          EnergySource.dropped,
+          EnergySource.tombstone,
+          EnergySource.mine,
+        ],
+      });
     }
   }
 
