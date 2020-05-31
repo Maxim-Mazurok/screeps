@@ -85,7 +85,7 @@ export class Rooms {
       const totalEnergy = HelpersFind.getRoomTotalEnergyForSpawningAvailable(
         room
       );
-      const body: BodyPartConstant[] = [];
+      const body: BodyPartConstant[] = [MOVE, WORK, CARRY];
       const bodyParts = [MOVE, WORK, CARRY];
       let lastBodyPartIndex = bodyParts.length - 1;
       while (HelpersCreep.bodyCost(body) < totalEnergy) {
@@ -102,7 +102,9 @@ export class Rooms {
           break;
         }
       }
-      spawn.spawnCreep(body, Math.random().toString());
+      if (HelpersCreep.bodyCost(body) <= totalEnergy) {
+        spawn.spawnCreep(body, Math.random().toString());
+      }
     }
   }
 }
