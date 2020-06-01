@@ -16,6 +16,7 @@ class GeneralCreep {
         enums_1.CreepActivity.replanishExtensionEnergy,
         enums_1.CreepActivity.replanishSpawnEnergy,
         enums_1.CreepActivity.build,
+        enums_1.CreepActivity.replanishTowerEnergy,
         enums_1.CreepActivity.replanishLinkEnergy,
         enums_1.CreepActivity.replanishStorageEnergy,
     ]) {
@@ -111,6 +112,7 @@ class GeneralCreep {
                                 case STRUCTURE_SPAWN:
                                 case STRUCTURE_EXTENSION:
                                 case STRUCTURE_LINK:
+                                case STRUCTURE_TOWER: // TODO: maybe, only replanish towers that have TOTAL - CURRENT >= CREEP.energy so that creep will save travel on 2 energy points delivery, etc.
                                     return structure.energy < structure.energyCapacity;
                                 case STRUCTURE_STORAGE:
                                     return (structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0);

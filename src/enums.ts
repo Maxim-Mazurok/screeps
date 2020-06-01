@@ -20,6 +20,7 @@ export enum CreepActivity {
   replanishSpawnEnergy,
   replanishExtensionEnergy,
   build,
+  replanishTowerEnergy,
   replanishLinkEnergy,
   replanishStorageEnergy,
 }

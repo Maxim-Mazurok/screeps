@@ -33,6 +33,7 @@ export interface EnergySourcesConfig {
 }
 
 export type ReplenishableStructures =
+  | STRUCTURE_TOWER
   | STRUCTURE_SPAWN
   | STRUCTURE_EXTENSION
   | STRUCTURE_LINK

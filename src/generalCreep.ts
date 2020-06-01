@@ -32,6 +32,7 @@ export class GeneralCreep {
       CreepActivity.replanishExtensionEnergy,
       CreepActivity.replanishSpawnEnergy,
       CreepActivity.build,
+      CreepActivity.replanishTowerEnergy,
       CreepActivity.replanishLinkEnergy,
       CreepActivity.replanishStorageEnergy,
     ]
@@ -173,6 +174,7 @@ export class GeneralCreep {
                     case STRUCTURE_SPAWN:
                     case STRUCTURE_EXTENSION:
                     case STRUCTURE_LINK:
+                    case STRUCTURE_TOWER: // TODO: maybe, only replanish towers that have TOTAL - CURRENT >= CREEP.energy so that creep will save travel on 2 energy points delivery, etc.
                       return structure.energy < structure.energyCapacity;
                     case STRUCTURE_STORAGE:
                       return (
