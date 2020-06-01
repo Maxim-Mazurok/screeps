@@ -94,6 +94,14 @@ export class Rooms {
             ? 0
             : lastBodyPartIndex + 1;
         if (
+          HelpersCreep.moveTimeByPartsOnPlain([
+            ...body,
+            bodyParts[lastBodyPartIndex],
+          ]) > 1
+        ) {
+          continue;
+        }
+        if (
           HelpersCreep.bodyCost([...body, bodyParts[lastBodyPartIndex]]) <=
           totalEnergy
         ) {

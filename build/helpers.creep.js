@@ -37,6 +37,16 @@ class HelpersCreep {
     static bodyCost(body) {
         return body.reduce((cost, part) => cost + BODYPART_COST[part], 0);
     }
+    static moveTimeByPartsOnPlain(parts) {
+        const terrainFactor = 1; // plain
+        const weight = parts.filter(x => x !== MOVE).length;
+        const moveParts = parts.filter(x => x === MOVE).length;
+        return HelpersCreep.moveTime(terrainFactor, weight, moveParts);
+    }
+    static moveTime(terrainFactor, // road, plain, swamp
+    weight, moveParts) {
+        return Math.ceil((terrainFactor * weight) / moveParts);
+    }
 }
 exports.HelpersCreep = HelpersCreep;
 exports.TRANSFER_PATH = { stroke: '#ffffff' };

@@ -72,6 +72,12 @@ class Rooms {
                     lastBodyPartIndex === bodyParts.length - 1
                         ? 0
                         : lastBodyPartIndex + 1;
+                if (helpers_1.HelpersCreep.moveTimeByPartsOnPlain([
+                    ...body,
+                    bodyParts[lastBodyPartIndex],
+                ]) > 1) {
+                    continue;
+                }
                 if (helpers_1.HelpersCreep.bodyCost([...body, bodyParts[lastBodyPartIndex]]) <=
                     totalEnergy) {
                     body.push(bodyParts[lastBodyPartIndex]);
