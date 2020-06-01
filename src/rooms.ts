@@ -2,7 +2,8 @@ import {Towers} from './towers';
 import {Market} from './market';
 import {filter} from 'lodash';
 import {CreepRole} from './enums';
-import {HelpersFind, HelpersCreep} from './helpers';
+import {HelpersFind} from './helpers.find';
+import {HelpersCreep} from './helpers.creep';
 import {RoomsConfig, RoomConfig} from './ts';
 
 export class Rooms {

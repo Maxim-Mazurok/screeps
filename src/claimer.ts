@@ -1,5 +1,6 @@
 const roleBuilder = require('./builder');
-import {CLAIM_FLAG_NAME, HelpersCreep, HelpersFind} from './helpers';
+import {HelpersFind} from './helpers.find';
+import {CLAIM_FLAG_NAME, HelpersCreep} from './helpers.creep';
 import {GeneralCreep} from './generalCreep';
 import {EnergySource} from './enums';
 

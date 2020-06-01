@@ -1,19 +1,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClaimBuilder = void 0;
 const roleBuilder = require('./builder');
-const helpers_1 = require("./helpers");
+const helpers_find_1 = require("./helpers.find");
+const helpers_creep_1 = require("./helpers.creep");
 const generalCreep_1 = require("./generalCreep");
 const enums_1 = require("./enums");
 class ClaimBuilder {
     static run(creep) {
         var _a, _b;
-        const flag = Game.flags[helpers_1.CLAIM_FLAG_NAME];
+        const flag = Game.flags[helpers_creep_1.CLAIM_FLAG_NAME];
         if (flag.room && flag.room.name !== creep.room.name) {
             creep.moveTo(flag);
         }
         else if (creep.room.controller &&
             creep.room.controller.my === false &&
-            helpers_1.HelpersCreep.canClaim(creep)) {
+            helpers_creep_1.HelpersCreep.canClaim(creep)) {
             // should claim
             if (flag.room &&
                 flag.room.name !== creep.room.name &&
@@ -27,7 +28,7 @@ class ClaimBuilder {
             }
         }
         else if (flag.room &&
-            helpers_1.HelpersFind.findSomethingToBuild(flag.room) &&
+            helpers_find_1.HelpersFind.findSomethingToBuild(flag.room) &&
             (((_a = creep.room.controller) === null || _a === void 0 ? void 0 : _a.ticksToDowngrade) || Infinity) > 1500 &&
             (((_b = creep.room.controller) === null || _b === void 0 ? void 0 : _b.ticksToDowngrade) || 0) < 3000) {
             // should build

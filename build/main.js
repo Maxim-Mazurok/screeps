@@ -3,7 +3,8 @@ const _ = require("lodash");
 const rooms_1 = require("./rooms");
 const extractor_1 = require("./extractor");
 const claimer_1 = require("./claimer");
-const helpers_1 = require("./helpers");
+const helpers_find_1 = require("./helpers.find");
+const helpers_creep_1 = require("./helpers.creep");
 const enums_1 = require("./enums");
 const generalCreep_1 = require("./generalCreep");
 const harvester = require('./harvester');
@@ -46,7 +47,7 @@ const roomsConfig = [
     },
 ];
 function loop() {
-    helpers_1.HelpersCreep.clearNonExistingCreepsMemory();
+    helpers_creep_1.HelpersCreep.clearNonExistingCreepsMemory();
     const harvesters = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.harvester && creep.memory.room === '1');
     const harvestersE = _.filter(Game.creeps, (creep) => creep.memory.role === enums_1.CreepRole.harvester &&
         creep.memory.room === '1' &&
@@ -107,7 +108,7 @@ function loop() {
     }
     else if (extractors.length < 1 &&
         Game.rooms['E47N16'].lookForAt('mineral', 20, 21)[0].mineralAmount > 0 &&
-        helpers_1.HelpersFind.getRoomTerminalFreeStorageAmount(Game.rooms['E47N16']) > 5000) {
+        helpers_find_1.HelpersFind.getRoomTerminalFreeStorageAmount(Game.rooms['E47N16']) > 5000) {
         const newName = 'Extractor' + Game.time;
         Game.spawns['Spawn1'].spawnCreep([
             ..._.fill(_.times(1), MOVE),
@@ -168,7 +169,7 @@ function loop() {
     }
     else if (extractors2.length < 1 &&
         Game.rooms['E47N17'].lookForAt('mineral', 42, 31)[0].mineralAmount > 0 &&
-        helpers_1.HelpersFind.getRoomTerminalFreeStorageAmount(Game.rooms['E47N17']) > 5000) {
+        helpers_find_1.HelpersFind.getRoomTerminalFreeStorageAmount(Game.rooms['E47N17']) > 5000) {
         const newName = 'Extractor' + Game.time;
         Game.spawns['Spawn2'].spawnCreep([
             ..._.fill(_.times(5), MOVE),
@@ -190,7 +191,7 @@ function loop() {
             });
         }
     }
-    const roomTotalEnergyForSpawningAvailable3 = helpers_1.HelpersFind.getRoomTotalEnergyForSpawningAvailable(new Room('E48N17'));
+    const roomTotalEnergyForSpawningAvailable3 = helpers_find_1.HelpersFind.getRoomTotalEnergyForSpawningAvailable(new Room('E48N17'));
     if (harvesters3.length < 1) {
         const newName = 'Harvester3' + Game.time;
         if (roomTotalEnergyForSpawningAvailable3 >= 1500) {
@@ -247,7 +248,7 @@ function loop() {
         }
     }
     else if (builders3.length < 1) {
-        if (helpers_1.HelpersFind.findSomethingToBuild(new Room('E48N17'), 250000, false)
+        if (helpers_find_1.HelpersFind.findSomethingToBuild(new Room('E48N17'), 250000, false)
             .length > 0) {
             const newName = 'Builder3' + Game.time;
             if (roomTotalEnergyForSpawningAvailable3 >= 1500) {

@@ -1,4 +1,5 @@
-import {HelpersFind, HelpersTerminal} from './helpers';
+import {HelpersFind} from './helpers.find';
+import {HelpersTerminal} from './helpers.terminal';
 import {RoomName} from './ts';
 
 export class Market {

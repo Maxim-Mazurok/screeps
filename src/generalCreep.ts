@@ -153,7 +153,7 @@ export class GeneralCreep {
       function replanishTarget(
         target: ConcreteStructure<ReplenishableStructures>
       ) {
-        if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+        if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
           creep.moveTo(target, {visualizePathStyle: TRANSFER_PATH});
         }
       }
@@ -250,7 +250,7 @@ export class GeneralCreep {
       if (activities.includes(CreepActivity.build)) {
         const weakWall = findWeakWall();
         if (weakWall) {
-          if (creep.repair(weakWall) == ERR_NOT_IN_RANGE) {
+          if (creep.repair(weakWall) === ERR_NOT_IN_RANGE) {
             creep.moveTo(weakWall, {visualizePathStyle: BUILD_PATH});
           }
           return true;
@@ -258,7 +258,7 @@ export class GeneralCreep {
 
         const constructionSite = findConstructionSite();
         if (constructionSite) {
-          if (creep.build(constructionSite) == ERR_NOT_IN_RANGE) {
+          if (creep.build(constructionSite) === ERR_NOT_IN_RANGE) {
             creep.moveTo(constructionSite, {visualizePathStyle: BUILD_PATH});
           }
           return true;

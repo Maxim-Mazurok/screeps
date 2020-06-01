@@ -4,7 +4,8 @@ const towers_1 = require("./towers");
 const market_1 = require("./market");
 const lodash_1 = require("lodash");
 const enums_1 = require("./enums");
-const helpers_1 = require("./helpers");
+const helpers_find_1 = require("./helpers.find");
+const helpers_creep_1 = require("./helpers.creep");
 class Rooms {
     constructor(roomsConfig) {
         this.rooms = [];
@@ -46,7 +47,7 @@ class Rooms {
                 });
             }
         }
-        if (helpers_1.HelpersFind.findSomethingToBuild(room) &&
+        if (helpers_find_1.HelpersFind.findSomethingToBuild(room) &&
             config.skills &&
             config.skills[enums_1.CreepRole.builder]) {
             const builders = getCreepsByRole(enums_1.CreepRole.builder);
@@ -61,9 +62,9 @@ class Rooms {
         }
         if (config.autoSpawn &&
             config.autoSpawn.enabled &&
-            helpers_1.HelpersFind.findAllMyCreepsInRoom(room).length <
+            helpers_find_1.HelpersFind.findAllMyCreepsInRoom(room).length <
                 config.autoSpawn.maxCreeps) {
-            const body = helpers_1.HelpersCreep.buildBody(room);
+            const body = helpers_creep_1.HelpersCreep.buildBody(room);
             if (body) {
                 spawn.spawnCreep(body, Math.random().toString());
             }

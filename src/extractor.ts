@@ -1,5 +1,5 @@
-import {GET_ENERGY_PATH, HelpersCreep, TRANSFER_PATH} from './helpers.creep';
-import {HelpersFind} from './helpers';
+import {HelpersCreep} from './helpers.creep';
+import {HelpersFind} from './helpers.find';
 
 export class Extractor {
   static run(creep: Creep) {

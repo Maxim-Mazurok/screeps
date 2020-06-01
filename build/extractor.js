@@ -1,7 +1,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Extractor = void 0;
 const helpers_creep_1 = require("./helpers.creep");
-const helpers_1 = require("./helpers");
+const helpers_find_1 = require("./helpers.find");
 class Extractor {
     static run(creep) {
         //// STATE MANAGEMENT
@@ -27,7 +27,7 @@ class Extractor {
             //                     && (structure.mineralType == RESOURCE_HYDROGEN || structure.mineralType == null);
             //             }
             //     });
-            const terminals = helpers_1.HelpersFind.findStructuresByType(creep.room, STRUCTURE_TERMINAL);
+            const terminals = helpers_find_1.HelpersFind.findStructuresByType(creep.room, STRUCTURE_TERMINAL);
             if (terminals.length === 1) {
                 // only one terminal allowed per room
                 const terminal = terminals[0];
@@ -47,7 +47,7 @@ class Extractor {
             }
         }
         else {
-            const mineral = helpers_1.HelpersFind.findClosestPath(creep.pos, creep.room, FIND_MINERALS);
+            const mineral = helpers_find_1.HelpersFind.findClosestPath(creep.pos, creep.room, FIND_MINERALS);
             if (mineral === null) {
                 helpers_creep_1.HelpersCreep.logError(creep, 'no mineral in room found');
                 return;

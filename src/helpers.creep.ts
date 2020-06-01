@@ -1,5 +1,5 @@
 import {sum} from 'lodash';
-import {HelpersFind} from './helpers';
+import {HelpersFind} from './helpers.find';
 
 export class HelpersCreep {
   static totalCarry(creep: Creep): number {
