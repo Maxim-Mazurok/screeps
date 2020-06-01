@@ -1,6 +1,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BUILD_FLAG_NAME = exports.CLAIM_FLAG_NAME = exports.UPGRADE_PATH = exports.BUILD_PATH = exports.CLAIM_PATH = exports.GET_ENERGY_PATH = exports.TRANSFER_PATH = exports.HelpersCreep = void 0;
 const lodash_1 = require("lodash");
+const helpers_1 = require("./helpers");
 class HelpersCreep {
     static totalCarry(creep) {
         return lodash_1.sum(Object.values(creep.carry));
@@ -46,6 +47,37 @@ class HelpersCreep {
     static moveTime(terrainFactor, // road, plain, swamp
     weight, moveParts) {
         return Math.ceil((terrainFactor * weight) / moveParts);
+    }
+    static buildBody(room) {
+        function circleIndex() {
+            lastBodyPartIndex =
+                lastBodyPartIndex === bodyParts.length - 1 ? 0 : lastBodyPartIndex + 1;
+        }
+        function newBody(part) {
+            return [...body, part];
+        }
+        function tryToAddToBody(part) {
+            const newPart = part ? part : bodyParts[lastBodyPartIndex];
+            if (HelpersCreep.moveTimeByPartsOnPlain(newBody(newPart)) > 1) {
+                tryToAddToBody(MOVE);
+            }
+            if (HelpersCreep.bodyCost(newBody(newPart)) <= totalEnergy) {
+                body.push(newPart);
+                circleIndex();
+                tryToAddToBody();
+            }
+        }
+        const totalEnergy = helpers_1.HelpersFind.getRoomTotalEnergyForSpawningAvailable(room);
+        const body = [MOVE, WORK, CARRY];
+        const bodyParts = [WORK, CARRY];
+        let lastBodyPartIndex = 0;
+        tryToAddToBody();
+        if (HelpersCreep.bodyCost(body) <= totalEnergy) {
+            return body;
+        }
+        else {
+            return null;
+        }
     }
 }
 exports.HelpersCreep = HelpersCreep;

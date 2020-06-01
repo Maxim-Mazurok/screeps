@@ -1,4 +1,5 @@
 import {sum} from 'lodash';
+import {HelpersFind} from './helpers';
 
 export class HelpersCreep {
   static totalCarry(creep: Creep): number {
@@ -66,6 +67,39 @@ export class HelpersCreep {
     moveParts: number
   ) {
     return Math.ceil((terrainFactor * weight) / moveParts);
+  }
+
+  static buildBody(room: Room): BodyPartConstant[] | null {
+    function circleIndex() {
+      lastBodyPartIndex =
+        lastBodyPartIndex === bodyParts.length - 1 ? 0 : lastBodyPartIndex + 1;
+    }
+    function newBody(part: BodyPartConstant) {
+      return [...body, part];
+    }
+    function tryToAddToBody(part?: BodyPartConstant) {
+      const newPart = part ? part : bodyParts[lastBodyPartIndex];
+      if (HelpersCreep.moveTimeByPartsOnPlain(newBody(newPart)) > 1) {
+        tryToAddToBody(MOVE);
+      }
+      if (HelpersCreep.bodyCost(newBody(newPart)) <= totalEnergy) {
+        body.push(newPart);
+        circleIndex();
+        tryToAddToBody();
+      }
+    }
+    const totalEnergy = HelpersFind.getRoomTotalEnergyForSpawningAvailable(
+      room
+    );
+    const body: BodyPartConstant[] = [MOVE, WORK, CARRY];
+    const bodyParts = [WORK, CARRY];
+    let lastBodyPartIndex = 0;
+    tryToAddToBody();
+    if (HelpersCreep.bodyCost(body) <= totalEnergy) {
+      return body;
+    } else {
+      return null;
+    }
   }
 }
 
