@@ -3,31 +3,29 @@
   "version": "1.0.1",
   "description": "My Screeps code",
   "homepage": "https://screeps.com/a/#!/profile/maxim_mazurok",
+  "license": "MIT",
+  "author": "",
   "main": "build/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "check": "gts check",
     "clean": "gts clean",
     "compile": "npx rimraf build && tsc -p . --allowJs",
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "posttest": "npm run check"
   },
-  "engines": {
-    "node": "10.15.3",
-    "npm": "6.9.0"
-  },
-  "author": "",
-  "license": "MIT",
   "dependencies": {
-    "@types/lodash": "^4.14.151",
-    "@types/node": "^12.12.39",
+    "@types/lodash": "^4.14.154",
+    "@types/node": "^12.12.42",
     "@types/screeps": "^3.1.2",
-    "lodash": "^4.17.15"
-  },
-  "devDependencies": {
     "gts": "^2.0.2",
-    "typescript": "^3.9.2"
+    "lodash": "^4.17.15",
+    "typescript": "^3.9.3"
+  },
+  "engines": {
+    "node": "12.17.0",
+    "npm": "6.14.5"
   }
 }
