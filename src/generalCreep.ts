@@ -16,6 +16,13 @@ type ResourceObject =
   | Tombstone
   | Resource;
 
+type ReplanishActivity =
+  | CreepActivity.replanishExtensionEnergy
+  | CreepActivity.replanishSpawnEnergy
+  | CreepActivity.replanishTowerEnergy
+  | CreepActivity.replanishLinkEnergy
+  | CreepActivity.replanishStorageEnergy;
+
 export class GeneralCreep {
   static run(
     creep: Creep,
@@ -37,7 +44,7 @@ export class GeneralCreep {
       CreepActivity.replanishStorageEnergy,
     ]
   ) {
-    const jobs = [replanish, build, upgradeController];
+    const jobs = [replanish.bind(null, activities), build, upgradeController];
 
     // try to get energy from link, storage or mine, depending on sources config
     function getEnergy(): boolean {
@@ -149,7 +156,7 @@ export class GeneralCreep {
       return true;
     }
 
-    function replanish(): boolean {
+    function replanish(activities: CreepActivity[]): boolean {
       function replanishTarget(
         target: ConcreteStructure<ReplenishableStructures>
       ) {
@@ -291,6 +298,13 @@ export class GeneralCreep {
     }
 
     if (creep.memory.working) {
+      if (
+        replanish([
+          CreepActivity.replanishExtensionEnergy,
+          CreepActivity.replanishSpawnEnergy,
+        ])
+      )
+        return;
       while (jobs[creep.memory.jobId || 0]() === false) {
         creep.memory.jobId =
           (creep.memory.jobId || 0) + 1 > jobs.length - 1

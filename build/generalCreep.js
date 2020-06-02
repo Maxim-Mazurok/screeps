@@ -20,7 +20,7 @@ class GeneralCreep {
         enums_1.CreepActivity.replanishLinkEnergy,
         enums_1.CreepActivity.replanishStorageEnergy,
     ]) {
-        const jobs = [replanish, build, upgradeController];
+        const jobs = [replanish.bind(null, activities), build, upgradeController];
         // try to get energy from link, storage or mine, depending on sources config
         function getEnergy() {
             function getResourceObject(energySource) {
@@ -98,7 +98,7 @@ class GeneralCreep {
             }
             return true;
         }
-        function replanish() {
+        function replanish(activities) {
             function replanishTarget(target) {
                 if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, { visualizePathStyle: helpers_creep_1.TRANSFER_PATH });
@@ -188,6 +188,11 @@ class GeneralCreep {
             creep.say('work');
         }
         if (creep.memory.working) {
+            if (replanish([
+                enums_1.CreepActivity.replanishExtensionEnergy,
+                enums_1.CreepActivity.replanishSpawnEnergy,
+            ]))
+                return;
             while (jobs[creep.memory.jobId || 0]() === false) {
                 creep.memory.jobId =
                     (creep.memory.jobId || 0) + 1 > jobs.length - 1
