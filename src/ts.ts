@@ -26,6 +26,10 @@ export interface RoomConfig {
     enabled: boolean;
     maxCreeps: number;
   };
+  tower?: {
+    maxHits: number;
+    maxWallHits: number;
+  };
 }
 
 export interface EnergySourcesConfig {

@@ -20,6 +20,10 @@ const roomsConfig: RoomsConfig = [
       enabled: true,
       maxCreeps: 3,
     },
+    tower: {
+      maxHits: 100000,
+      maxWallHits: 100000,
+    },
   },
   {
     roomName: 'E48N17',
@@ -36,6 +40,10 @@ const roomsConfig: RoomsConfig = [
         ..._.fill(_.times(1), CLAIM),
       ],
     },
+    tower: {
+      maxHits: 1000000,
+      maxWallHits: 1000000,
+    },
   },
   {
     roomName: 'E47N17',
@@ -45,6 +53,10 @@ const roomsConfig: RoomsConfig = [
         ..._.fill(_.times(6), WORK),
         ..._.fill(_.times(6), CARRY),
       ],
+    },
+    tower: {
+      maxHits: 2000000,
+      maxWallHits: 2000000,
     },
   },
 ];
@@ -487,32 +499,30 @@ function loop() {
     }
   }
 
-  // tslint:disable-next-line
-  const linkFrom: StructureLink | any = Game.rooms['E47N16'].lookForAt(
+  const linkFrom = Game.rooms['E47N16'].lookForAt(
     'structure',
     9,
     31
-  )[0];
-  // tslint:disable-next-line
-  const linkToUpgrade: StructureLink | any = Game.rooms['E47N16'].lookForAt(
+  )[0] as StructureLink;
+
+  const linkToUpgrade = Game.rooms['E47N16'].lookForAt(
     'structure',
     43,
     10
-  )[0];
+  )[0] as StructureLink;
   linkFrom.transferEnergy(linkToUpgrade);
 
-  // tslint:disable-next-line
-  const linkFrom2: StructureLink | any = Game.rooms['E47N17'].lookForAt(
+  const linkFrom2 = Game.rooms['E47N17'].lookForAt(
     'structure',
     40,
     12
-  )[0];
-  // tslint:disable-next-line
-  const linkToBuild2: StructureLink | any = Game.rooms['E47N17'].lookForAt(
+  )[0] as StructureLink;
+
+  const linkToBuild2 = Game.rooms['E47N17'].lookForAt(
     'structure',
     11,
     36
-  )[0];
+  )[0] as StructureLink;
   //const linkToUpgrade2 = Game.rooms['E47N17'].lookForAt('structure', 43, 10)[0];
   // if (linkToUpgrade.energy < 150 + 600) {
   //     linkFrom.transferEnergy(linkToUpgrade);

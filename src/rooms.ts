@@ -22,7 +22,7 @@ export class Rooms {
     this.rooms.forEach((room: Room) => {
       const config = this.roomsConfig.find(x => x.roomName === room.name);
 
-      new Towers(room).run();
+      new Towers(room).run(config?.tower?.maxHits, config?.tower?.maxWallHits);
       new Market(room).run();
       config && this.spawnCreeps(room, config);
     });

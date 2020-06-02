@@ -9,7 +9,7 @@ export class Towers {
     });
   }
 
-  run(maxHits = 500000) {
+  run(maxHits = 500000, maxWallHits = 100000) {
     this.towers.forEach((tower: StructureTower) => {
       const closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
       if (closestHostile) {
@@ -18,8 +18,14 @@ export class Towers {
         const closestDamagedStructure = tower.pos.findClosestByRange(
           FIND_STRUCTURES,
           {
-            filter: (structure: Structure) =>
-              structure.hits < structure.hitsMax && structure.hits < maxHits,
+            filter: (structure: Structure) => {
+              if (structure.structureType === STRUCTURE_WALL) {
+                return structure.hits < maxWallHits;
+              }
+              return (
+                structure.hits < structure.hitsMax && structure.hits < maxHits
+              );
+            },
           }
         );
         const weakStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
