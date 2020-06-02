@@ -130,6 +130,10 @@ class GeneralCreep {
                 if (activities.includes(enums_1.CreepActivity.replanishSpawnEnergy) && spawn) {
                     return spawn;
                 }
+                const tower = findNotFullStructure(STRUCTURE_TOWER);
+                if (activities.includes(enums_1.CreepActivity.replanishTowerEnergy) && tower) {
+                    return tower;
+                }
                 const link = findNotFullStructure(STRUCTURE_LINK);
                 if (activities.includes(enums_1.CreepActivity.replanishLinkEnergy) && link) {
                     return link;

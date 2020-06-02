@@ -195,14 +195,22 @@ export class GeneralCreep {
         ) {
           return extension;
         }
+
         const spawn = findNotFullStructure(STRUCTURE_SPAWN);
         if (activities.includes(CreepActivity.replanishSpawnEnergy) && spawn) {
           return spawn;
         }
+
+        const tower = findNotFullStructure(STRUCTURE_TOWER);
+        if (activities.includes(CreepActivity.replanishTowerEnergy) && tower) {
+          return tower;
+        }
+
         const link = findNotFullStructure(STRUCTURE_LINK);
         if (activities.includes(CreepActivity.replanishLinkEnergy) && link) {
           return link;
         }
+
         const storage = findNotFullStructure(STRUCTURE_STORAGE);
         if (
           activities.includes(CreepActivity.replanishStorageEnergy) &&
