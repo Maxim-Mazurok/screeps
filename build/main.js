@@ -54,7 +54,7 @@ const roomsConfig = [
         },
         tower: {
             maxHits: 2000000,
-            maxWallHits: 2000000,
+            maxWallHits: 500000,
         },
     },
 ];
