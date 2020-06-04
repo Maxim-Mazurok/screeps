@@ -129,7 +129,7 @@ roleBuilder = {
                             ? b.progress
                             : b.hits));
                     if (targets.length > 0) {
-                        const target = creep.pos.findClosestByPath([...targets[0]]);
+                        const target = creep.pos.findClosestByPath([targets[0]]);
                         if (target !== null) {
                             if ((target.progress !== undefined
                                 ? creep.build(target)
