@@ -1,4 +1,5 @@
 import {sum} from 'lodash';
+import {RoomConfig} from './ts';
 
 export class HelpersFind {
   static findStructuresByType<T extends Structure>(
@@ -112,18 +113,22 @@ export class HelpersFind {
 
   static findSomethingToBuild(
     room: Room,
-    maxHits = Infinity,
-    wallsOnly = false
+    buildConfig: RoomConfig['build'] = {
+      maxHits: Infinity,
+      maxWallHits: Infinity,
+    }
   ): Array<ConstructionSite | Structure> {
+    // TODO: merge with tower code
     return [
-      ...this.findByFindConstant(
-        room,
-        FIND_STRUCTURES,
-        object =>
-          object.hits < object.hitsMax &&
-          object.hits < maxHits &&
-          (wallsOnly ? object.structureType === STRUCTURE_WALL : true)
-      ),
+      ...this.findByFindConstant(room, FIND_STRUCTURES, structure => {
+        if (structure.structureType === STRUCTURE_WALL) {
+          return structure.hits < buildConfig.maxWallHits;
+        }
+        return (
+          structure.hits < structure.hitsMax &&
+          structure.hits < buildConfig.maxHits
+        );
+      }),
       ...this.findByFindConstant(room, FIND_CONSTRUCTION_SITES),
     ];
   }

@@ -19,7 +19,7 @@ class Rooms {
         this.rooms.forEach((room) => {
             var _a, _b;
             const config = this.roomsConfig.find(x => x.roomName === room.name);
-            new towers_1.Towers(room).run((_a = config === null || config === void 0 ? void 0 : config.tower) === null || _a === void 0 ? void 0 : _a.maxHits, (_b = config === null || config === void 0 ? void 0 : config.tower) === null || _b === void 0 ? void 0 : _b.maxWallHits);
+            new towers_1.Towers(room).run((_a = config === null || config === void 0 ? void 0 : config.build) === null || _a === void 0 ? void 0 : _a.maxHits, (_b = config === null || config === void 0 ? void 0 : config.build) === null || _b === void 0 ? void 0 : _b.maxWallHits);
             new market_1.Market(room).run();
             config && this.spawnCreeps(room, config);
         });
@@ -48,7 +48,7 @@ class Rooms {
                 });
             }
         }
-        if (helpers_find_1.HelpersFind.findSomethingToBuild(room) &&
+        if (helpers_find_1.HelpersFind.findSomethingToBuild(room, config.build) &&
             config.skills &&
             config.skills[enums_1.CreepRole.builder]) {
             const builders = getCreepsByRole(enums_1.CreepRole.builder);

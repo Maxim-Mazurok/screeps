@@ -26,7 +26,7 @@ export interface RoomConfig {
     enabled: boolean;
     maxCreeps: number;
   };
-  tower?: {
+  build?: {
     maxHits: number;
     maxWallHits: number;
   };

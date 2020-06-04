@@ -18,7 +18,7 @@ const roomsConfig = [
             enabled: true,
             maxCreeps: 3,
         },
-        tower: {
+        build: {
             maxHits: 100000,
             maxWallHits: 100000,
         },
@@ -38,7 +38,7 @@ const roomsConfig = [
                 ..._.fill(_.times(1), CLAIM),
             ],
         },
-        tower: {
+        build: {
             maxHits: 1000000,
             maxWallHits: 1000000,
         },
@@ -52,7 +52,7 @@ const roomsConfig = [
                 ..._.fill(_.times(6), CARRY),
             ],
         },
-        tower: {
+        build: {
             maxHits: 2000000,
             maxWallHits: 500000,
         },
@@ -260,8 +260,10 @@ function loop() {
         }
     }
     else if (builders3.length < 1) {
-        if (helpers_find_1.HelpersFind.findSomethingToBuild(new Room('E48N17'), 250000, false)
-            .length > 0) {
+        if (helpers_find_1.HelpersFind.findSomethingToBuild(new Room('E48N17'), {
+            maxHits: 250000,
+            maxWallHits: 25000,
+        }).length > 0) {
             const newName = 'Builder3' + Game.time;
             if (roomTotalEnergyForSpawningAvailable3 >= 1500) {
                 Game.spawns['Spawn3'].spawnCreep([

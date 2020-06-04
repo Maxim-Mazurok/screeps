@@ -60,11 +60,19 @@ class HelpersFind {
     static findClosestStructureByPathFromArray(roomPosition, room, array) {
         return roomPosition.findClosestByPath(array);
     }
-    static findSomethingToBuild(room, maxHits = Infinity, wallsOnly = false) {
+    static findSomethingToBuild(room, buildConfig = {
+        maxHits: Infinity,
+        maxWallHits: Infinity,
+    }) {
+        // TODO: merge with tower code
         return [
-            ...this.findByFindConstant(room, FIND_STRUCTURES, object => object.hits < object.hitsMax &&
-                object.hits < maxHits &&
-                (wallsOnly ? object.structureType === STRUCTURE_WALL : true)),
+            ...this.findByFindConstant(room, FIND_STRUCTURES, structure => {
+                if (structure.structureType === STRUCTURE_WALL) {
+                    return structure.hits < buildConfig.maxWallHits;
+                }
+                return (structure.hits < structure.hitsMax &&
+                    structure.hits < buildConfig.maxHits);
+            }),
             ...this.findByFindConstant(room, FIND_CONSTRUCTION_SITES),
         ];
     }

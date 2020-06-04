@@ -22,7 +22,7 @@ export class Rooms {
     this.rooms.forEach((room: Room) => {
       const config = this.roomsConfig.find(x => x.roomName === room.name);
 
-      new Towers(room).run(config?.tower?.maxHits, config?.tower?.maxWallHits);
+      new Towers(room).run(config?.build?.maxHits, config?.build?.maxWallHits);
       new Market(room).run();
       config && this.spawnCreeps(room, config);
     });
@@ -61,7 +61,7 @@ export class Rooms {
     }
 
     if (
-      HelpersFind.findSomethingToBuild(room) &&
+      HelpersFind.findSomethingToBuild(room, config.build) &&
       config.skills &&
       config.skills[CreepRole.builder]
     ) {
