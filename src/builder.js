@@ -154,7 +154,7 @@ roleBuilder = {
           );
 
           if (targets.length > 0) {
-            const target = creep.pos.findClosestByPath([targets[0]]);
+            const target = creep.pos.findClosestByPath(targets.slice(0,5));
             if (target !== null) {
               if (
                 (target.progress !== undefined
