@@ -28,7 +28,7 @@ class ClaimBuilder {
             }
         }
         else if (flag.room &&
-            helpers_find_1.HelpersFind.findSomethingToBuild(flag.room) &&
+            helpers_find_1.HelpersFind.findSomethingToBuild(flag.room).length &&
             (((_a = creep.room.controller) === null || _a === void 0 ? void 0 : _a.ticksToDowngrade) || Infinity) > 1500 &&
             (((_b = creep.room.controller) === null || _b === void 0 ? void 0 : _b.ticksToDowngrade) || 0) < 3000) {
             // should build

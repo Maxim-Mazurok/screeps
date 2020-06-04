@@ -48,7 +48,7 @@ class Rooms {
                 });
             }
         }
-        if (helpers_find_1.HelpersFind.findSomethingToBuild(room, config.build) &&
+        if (helpers_find_1.HelpersFind.findSomethingToBuild(room, config.build).length &&
             config.skills &&
             config.skills[enums_1.CreepRole.builder]) {
             const builders = getCreepsByRole(enums_1.CreepRole.builder);

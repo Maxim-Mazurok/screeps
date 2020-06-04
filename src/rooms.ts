@@ -61,7 +61,7 @@ export class Rooms {
     }
 
     if (
-      HelpersFind.findSomethingToBuild(room, config.build) &&
+      HelpersFind.findSomethingToBuild(room, config.build).length &&
       config.skills &&
       config.skills[CreepRole.builder]
     ) {

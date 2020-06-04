@@ -29,7 +29,7 @@ export class ClaimBuilder {
       }
     } else if (
       flag.room &&
-      HelpersFind.findSomethingToBuild(flag.room) &&
+      HelpersFind.findSomethingToBuild(flag.room).length &&
       (creep.room.controller?.ticksToDowngrade || Infinity) > 1500 &&
       (creep.room.controller?.ticksToDowngrade || 0) < 3000
     ) {

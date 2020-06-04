@@ -263,7 +263,7 @@ function loop() {
         if (helpers_find_1.HelpersFind.findSomethingToBuild(new Room('E48N17'), {
             maxHits: 250000,
             maxWallHits: 25000,
-        }).length > 0) {
+        }).length) {
             const newName = 'Builder3' + Game.time;
             if (roomTotalEnergyForSpawningAvailable3 >= 1500) {
                 Game.spawns['Spawn3'].spawnCreep([
