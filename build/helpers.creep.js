@@ -63,7 +63,7 @@ class HelpersCreep {
             }
             if (HelpersCreep.bodyCost(newBody(newPart)) <= totalEnergy) {
                 body.push(newPart);
-                circleIndex();
+                newPart !== MOVE && circleIndex();
                 tryToAddToBody();
             }
         }
