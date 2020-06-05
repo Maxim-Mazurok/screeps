@@ -63,6 +63,7 @@ class HelpersFind {
     static findSomethingToBuild(room, buildConfig = {
         maxHits: Infinity,
         maxWallHits: Infinity,
+        minDiff: 0,
     }) {
         // TODO: merge with tower code
         return [
@@ -71,7 +72,9 @@ class HelpersFind {
                     return structure.hits < buildConfig.maxWallHits;
                 }
                 return (structure.hits < structure.hitsMax &&
-                    structure.hits < buildConfig.maxHits);
+                    structure.hits < buildConfig.maxHits &&
+                    Math.min(structure.hitsMax, buildConfig.maxHits) - structure.hits >=
+                        buildConfig.minDiff);
             }),
             ...this.findByFindConstant(room, FIND_CONSTRUCTION_SITES),
         ];

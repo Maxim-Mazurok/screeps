@@ -29,6 +29,7 @@ export interface RoomConfig {
   build?: {
     maxHits: number;
     maxWallHits: number;
+    minDiff: number;
   };
 }
 
