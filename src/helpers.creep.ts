@@ -1,6 +1,8 @@
 import {sum} from 'lodash';
 import {HelpersFind} from './helpers.find';
 
+type TerrainFactor = 0.5 | 1 | 5; // road, plain, swamp
+
 export class HelpersCreep {
   static totalCarry(creep: Creep): number {
     return sum(Object.values(creep.carry));
@@ -54,22 +56,27 @@ export class HelpersCreep {
     return body.reduce((cost, part) => cost + BODYPART_COST[part], 0);
   }
 
-  static moveTimeByPartsOnPlain(parts: BodyPartConstant[]) {
-    const terrainFactor = 1; // plain
+  static moveTimeByParts(
+    parts: BodyPartConstant[],
+    terrainFactor: TerrainFactor = 1
+  ) {
     const weight = parts.filter(x => x !== MOVE).length;
     const moveParts = parts.filter(x => x === MOVE).length;
     return HelpersCreep.moveTime(terrainFactor, weight, moveParts);
   }
 
   static moveTime(
-    terrainFactor: 0.5 | 1 | 5, // road, plain, swamp
+    terrainFactor: TerrainFactor,
     weight: number,
     moveParts: number
   ) {
     return Math.ceil((terrainFactor * weight) / moveParts);
   }
 
-  static buildBody(room: Room): BodyPartConstant[] | null {
+  static buildBody(
+    room: Room,
+    terrainFactor: TerrainFactor
+  ): BodyPartConstant[] | null {
     function circleIndex() {
       lastBodyPartIndex =
         lastBodyPartIndex === bodyParts.length - 1 ? 0 : lastBodyPartIndex + 1;
@@ -79,7 +86,7 @@ export class HelpersCreep {
     }
     function tryToAddToBody(part?: BodyPartConstant) {
       const newPart = part ? part : bodyParts[lastBodyPartIndex];
-      if (HelpersCreep.moveTimeByPartsOnPlain(newBody(newPart)) > 1) {
+      if (HelpersCreep.moveTimeByParts(newBody(newPart), terrainFactor) > 1) {
         tryToAddToBody(MOVE);
       }
       if (HelpersCreep.bodyCost(newBody(newPart)) <= totalEnergy) {

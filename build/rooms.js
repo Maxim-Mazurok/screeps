@@ -65,7 +65,7 @@ class Rooms {
             config.autoSpawn.enabled &&
             helpers_find_1.HelpersFind.findAllMyCreepsInRoom(room).length <
                 config.autoSpawn.maxCreeps) {
-            const body = helpers_creep_1.HelpersCreep.buildBody(room);
+            const body = helpers_creep_1.HelpersCreep.buildBody(room, 0.5);
             if (body) {
                 spawn.spawnCreep(body, Math.random().toString());
             }

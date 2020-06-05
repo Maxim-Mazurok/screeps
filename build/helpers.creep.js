@@ -38,17 +38,15 @@ class HelpersCreep {
     static bodyCost(body) {
         return body.reduce((cost, part) => cost + BODYPART_COST[part], 0);
     }
-    static moveTimeByPartsOnPlain(parts) {
-        const terrainFactor = 1; // plain
+    static moveTimeByParts(parts, terrainFactor = 1) {
         const weight = parts.filter(x => x !== MOVE).length;
         const moveParts = parts.filter(x => x === MOVE).length;
         return HelpersCreep.moveTime(terrainFactor, weight, moveParts);
     }
-    static moveTime(terrainFactor, // road, plain, swamp
-    weight, moveParts) {
+    static moveTime(terrainFactor, weight, moveParts) {
         return Math.ceil((terrainFactor * weight) / moveParts);
     }
-    static buildBody(room) {
+    static buildBody(room, terrainFactor) {
         function circleIndex() {
             lastBodyPartIndex =
                 lastBodyPartIndex === bodyParts.length - 1 ? 0 : lastBodyPartIndex + 1;
@@ -58,7 +56,7 @@ class HelpersCreep {
         }
         function tryToAddToBody(part) {
             const newPart = part ? part : bodyParts[lastBodyPartIndex];
-            if (HelpersCreep.moveTimeByPartsOnPlain(newBody(newPart)) > 1) {
+            if (HelpersCreep.moveTimeByParts(newBody(newPart), terrainFactor) > 1) {
                 tryToAddToBody(MOVE);
             }
             if (HelpersCreep.bodyCost(newBody(newPart)) <= totalEnergy) {
