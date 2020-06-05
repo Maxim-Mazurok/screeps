@@ -16,13 +16,6 @@ type ResourceObject =
   | Tombstone
   | Resource;
 
-type ReplanishActivity =
-  | CreepActivity.replanishExtensionEnergy
-  | CreepActivity.replanishSpawnEnergy
-  | CreepActivity.replanishTowerEnergy
-  | CreepActivity.replanishLinkEnergy
-  | CreepActivity.replanishStorageEnergy;
-
 export class GeneralCreep {
   static run(
     creep: Creep,

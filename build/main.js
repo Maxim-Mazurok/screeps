@@ -21,7 +21,7 @@ const roomsConfig = [
         build: {
             maxHits: 100000,
             maxWallHits: 100000,
-            minDiff: 500,
+            minDiff: 1000,
         },
     },
     {
@@ -42,7 +42,7 @@ const roomsConfig = [
         build: {
             maxHits: 1000000,
             maxWallHits: 1000000,
-            minDiff: 500,
+            minDiff: 1000,
         },
     },
     {
@@ -57,7 +57,7 @@ const roomsConfig = [
         build: {
             maxHits: 2000000,
             maxWallHits: 500000,
-            minDiff: 500,
+            minDiff: 1000,
         },
     },
 ];
@@ -266,7 +266,7 @@ function loop() {
         if (helpers_find_1.HelpersFind.findSomethingToBuild(new Room('E48N17'), {
             maxHits: 250000,
             maxWallHits: 25000,
-            minDiff: 500,
+            minDiff: 1000,
         }).length) {
             const newName = 'Builder3' + Game.time;
             if (roomTotalEnergyForSpawningAvailable3 >= 1500) {
