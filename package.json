@@ -21,7 +21,7 @@
     "@types/node": "^12.12.42",
     "@types/screeps": "^3.1.2",
     "gts": "^2.0.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "typescript": "^3.9.3"
   },
   "engines": {
