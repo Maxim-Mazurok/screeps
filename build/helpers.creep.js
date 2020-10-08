@@ -55,7 +55,7 @@ class HelpersCreep {
             return [...body, part];
         }
         function tryToAddToBody(part) {
-            if (bodyParts.length >= 50)
+            if (body.length >= 50)
                 return; // Should contain 1 to 50 elements
             const newPart = part ? part : bodyParts[lastBodyPartIndex];
             if (HelpersCreep.moveTimeByParts(newBody(newPart), terrainFactor) > 1) {

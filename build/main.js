@@ -19,8 +19,8 @@ const roomsConfig = [
             maxCreeps: 3,
         },
         build: {
-            maxHits: 100000,
-            maxWallHits: 100000,
+            maxHits: 2000000,
+            maxWallHits: 1000000,
             minDiff: 1000,
         },
     },
@@ -40,7 +40,7 @@ const roomsConfig = [
             ],
         },
         build: {
-            maxHits: 1000000,
+            maxHits: 2000000,
             maxWallHits: 1000000,
             minDiff: 1000,
         },
@@ -56,7 +56,7 @@ const roomsConfig = [
         },
         build: {
             maxHits: 2000000,
-            maxWallHits: 500000,
+            maxWallHits: 1000000,
             minDiff: 1000,
         },
     },
