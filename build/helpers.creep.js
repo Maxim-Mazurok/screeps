@@ -55,13 +55,13 @@ class HelpersCreep {
             return [...body, part];
         }
         function tryToAddToBody(part) {
-            if (body.length >= 50)
-                return; // Should contain 1 to 50 elements
             const newPart = part ? part : bodyParts[lastBodyPartIndex];
             if (HelpersCreep.moveTimeByParts(newBody(newPart), terrainFactor) > 1) {
                 tryToAddToBody(MOVE);
             }
             if (HelpersCreep.bodyCost(newBody(newPart)) <= totalEnergy) {
+                if (body.length >= 50)
+                    return; // Should contain 1 to 50 elements
                 body.push(newPart);
                 newPart !== MOVE && circleIndex();
                 tryToAddToBody();
