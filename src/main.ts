@@ -550,6 +550,9 @@ function loop() {
 module.exports.loop = () => {
   try {
     loop();
+    if (Game.cpu.bucket > 9000) {
+      Game.cpu.generatePixel();
+    }
   } catch (e) {
     console.log('An error occurred!');
     console.log(e.message);
