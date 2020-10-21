@@ -13,14 +13,14 @@ class GeneralCreep {
             enums_1.EnergySource.mine,
         ],
     }, activities = [
-        enums_1.CreepActivity.replanishExtensionEnergy,
-        enums_1.CreepActivity.replanishSpawnEnergy,
+        enums_1.CreepActivity.replenishExtensionEnergy,
+        enums_1.CreepActivity.replenishSpawnEnergy,
         enums_1.CreepActivity.build,
-        enums_1.CreepActivity.replanishTowerEnergy,
-        enums_1.CreepActivity.replanishLinkEnergy,
-        enums_1.CreepActivity.replanishStorageEnergy,
+        enums_1.CreepActivity.replenishTowerEnergy,
+        enums_1.CreepActivity.replenishLinkEnergy,
+        enums_1.CreepActivity.replenishStorageEnergy,
     ]) {
-        const jobs = [replanish.bind(null, activities), build, upgradeController];
+        const jobs = [replenish.bind(null, activities), build, upgradeController];
         // try to get energy from link, storage or mine, depending on sources config
         function getEnergy() {
             function getResourceObject(energySource) {
@@ -98,8 +98,8 @@ class GeneralCreep {
             }
             return true;
         }
-        function replanish(activities) {
-            function replanishTarget(target) {
+        function replenish(activities) {
+            function replenishTarget(target) {
                 if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, { visualizePathStyle: helpers_creep_1.TRANSFER_PATH });
                 }
@@ -112,7 +112,7 @@ class GeneralCreep {
                                 case STRUCTURE_SPAWN:
                                 case STRUCTURE_EXTENSION:
                                 case STRUCTURE_LINK:
-                                case STRUCTURE_TOWER: // TODO: maybe, only replanish towers that have TOTAL - CURRENT >= CREEP.energy so that creep will save travel on 2 energy points delivery, etc.
+                                case STRUCTURE_TOWER: // TODO: maybe, only replenish towers that have TOTAL - CURRENT >= CREEP.energy so that creep will save travel on 2 energy points delivery, etc.
                                     return structure.energy < structure.energyCapacity;
                                 case STRUCTURE_STORAGE:
                                     return (structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0);
@@ -122,24 +122,24 @@ class GeneralCreep {
                     }));
                 }
                 const extension = findNotFullStructure(STRUCTURE_EXTENSION);
-                if (activities.includes(enums_1.CreepActivity.replanishExtensionEnergy) &&
+                if (activities.includes(enums_1.CreepActivity.replenishExtensionEnergy) &&
                     extension) {
                     return extension;
                 }
                 const spawn = findNotFullStructure(STRUCTURE_SPAWN);
-                if (activities.includes(enums_1.CreepActivity.replanishSpawnEnergy) && spawn) {
+                if (activities.includes(enums_1.CreepActivity.replenishSpawnEnergy) && spawn) {
                     return spawn;
                 }
                 const tower = findNotFullStructure(STRUCTURE_TOWER);
-                if (activities.includes(enums_1.CreepActivity.replanishTowerEnergy) && tower) {
+                if (activities.includes(enums_1.CreepActivity.replenishTowerEnergy) && tower) {
                     return tower;
                 }
                 const link = findNotFullStructure(STRUCTURE_LINK);
-                if (activities.includes(enums_1.CreepActivity.replanishLinkEnergy) && link) {
+                if (activities.includes(enums_1.CreepActivity.replenishLinkEnergy) && link) {
                     return link;
                 }
                 const storage = findNotFullStructure(STRUCTURE_STORAGE);
-                if (activities.includes(enums_1.CreepActivity.replanishStorageEnergy) &&
+                if (activities.includes(enums_1.CreepActivity.replenishStorageEnergy) &&
                     storage) {
                     return storage;
                 }
@@ -147,7 +147,7 @@ class GeneralCreep {
             }
             const target = findTarget();
             if (target) {
-                replanishTarget(target);
+                replenishTarget(target);
                 return true;
             }
             return false;
@@ -188,9 +188,9 @@ class GeneralCreep {
             creep.say('work');
         }
         if (creep.memory.working) {
-            if (replanish([
-                enums_1.CreepActivity.replanishExtensionEnergy,
-                enums_1.CreepActivity.replanishSpawnEnergy,
+            if (replenish([
+                enums_1.CreepActivity.replenishExtensionEnergy,
+                enums_1.CreepActivity.replenishSpawnEnergy,
             ]))
                 return;
             while (jobs[creep.memory.jobId || 0]() === false) {

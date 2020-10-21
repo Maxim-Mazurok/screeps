@@ -20,10 +20,10 @@ var EnergySource;
 })(EnergySource = exports.EnergySource || (exports.EnergySource = {}));
 var CreepActivity;
 (function (CreepActivity) {
-    CreepActivity[CreepActivity["replanishSpawnEnergy"] = 0] = "replanishSpawnEnergy";
-    CreepActivity[CreepActivity["replanishExtensionEnergy"] = 1] = "replanishExtensionEnergy";
+    CreepActivity[CreepActivity["replenishSpawnEnergy"] = 0] = "replenishSpawnEnergy";
+    CreepActivity[CreepActivity["replenishExtensionEnergy"] = 1] = "replenishExtensionEnergy";
     CreepActivity[CreepActivity["build"] = 2] = "build";
-    CreepActivity[CreepActivity["replanishTowerEnergy"] = 3] = "replanishTowerEnergy";
-    CreepActivity[CreepActivity["replanishLinkEnergy"] = 4] = "replanishLinkEnergy";
-    CreepActivity[CreepActivity["replanishStorageEnergy"] = 5] = "replanishStorageEnergy";
+    CreepActivity[CreepActivity["replenishTowerEnergy"] = 3] = "replenishTowerEnergy";
+    CreepActivity[CreepActivity["replenishLinkEnergy"] = 4] = "replenishLinkEnergy";
+    CreepActivity[CreepActivity["replenishStorageEnergy"] = 5] = "replenishStorageEnergy";
 })(CreepActivity = exports.CreepActivity || (exports.CreepActivity = {}));

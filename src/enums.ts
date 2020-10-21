@@ -17,10 +17,10 @@ export enum EnergySource {
 }
 
 export enum CreepActivity {
-  replanishSpawnEnergy,
-  replanishExtensionEnergy,
+  replenishSpawnEnergy,
+  replenishExtensionEnergy,
   build,
-  replanishTowerEnergy,
-  replanishLinkEnergy,
-  replanishStorageEnergy,
+  replenishTowerEnergy,
+  replenishLinkEnergy,
+  replenishStorageEnergy,
 }
