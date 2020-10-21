@@ -14,6 +14,7 @@ export enum EnergySource {
   tombstone,
   dropped,
   mine,
+  ruin,
 }
 
 export enum CreepActivity {

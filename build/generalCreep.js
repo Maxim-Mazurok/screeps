@@ -10,6 +10,7 @@ class GeneralCreep {
             enums_1.EnergySource.storage,
             enums_1.EnergySource.dropped,
             enums_1.EnergySource.tombstone,
+            enums_1.EnergySource.ruin,
             enums_1.EnergySource.mine,
         ],
     }, activities = [
@@ -42,6 +43,10 @@ class GeneralCreep {
                         return (creep.pos.findClosestByPath(creep.room
                             .find(FIND_TOMBSTONES)
                             .filter(x => x.store[RESOURCE_ENERGY] > 0)) || null);
+                    case enums_1.EnergySource.ruin:
+                        return (creep.pos.findClosestByPath(creep.room
+                            .find(FIND_RUINS)
+                            .filter(x => x.store[RESOURCE_ENERGY] > 0)) || null);
                     default:
                         return null;
                 }
@@ -51,6 +56,7 @@ class GeneralCreep {
                     case enums_1.EnergySource.link:
                     case enums_1.EnergySource.storage:
                     case enums_1.EnergySource.tombstone:
+                    case enums_1.EnergySource.ruin:
                         return creep.withdraw(resourceObject, RESOURCE_ENERGY);
                     case enums_1.EnergySource.mine:
                         return creep.harvest(resourceObject);

@@ -17,6 +17,7 @@ var EnergySource;
     EnergySource[EnergySource["tombstone"] = 2] = "tombstone";
     EnergySource[EnergySource["dropped"] = 3] = "dropped";
     EnergySource[EnergySource["mine"] = 4] = "mine";
+    EnergySource[EnergySource["ruin"] = 5] = "ruin";
 })(EnergySource = exports.EnergySource || (exports.EnergySource = {}));
 var CreepActivity;
 (function (CreepActivity) {

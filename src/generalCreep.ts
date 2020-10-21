@@ -14,7 +14,8 @@ type ResourceObject =
   | StructureStorage
   | Source
   | Tombstone
-  | Resource;
+  | Resource
+  | Ruin;
 
 export class GeneralCreep {
   static run(
@@ -25,6 +26,7 @@ export class GeneralCreep {
         EnergySource.storage,
         EnergySource.dropped,
         EnergySource.tombstone,
+        EnergySource.ruin,
         EnergySource.mine,
       ],
     },
@@ -80,6 +82,14 @@ export class GeneralCreep {
                   .filter(x => x.store[RESOURCE_ENERGY] > 0)
               ) || null
             );
+          case EnergySource.ruin:
+            return (
+              creep.pos.findClosestByPath(
+                creep.room
+                  .find(FIND_RUINS)
+                  .filter(x => x.store[RESOURCE_ENERGY] > 0)
+              ) || null
+            );
           default:
             return null;
         }
@@ -93,8 +103,13 @@ export class GeneralCreep {
           case EnergySource.link:
           case EnergySource.storage:
           case EnergySource.tombstone:
+          case EnergySource.ruin:
             return creep.withdraw(
-              resourceObject as StructureLink | StructureStorage | Tombstone,
+              resourceObject as
+                | StructureLink
+                | StructureStorage
+                | Tombstone
+                | Ruin,
               RESOURCE_ENERGY
             );
           case EnergySource.mine:
