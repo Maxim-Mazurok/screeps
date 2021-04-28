@@ -156,9 +156,9 @@ function loop() {
     else if (upgraders2.length < 1) {
         const newName = 'Upgrader2' + Game.time;
         Game.spawns['Spawn2'].spawnCreep([
-            ..._.fill(_.times(8), MOVE),
-            ..._.fill(_.times(8), WORK),
-            ..._.fill(_.times(8), CARRY),
+            ..._.fill(_.times(20), MOVE),
+            ..._.fill(_.times(10), WORK),
+            ..._.fill(_.times(10), CARRY),
         ], newName, { memory: { role: enums_1.CreepRole.upgrader, room: '2' } });
     }
     else if (builders2.length < 0) {
