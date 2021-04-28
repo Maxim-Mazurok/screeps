@@ -139,6 +139,34 @@ const roleHarvester = {
         }
       }
     } else {
+      if (
+        Game.rooms['E47N17'].lookForAt('structure', 40, 12)[0].store[
+          RESOURCE_ENERGY
+        ] === 0 &&
+        Game.rooms['E47N17'].lookForAt('structure', 11, 36)[0].store[
+          RESOURCE_ENERGY
+        ] === 0
+      ) {
+        var targets = creep.room.find(FIND_STRUCTURES, {
+          filter: structure => {
+            return (
+              [STRUCTURE_STORAGE].indexOf(structure.structureType) !== -1 &&
+              structure.store[RESOURCE_ENERGY] > 0
+            );
+          },
+        });
+        if (targets.length > 0) {
+          source = targets[0];
+          if (
+            Math.abs(creep.pos.x - source.pos.x) <= 1 &&
+            Math.abs(creep.pos.y - source.pos.y) <= 1
+          ) {
+            creep.withdraw(source, RESOURCE_ENERGY);
+          } else {
+            creep.moveTo(source, {visualizePathStyle: {stroke: '#ffffff'}});
+          }
+        }
+      }
       // //console.log('harvest');
       /*var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
