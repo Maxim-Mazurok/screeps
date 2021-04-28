@@ -25,11 +25,11 @@ class HelpersFind {
         let totalEnergyAvailable = 0;
         const extensions = HelpersFind.findStructuresByType(room, STRUCTURE_EXTENSION);
         extensions.forEach((extension) => {
-            totalEnergyAvailable += extension.energy;
+            totalEnergyAvailable += extension.store[RESOURCE_ENERGY];
         });
         const spawns = HelpersFind.findStructuresByType(room, STRUCTURE_SPAWN);
         spawns.forEach((spawn) => {
-            totalEnergyAvailable += spawn.energy;
+            totalEnergyAvailable += spawn.store[RESOURCE_ENERGY];
         });
         console.log(`Room ${room.name} has ${totalEnergyAvailable} energy for spawning available`);
         return totalEnergyAvailable;
@@ -41,7 +41,8 @@ class HelpersFind {
         let freeStorage = 0;
         const terminals = HelpersFind.findStructuresByType(room, STRUCTURE_TERMINAL);
         terminals.forEach((terminal) => {
-            freeStorage += terminal.storeCapacity - this.getAllStore(terminal.store);
+            freeStorage +=
+                terminal.store.getCapacity() - this.getAllStore(terminal.store);
         });
         console.log(`Room ${room.name} has ${freeStorage} free storage in terminal`);
         return freeStorage;
@@ -80,7 +81,7 @@ class HelpersFind {
         ];
     }
     static findLinksWithEnergy(room) {
-        return HelpersFind.findStructuresByType(room, STRUCTURE_LINK).filter((link) => link.energy > 0);
+        return HelpersFind.findStructuresByType(room, STRUCTURE_LINK).filter((link) => link.store[RESOURCE_ENERGY] > 0);
     }
     static findAllMyCreepsInRoom(room) {
         return Object.values(Game.creeps).filter((creep) => creep.my && creep.room.name === room.name);

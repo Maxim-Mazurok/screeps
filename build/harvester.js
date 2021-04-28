@@ -64,7 +64,8 @@ const roleHarvester = {
                         else
                             targets = false;
                         if (targets &&
-                            targets.energy < targets.energyCapacity - creep.carryCapacity) {
+                            targets.energy < targets.energyCapacity // - creep.carryCapacity
+                        ) {
                             const target = targets;
                             if (target !== null) {
                                 if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {

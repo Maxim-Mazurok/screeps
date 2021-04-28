@@ -47,14 +47,14 @@ export class HelpersFind {
       StructureExtension
     >(room, STRUCTURE_EXTENSION);
     extensions.forEach((extension: StructureExtension) => {
-      totalEnergyAvailable += extension.energy;
+      totalEnergyAvailable += extension.store[RESOURCE_ENERGY];
     });
 
     const spawns: StructureSpawn[] = HelpersFind.findStructuresByType<
       StructureSpawn
     >(room, STRUCTURE_SPAWN);
     spawns.forEach((spawn: StructureSpawn) => {
-      totalEnergyAvailable += spawn.energy;
+      totalEnergyAvailable += spawn.store[RESOURCE_ENERGY];
     });
 
     console.log(
@@ -73,7 +73,8 @@ export class HelpersFind {
       StructureTerminal
     >(room, STRUCTURE_TERMINAL);
     terminals.forEach((terminal: StructureTerminal) => {
-      freeStorage += terminal.storeCapacity - this.getAllStore(terminal.store);
+      freeStorage +=
+        terminal.store.getCapacity() - this.getAllStore(terminal.store);
     });
 
     console.log(
@@ -140,7 +141,7 @@ export class HelpersFind {
     return HelpersFind.findStructuresByType<StructureLink>(
       room,
       STRUCTURE_LINK
-    ).filter((link: StructureLink) => link.energy > 0);
+    ).filter((link: StructureLink) => link.store[RESOURCE_ENERGY] > 0);
   }
 
   static findAllMyCreepsInRoom(room: Room): Creep[] {
