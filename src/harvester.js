@@ -16,6 +16,26 @@ const roleHarvester = {
     if (creep.memory.transferring) {
       // creep.drop(RESOURCE_ENERGY);
       // return;
+
+      if (
+        Game.rooms['E47N17'].lookForAt('structure', 40, 12)[0].store[
+          RESOURCE_ENERGY
+        ] === 0 &&
+        Game.rooms['E47N17'].lookForAt('structure', 11, 36)[0].store[
+          RESOURCE_ENERGY
+        ] === 0
+      ) {
+        var targets = Game.rooms['E47N17'].lookForAt('structure', 40, 12)[0];
+        if (target !== null) {
+          if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(target, {
+              visualizePathStyle: {stroke: '#ffffff'},
+            });
+            return;
+          }
+        }
+      }
+
       var targets = creep.room.find(FIND_STRUCTURES, {
         filter: structure => {
           return (
