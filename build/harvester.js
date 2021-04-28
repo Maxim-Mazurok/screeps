@@ -123,6 +123,7 @@ const roleHarvester = {
             }
         }
         else {
+            let source;
             if (Game.rooms['E47N17'].lookForAt('structure', 40, 12)[0].store[RESOURCE_ENERGY] === 0 &&
                 Game.rooms['E47N17'].lookForAt('structure', 11, 36)[0].store[RESOURCE_ENERGY] === 0) {
                 var targets = creep.room.find(FIND_STRUCTURES, {
@@ -136,9 +137,11 @@ const roleHarvester = {
                     if (Math.abs(creep.pos.x - source.pos.x) <= 1 &&
                         Math.abs(creep.pos.y - source.pos.y) <= 1) {
                         creep.withdraw(source, RESOURCE_ENERGY);
+                        return;
                     }
                     else {
                         creep.moveTo(source, { visualizePathStyle: { stroke: '#ffffff' } });
+                        return;
                     }
                 }
             }
@@ -158,7 +161,7 @@ const roleHarvester = {
                       }
                   }
                   else {*/
-            let source = creep.pos.findClosestByPath(creep.room.find(FIND_DROPPED_RESOURCES)); // creep.pos.findClosestByPath(creep.room.find(FIND_DROPPED_RESOURCES));
+            source = creep.pos.findClosestByPath(creep.room.find(FIND_DROPPED_RESOURCES)); // creep.pos.findClosestByPath(creep.room.find(FIND_DROPPED_RESOURCES));
             if (!source) {
                 source = creep.pos.findClosestByPath(creep.room.find(FIND_SOURCES));
                 const res = creep.harvest(source);
