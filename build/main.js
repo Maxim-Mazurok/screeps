@@ -335,9 +335,9 @@ function loop() {
             generalCreep_1.GeneralCreep.run(creep, {
                 sources: [
                     enums_1.EnergySource.link,
-                    enums_1.EnergySource.storage,
                     enums_1.EnergySource.dropped,
                     enums_1.EnergySource.tombstone,
+                    ...(creep.memory.room !== '2' ? [enums_1.EnergySource.storage] : []),
                 ],
             });
         }

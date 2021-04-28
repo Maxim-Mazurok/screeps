@@ -520,9 +520,9 @@ function loop() {
       GeneralCreep.run(creep, {
         sources: [
           EnergySource.link,
-          EnergySource.storage,
           EnergySource.dropped,
           EnergySource.tombstone,
+          ...(creep.memory.room !== '2' ? [EnergySource.storage] : []),
         ],
       });
     } else if (creep.memory.role === CreepRole.builder) {
