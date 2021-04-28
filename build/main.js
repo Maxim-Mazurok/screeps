@@ -348,6 +348,7 @@ function loop() {
                     ? {
                         ignoreLinks: [
                             new RoomPosition(16, 23, 'E47N16'),
+                            new RoomPosition(9, 31, 'E47N16'),
                         ],
                         maxPathToDropped: 3,
                     }
