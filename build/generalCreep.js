@@ -3,7 +3,6 @@ exports.GeneralCreep = void 0;
 const helpers_creep_1 = require("./helpers.creep");
 const helpers_find_1 = require("./helpers.find");
 const enums_1 = require("./enums");
-const lodash_1 = require("lodash");
 class GeneralCreep {
     static run(creep, sources = {
         sources: [
@@ -31,7 +30,7 @@ class GeneralCreep {
                         const ignoreLinks = sources.ignoreLinks === undefined ? [] : sources.ignoreLinks;
                         let linksWithEnergy = helpers_find_1.HelpersFind.findLinksWithEnergy(creep.room);
                         if (ignoreLinks.length !== 0) {
-                            linksWithEnergy = linksWithEnergy.filter(({ pos }) => ignoreLinks.findIndex(x => lodash_1.isEqual(pos, x)) === -1);
+                            linksWithEnergy = linksWithEnergy.filter(({ pos }) => ignoreLinks.findIndex(x => JSON.stringify(pos) === JSON.stringify(x)) === -1);
                         }
                         return helpers_find_1.HelpersFind.findClosestStructureByPathFromArray(creep.pos, creep.room, linksWithEnergy);
                     }
