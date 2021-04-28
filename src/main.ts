@@ -582,7 +582,7 @@ function loop() {
   //     linkFrom.transferEnergy(linkToUpgrade);
   // } else {
   // tslint:disable-next-line
-  linkFrom2.transferEnergy(linkToBuild2, linkFrom2.energy);
+  linkFrom2.transferEnergy(linkToBuild2, linkFrom2.store[RESOURCE_ENERGY]);
   //}
 
   // try {
