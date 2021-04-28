@@ -379,7 +379,8 @@ function loop() {
     //     linkFrom.transferEnergy(linkToUpgrade);
     // } else {
     // tslint:disable-next-line
-    linkFrom2.transferEnergy(linkToBuild2, linkFrom2.store[RESOURCE_ENERGY]);
+    linkFrom2.transferEnergy(linkToBuild2, Math.min(linkToBuild2.store.getCapacity(RESOURCE_ENERGY) -
+        linkToBuild2.store[RESOURCE_ENERGY], linkFrom2.store[RESOURCE_ENERGY]));
     //}
     // try {
     //     const market = require('market');
