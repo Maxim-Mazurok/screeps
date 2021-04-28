@@ -8,6 +8,7 @@ import {
 import {HelpersFind} from './helpers.find';
 import {EnergySourcesConfig, ReplenishableStructures} from './ts';
 import {EnergySource, CreepActivity} from './enums';
+import {isEqual} from 'lodash';
 
 type ResourceObject =
   | StructureLink
@@ -53,7 +54,7 @@ export class GeneralCreep {
             let linksWithEnergy = HelpersFind.findLinksWithEnergy(creep.room);
             if (ignoreLinks.length !== 0) {
               linksWithEnergy = linksWithEnergy.filter(
-                x => ignoreLinks.indexOf(x.pos) === -1
+                x => ignoreLinks.findIndex(y => isEqual(x, y)) === -1
               );
             }
             return HelpersFind.findClosestStructureByPathFromArray<
