@@ -148,8 +148,8 @@ function loop() {
     if (harvesters2.length < 1) {
         const newName = 'Harvester2' + Game.time;
         Game.spawns['Spawn2'].spawnCreep([
-            ..._.fill(_.times(9), MOVE),
-            ..._.fill(_.times(10), WORK),
+            ..._.fill(_.times(14), MOVE),
+            ..._.fill(_.times(7), WORK),
             ..._.fill(_.times(7), CARRY),
         ], newName, { memory: { role: enums_1.CreepRole.harvester, room: '2' } });
     }
