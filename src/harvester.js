@@ -34,7 +34,8 @@ const roleHarvester = {
           filter: structure => {
             return (
               [STRUCTURE_SPAWN].indexOf(structure.structureType) !== -1 &&
-              structure.energy < structure.energyCapacity
+              structure.energy < structure.energyCapacity &&
+              structure.name !== 'Spawn4'
             );
           },
         });
@@ -174,7 +175,8 @@ const roleHarvester = {
               filter: structure => {
                 return (
                   [STRUCTURE_SPAWN].indexOf(structure.structureType) !== -1 &&
-                  structure.energy < structure.energyCapacity
+                  structure.energy < structure.energyCapacity &&
+                  structure.name !== 'Spawn4'
                 );
               },
             }).length > 0
