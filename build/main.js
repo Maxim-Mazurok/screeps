@@ -155,7 +155,7 @@ function loop() {
     }
     else if (upgraders2.length < 1) {
         const newName = 'Upgrader2' + Game.time;
-        Game.spawns['Spawn2'].spawnCreep([
+        Game.spawns['Spawn4'].spawnCreep([
             ..._.fill(_.times(20), MOVE),
             ..._.fill(_.times(10), WORK),
             ..._.fill(_.times(10), CARRY),
