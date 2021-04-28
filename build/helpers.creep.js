@@ -47,6 +47,7 @@ class HelpersCreep {
         return Math.ceil((terrainFactor * weight) / moveParts);
     }
     static buildBody(room, terrainFactor) {
+        var _a;
         function circleIndex() {
             lastBodyPartIndex =
                 lastBodyPartIndex === bodyParts.length - 1 ? 0 : lastBodyPartIndex + 1;
@@ -60,14 +61,23 @@ class HelpersCreep {
                 tryToAddToBody(MOVE);
             }
             if (HelpersCreep.bodyCost(newBody(newPart)) <= totalEnergy) {
-                if (body.length >= 50)
-                    return; // Should contain 1 to 50 elements
+                if (body.length >= 50) {
+                    // Should contain 1 to 50 elements
+                    return;
+                }
+                if (controllerLevel === 8 &&
+                    body.filter(x => x === WORK).length >= 15) {
+                    // fully upgraded level 8 controller can't be upgraded over 15 energy units per tick regardless of creeps abilities
+                    // TODO: limit can be increased by using ghodium mineral boost
+                    return;
+                }
                 body.push(newPart);
                 newPart !== MOVE && circleIndex();
                 tryToAddToBody();
             }
         }
         const totalEnergy = helpers_find_1.HelpersFind.getRoomTotalEnergyForSpawningAvailable(room);
+        const controllerLevel = (_a = room.controller) === null || _a === void 0 ? void 0 : _a.level;
         const body = [MOVE, WORK, CARRY];
         const bodyParts = [WORK, CARRY];
         let lastBodyPartIndex = 0;

@@ -90,7 +90,18 @@ export class HelpersCreep {
         tryToAddToBody(MOVE);
       }
       if (HelpersCreep.bodyCost(newBody(newPart)) <= totalEnergy) {
-        if (body.length >= 50) return; // Should contain 1 to 50 elements
+        if (body.length >= 50) {
+          // Should contain 1 to 50 elements
+          return;
+        }
+        if (
+          controllerLevel === 8 &&
+          body.filter(x => x === WORK).length >= 15
+        ) {
+          // fully upgraded level 8 controller can't be upgraded over 15 energy units per tick regardless of creeps abilities
+          // TODO: limit can be increased by using ghodium mineral boost
+          return;
+        }
         body.push(newPart);
         newPart !== MOVE && circleIndex();
         tryToAddToBody();
@@ -99,6 +110,7 @@ export class HelpersCreep {
     const totalEnergy = HelpersFind.getRoomTotalEnergyForSpawningAvailable(
       room
     );
+    const controllerLevel = room.controller?.level;
     const body: BodyPartConstant[] = [MOVE, WORK, CARRY];
     const bodyParts = [WORK, CARRY];
     let lastBodyPartIndex = 0;
