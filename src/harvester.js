@@ -155,7 +155,9 @@ const roleHarvester = {
                 }
             }
             else {*/
-      let source = false; // creep.pos.findClosestByPath(creep.room.find(FIND_DROPPED_RESOURCES));
+      let source = creep.pos.findClosestByPath(
+        creep.room.find(FIND_DROPPED_RESOURCES)
+      ); // creep.pos.findClosestByPath(creep.room.find(FIND_DROPPED_RESOURCES));
       if (!source) {
         source = creep.pos.findClosestByPath(creep.room.find(FIND_SOURCES));
         const res = creep.harvest(source);
