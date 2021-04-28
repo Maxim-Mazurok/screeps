@@ -526,10 +526,21 @@ function loop() {
             EnergySource.tombstone,
             ...(creep.memory.room !== '2' ? [EnergySource.storage] : []),
           ],
-          ignoreLinks: [
-            new RoomPosition(40, 12, 'E47N17'), // top right link
-          ],
-          maxPathToDropped: 3,
+          ...(creep.memory.room === '2'
+            ? {
+                ignoreLinks: [
+                  new RoomPosition(40, 12, 'E47N17'), // top right link
+                ],
+                maxPathToDropped: 3,
+              }
+            : creep.memory.room === '1'
+            ? {
+                ignoreLinks: [
+                  new RoomPosition(16, 23, 'E47N16'), // middle left link
+                ],
+                maxPathToDropped: 3,
+              }
+            : {}),
         },
         creep.memory.room === '2' ? [] : undefined
       );

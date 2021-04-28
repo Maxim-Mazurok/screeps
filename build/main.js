@@ -332,18 +332,26 @@ function loop() {
             harvester.run(creep);
         }
         else if (creep.memory.role === enums_1.CreepRole.upgrader) {
-            generalCreep_1.GeneralCreep.run(creep, {
-                sources: [
+            generalCreep_1.GeneralCreep.run(creep, Object.assign({ sources: [
                     enums_1.EnergySource.link,
                     enums_1.EnergySource.dropped,
                     enums_1.EnergySource.tombstone,
                     ...(creep.memory.room !== '2' ? [enums_1.EnergySource.storage] : []),
-                ],
-                ignoreLinks: [
-                    new RoomPosition(40, 12, 'E47N17'),
-                ],
-                maxPathToDropped: 3,
-            }, creep.memory.room === '2' ? [] : undefined);
+                ] }, (creep.memory.room === '2'
+                ? {
+                    ignoreLinks: [
+                        new RoomPosition(40, 12, 'E47N17'),
+                    ],
+                    maxPathToDropped: 3,
+                }
+                : creep.memory.room === '1'
+                    ? {
+                        ignoreLinks: [
+                            new RoomPosition(16, 23, 'E47N16'),
+                        ],
+                        maxPathToDropped: 3,
+                    }
+                    : {})), creep.memory.room === '2' ? [] : undefined);
         }
         else if (creep.memory.role === enums_1.CreepRole.builder) {
             roleBuilder.run(creep);
