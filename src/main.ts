@@ -18,7 +18,7 @@ const roomsConfig: RoomsConfig = [
     roomName: 'E48N18',
     autoSpawn: {
       enabled: true,
-      maxCreeps: 3,
+      maxCreeps: 2,
     },
     build: {
       maxHits: 2_000_000,
