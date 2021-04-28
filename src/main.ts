@@ -526,6 +526,9 @@ function loop() {
             EnergySource.tombstone,
             ...(creep.memory.room !== '2' ? [EnergySource.storage] : []),
           ],
+          ignoreLinks: [
+            new RoomPosition(40, 12, 'E47N17'), // top right link
+          ],
         },
         creep.memory.room === '2' ? [] : undefined
       );

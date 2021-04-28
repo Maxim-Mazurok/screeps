@@ -13,6 +13,7 @@ class GeneralCreep {
             enums_1.EnergySource.ruin,
             enums_1.EnergySource.mine,
         ],
+        ignoreLinks: [],
     }, activities = [
         enums_1.CreepActivity.replenishExtensionEnergy,
         enums_1.CreepActivity.replenishSpawnEnergy,
@@ -27,7 +28,7 @@ class GeneralCreep {
             function getResourceObject(energySource) {
                 switch (energySource) {
                     case enums_1.EnergySource.link:
-                        return helpers_find_1.HelpersFind.findClosestStructureByPathFromArray(creep.pos, creep.room, helpers_find_1.HelpersFind.findLinksWithEnergy(creep.room));
+                        return helpers_find_1.HelpersFind.findClosestStructureByPathFromArray(creep.pos, creep.room, helpers_find_1.HelpersFind.findLinksWithEnergy(creep.room).filter(x => { var _a; return ((_a = sources.ignoreLinks) === null || _a === void 0 ? void 0 : _a.indexOf(x.pos)) === -1; }));
                     case enums_1.EnergySource.storage:
                         return creep.room.storage &&
                             creep.room.storage.store[RESOURCE_ENERGY]

@@ -29,6 +29,7 @@ export class GeneralCreep {
         EnergySource.ruin,
         EnergySource.mine,
       ],
+      ignoreLinks: [],
     },
     activities: CreepActivity[] = [
       CreepActivity.replenishExtensionEnergy,
@@ -53,7 +54,9 @@ export class GeneralCreep {
             >(
               creep.pos,
               creep.room,
-              HelpersFind.findLinksWithEnergy(creep.room)
+              HelpersFind.findLinksWithEnergy(creep.room).filter(
+                x => sources.ignoreLinks?.indexOf(x.pos) === -1
+              )
             );
           case EnergySource.storage:
             return creep.room.storage &&
