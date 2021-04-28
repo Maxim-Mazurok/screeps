@@ -529,6 +529,7 @@ function loop() {
           ignoreLinks: [
             new RoomPosition(40, 12, 'E47N17'), // top right link
           ],
+          maxPathToDropped: 3,
         },
         creep.memory.room === '2' ? [] : undefined
       );

@@ -36,6 +36,7 @@ export interface RoomConfig {
 export interface EnergySourcesConfig {
   sources: EnergySource[];
   ignoreLinks?: RoomPosition[];
+  maxPathToDropped?: number;
 }
 
 export type ReplenishableStructures =

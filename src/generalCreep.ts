@@ -29,7 +29,6 @@ export class GeneralCreep {
         EnergySource.ruin,
         EnergySource.mine,
       ],
-      ignoreLinks: [],
     },
     activities: CreepActivity[] = [
       CreepActivity.replenishExtensionEnergy,
@@ -48,16 +47,19 @@ export class GeneralCreep {
         energySource: EnergySource
       ): ResourceObject | null {
         switch (energySource) {
-          case EnergySource.link:
+          case EnergySource.link: {
+            const ignoreLinks =
+              sources.ignoreLinks === undefined ? [] : sources.ignoreLinks;
+            let linksWithEnergy = HelpersFind.findLinksWithEnergy(creep.room);
+            if (ignoreLinks.length !== 0) {
+              linksWithEnergy = linksWithEnergy.filter(
+                x => ignoreLinks.indexOf(x.pos) === -1
+              );
+            }
             return HelpersFind.findClosestStructureByPathFromArray<
               StructureLink
-            >(
-              creep.pos,
-              creep.room,
-              HelpersFind.findLinksWithEnergy(creep.room).filter(
-                x => sources.ignoreLinks?.indexOf(x.pos) === -1
-              )
-            );
+            >(creep.pos, creep.room, linksWithEnergy);
+          }
           case EnergySource.storage:
             return creep.room.storage &&
               creep.room.storage.store[RESOURCE_ENERGY]
@@ -69,14 +71,19 @@ export class GeneralCreep {
                 creep.room.find(FIND_SOURCES_ACTIVE)
               ) || null
             );
-          case EnergySource.dropped:
-            return (
-              creep.pos.findClosestByPath(
-                creep.room
-                  .find(FIND_DROPPED_RESOURCES)
-                  .filter(x => x.resourceType === RESOURCE_ENERGY)
-              ) || null
+          case EnergySource.dropped: {
+            const closestByPath = creep.pos.findClosestByPath(
+              creep.room
+                .find(FIND_DROPPED_RESOURCES)
+                .filter(x => x.resourceType === RESOURCE_ENERGY)
             );
+            if (sources.maxPathToDropped === undefined) return closestByPath;
+            if (closestByPath === null) return closestByPath;
+            return creep.room.findPath(creep.pos, closestByPath.pos).length >
+              sources.maxPathToDropped
+              ? null
+              : closestByPath;
+          }
           case EnergySource.tombstone:
             return (
               creep.pos.findClosestByPath(
