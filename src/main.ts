@@ -564,7 +564,17 @@ function loop() {
     43,
     10
   )[0] as StructureLink;
-  linkFrom.transferEnergy(linkToUpgrade);
+  linkFrom.transferEnergy(
+    linkToUpgrade,
+    Math.min(
+      Math.floor(
+        (linkToUpgrade.store.getCapacity(RESOURCE_ENERGY) -
+          linkToUpgrade.store[RESOURCE_ENERGY]) *
+          1.03
+      ),
+      linkFrom.store[RESOURCE_ENERGY]
+    )
+  );
 
   const linkFrom2 = Game.rooms['E47N17'].lookForAt(
     'structure',
@@ -585,8 +595,11 @@ function loop() {
   linkFrom2.transferEnergy(
     linkToBuild2,
     Math.min(
-      linkToBuild2.store.getCapacity(RESOURCE_ENERGY) -
-        linkToBuild2.store[RESOURCE_ENERGY],
+      Math.floor(
+        (linkToBuild2.store.getCapacity(RESOURCE_ENERGY) -
+          linkToBuild2.store[RESOURCE_ENERGY]) *
+          1.03
+      ),
       linkFrom2.store[RESOURCE_ENERGY]
     )
   );
