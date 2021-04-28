@@ -54,7 +54,7 @@ export class GeneralCreep {
             let linksWithEnergy = HelpersFind.findLinksWithEnergy(creep.room);
             if (ignoreLinks.length !== 0) {
               linksWithEnergy = linksWithEnergy.filter(
-                x => ignoreLinks.findIndex(y => isEqual(x, y)) === -1
+                ({pos}) => ignoreLinks.findIndex(x => isEqual(pos, x)) === -1
               );
             }
             return HelpersFind.findClosestStructureByPathFromArray<

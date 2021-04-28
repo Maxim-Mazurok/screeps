@@ -31,7 +31,7 @@ class GeneralCreep {
                         const ignoreLinks = sources.ignoreLinks === undefined ? [] : sources.ignoreLinks;
                         let linksWithEnergy = helpers_find_1.HelpersFind.findLinksWithEnergy(creep.room);
                         if (ignoreLinks.length !== 0) {
-                            linksWithEnergy = linksWithEnergy.filter(x => ignoreLinks.findIndex(y => lodash_1.isEqual(x, y)) === -1);
+                            linksWithEnergy = linksWithEnergy.filter(({ pos }) => ignoreLinks.findIndex(x => lodash_1.isEqual(pos, x)) === -1);
                         }
                         return helpers_find_1.HelpersFind.findClosestStructureByPathFromArray(creep.pos, creep.room, linksWithEnergy);
                     }
