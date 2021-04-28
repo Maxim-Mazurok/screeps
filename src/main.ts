@@ -517,14 +517,18 @@ function loop() {
     } else if (creep.memory.role === CreepRole.harvester) {
       harvester.run(creep);
     } else if (creep.memory.role === CreepRole.upgrader) {
-      GeneralCreep.run(creep, {
-        sources: [
-          EnergySource.link,
-          EnergySource.dropped,
-          EnergySource.tombstone,
-          ...(creep.memory.room !== '2' ? [EnergySource.storage] : []),
-        ],
-      });
+      GeneralCreep.run(
+        creep,
+        {
+          sources: [
+            EnergySource.link,
+            EnergySource.dropped,
+            EnergySource.tombstone,
+            ...(creep.memory.room !== '2' ? [EnergySource.storage] : []),
+          ],
+        },
+        creep.memory.room === '2' ? [] : undefined
+      );
     } else if (creep.memory.role === CreepRole.builder) {
       roleBuilder.run(creep);
       // try {

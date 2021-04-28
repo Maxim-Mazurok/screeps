@@ -339,7 +339,7 @@ function loop() {
                     enums_1.EnergySource.tombstone,
                     ...(creep.memory.room !== '2' ? [enums_1.EnergySource.storage] : []),
                 ],
-            });
+            }, creep.memory.room === '2' ? [] : undefined);
         }
         else if (creep.memory.role === enums_1.CreepRole.builder) {
             roleBuilder.run(creep);
