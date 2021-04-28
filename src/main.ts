@@ -566,13 +566,16 @@ function loop() {
   )[0] as StructureLink;
   linkFrom.transferEnergy(
     linkToUpgrade,
-    Math.min(
-      Math.floor(
-        (linkToUpgrade.store.getCapacity(RESOURCE_ENERGY) -
-          linkToUpgrade.store[RESOURCE_ENERGY]) *
-          1.03
+    Math.max(
+      Math.min(
+        Math.floor(
+          (linkToUpgrade.store.getCapacity(RESOURCE_ENERGY) -
+            linkToUpgrade.store[RESOURCE_ENERGY]) *
+            1.03
+        ),
+        linkFrom.store[RESOURCE_ENERGY]
       ),
-      linkFrom.store[RESOURCE_ENERGY]
+      100
     )
   );
 
@@ -594,13 +597,16 @@ function loop() {
   // tslint:disable-next-line
   linkFrom2.transferEnergy(
     linkToBuild2,
-    Math.min(
-      Math.floor(
-        (linkToBuild2.store.getCapacity(RESOURCE_ENERGY) -
-          linkToBuild2.store[RESOURCE_ENERGY]) *
-          1.03
+    Math.max(
+      Math.min(
+        Math.floor(
+          (linkToBuild2.store.getCapacity(RESOURCE_ENERGY) -
+            linkToBuild2.store[RESOURCE_ENERGY]) *
+            1.03
+        ),
+        linkFrom2.store[RESOURCE_ENERGY]
       ),
-      linkFrom2.store[RESOURCE_ENERGY]
+      100
     )
   );
   //}

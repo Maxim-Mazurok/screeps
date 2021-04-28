@@ -371,9 +371,9 @@ function loop() {
     }
     const linkFrom = Game.rooms['E47N16'].lookForAt('structure', 9, 31)[0];
     const linkToUpgrade = Game.rooms['E47N16'].lookForAt('structure', 43, 10)[0];
-    linkFrom.transferEnergy(linkToUpgrade, Math.min(Math.floor((linkToUpgrade.store.getCapacity(RESOURCE_ENERGY) -
+    linkFrom.transferEnergy(linkToUpgrade, Math.max(Math.min(Math.floor((linkToUpgrade.store.getCapacity(RESOURCE_ENERGY) -
         linkToUpgrade.store[RESOURCE_ENERGY]) *
-        1.03), linkFrom.store[RESOURCE_ENERGY]));
+        1.03), linkFrom.store[RESOURCE_ENERGY]), 100));
     const linkFrom2 = Game.rooms['E47N17'].lookForAt('structure', 40, 12)[0];
     const linkToBuild2 = Game.rooms['E47N17'].lookForAt('structure', 11, 36)[0];
     //const linkToUpgrade2 = Game.rooms['E47N17'].lookForAt('structure', 43, 10)[0];
@@ -381,9 +381,9 @@ function loop() {
     //     linkFrom.transferEnergy(linkToUpgrade);
     // } else {
     // tslint:disable-next-line
-    linkFrom2.transferEnergy(linkToBuild2, Math.min(Math.floor((linkToBuild2.store.getCapacity(RESOURCE_ENERGY) -
+    linkFrom2.transferEnergy(linkToBuild2, Math.max(Math.min(Math.floor((linkToBuild2.store.getCapacity(RESOURCE_ENERGY) -
         linkToBuild2.store[RESOURCE_ENERGY]) *
-        1.03), linkFrom2.store[RESOURCE_ENERGY]));
+        1.03), linkFrom2.store[RESOURCE_ENERGY]), 100));
     //}
     // try {
     //     const market = require('market');
