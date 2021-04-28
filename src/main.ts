@@ -351,7 +351,27 @@ function loop() {
   );
   if (harvesters3.length < 1) {
     const newName = 'Harvester3' + Game.time;
-    if (roomTotalEnergyForSpawningAvailable3 >= 1500) {
+    if (roomTotalEnergyForSpawningAvailable3 >= 2000) {
+      Game.spawns['Spawn3'].spawnCreep(
+        [
+          ..._.fill(_.times(16), MOVE),
+          ..._.fill(_.times(8), WORK),
+          ..._.fill(_.times(8), CARRY),
+        ],
+        newName,
+        {memory: {role: CreepRole.harvester, room: '3'}}
+      );
+    } else if (roomTotalEnergyForSpawningAvailable3 >= 1750) {
+      Game.spawns['Spawn3'].spawnCreep(
+        [
+          ..._.fill(_.times(14), MOVE),
+          ..._.fill(_.times(7), WORK),
+          ..._.fill(_.times(7), CARRY),
+        ],
+        newName,
+        {memory: {role: CreepRole.harvester, room: '3'}}
+      );
+    } else if (roomTotalEnergyForSpawningAvailable3 >= 1500) {
       Game.spawns['Spawn3'].spawnCreep(
         [
           ..._.fill(_.times(12), MOVE),
@@ -394,7 +414,27 @@ function loop() {
     }
   } else if (upgraders3.length < 1) {
     const newName = 'Upgrader3' + Game.time;
-    if (roomTotalEnergyForSpawningAvailable3 >= 1500) {
+    if (roomTotalEnergyForSpawningAvailable3 >= 2000) {
+      Game.spawns['Spawn3'].spawnCreep(
+        [
+          ..._.fill(_.times(16), MOVE),
+          ..._.fill(_.times(8), WORK),
+          ..._.fill(_.times(8), CARRY),
+        ],
+        newName,
+        {memory: {role: CreepRole.upgrader, room: '3'}}
+      );
+    } else if (roomTotalEnergyForSpawningAvailable3 >= 1750) {
+      Game.spawns['Spawn3'].spawnCreep(
+        [
+          ..._.fill(_.times(14), MOVE),
+          ..._.fill(_.times(7), WORK),
+          ..._.fill(_.times(7), CARRY),
+        ],
+        newName,
+        {memory: {role: CreepRole.upgrader, room: '3'}}
+      );
+    } else if (roomTotalEnergyForSpawningAvailable3 >= 1500) {
       Game.spawns['Spawn3'].spawnCreep(
         [
           ..._.fill(_.times(12), MOVE),
