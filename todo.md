@@ -10,3 +10,4 @@
 - maybe make creeps don't stand where other creeps want to go while they are just waiting
 - make creeps to seek for more energy if totalCarry is not maxed out only if it's convenient or there's any energy available
 - make all creeps to pickup dropped resources if it's convenient (close enough) and to dump it appropriately (minerals, etc.)
+- rebuild destroyed walls
