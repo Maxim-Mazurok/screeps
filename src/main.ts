@@ -22,7 +22,7 @@ const roomsConfig: RoomsConfig = [
     },
     build: {
       maxHits: 2_000_000,
-      maxWallHits: 1_000_000,
+      maxWallHits: 2_000_000,
       minDiff: 1_000,
     },
   },
@@ -43,7 +43,7 @@ const roomsConfig: RoomsConfig = [
     },
     build: {
       maxHits: 2_000_000,
-      maxWallHits: 1_000_000,
+      maxWallHits: 2_000_000,
       minDiff: 1_000,
     },
   },
@@ -58,7 +58,7 @@ const roomsConfig: RoomsConfig = [
     },
     build: {
       maxHits: 2_000_000,
-      maxWallHits: 1_000_000,
+      maxWallHits: 2_000_000,
       minDiff: 1_000,
     },
   },
