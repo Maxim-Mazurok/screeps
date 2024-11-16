@@ -11,3 +11,4 @@
 - make creeps to seek for more energy if totalCarry is not maxed out only if it's convenient or there's any energy available
 - make all creeps to pickup dropped resources if it's convenient (close enough) and to dump it appropriately (minerals, etc.)
 - rebuild destroyed walls
+- attack the healer, otherwise they will just keep on healing the wall destroyer
