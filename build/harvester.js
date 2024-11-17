@@ -2,7 +2,7 @@
 const roleHarvester = {
     /** @param {Creep} creep **/
     run: function (creep) {
-        if (creep.memory.transferring && creep.store.carry.energy === 0) {
+        if (creep.memory.transferring && creep.store[RESOURCE_ENERGY] === 0) {
             creep.memory.transferring = false;
             creep.say('harvest');
         }
