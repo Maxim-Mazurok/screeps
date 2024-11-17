@@ -7,7 +7,7 @@ const roleHarvester = {
             creep.say('harvest');
         }
         if (!creep.memory.transferring &&
-            _.sum(creep.store.carry) == creep.store.getCapacity()) {
+            creep.store.getFreeCapacity() <= 0) {
             creep.memory.transferring = true;
             creep.say('transfer');
         }
