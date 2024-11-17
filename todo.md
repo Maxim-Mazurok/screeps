@@ -12,3 +12,4 @@
 - make all creeps to pickup dropped resources if it's convenient (close enough) and to dump it appropriately (minerals, etc.)
 - rebuild destroyed walls
 - attack the healer, otherwise they will just keep on healing the wall destroyer
+- don't try to upgrgrade controller over 15 energy per tick, see https://docs.screeps.com/api/#Creep.upgradeController:~:text=A%20fully%20upgraded%20level%208%20controller%20can%27t%20be%20upgraded%20over%2015%20energy%20units%20per%20tick%20regardless%20of%20creeps%20abilities.%20The%20cumulative%20effect%20of%20all%20the%20creeps%20performing%20upgradeController%20in%20the%20current%20tick%20is%20taken%20into%20account.%20This%20limit%20can%20be%20increased%20by%20using%20ghodium%20mineral%20boost.
